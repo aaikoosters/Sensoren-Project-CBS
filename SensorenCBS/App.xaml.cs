@@ -8,7 +8,7 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 
-			MainPage = new SensorenCBSPage();
+			MainPage = new NavigationPage(new SensorenCBSPage());
 		}
 
 		protected override void OnStart()

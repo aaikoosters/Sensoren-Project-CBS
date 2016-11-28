@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace SensorenCBS
 {
@@ -7,6 +8,11 @@ namespace SensorenCBS
 		public SensorenCBSPage()
 		{
 			InitializeComponent();
+		}
+
+		void btnGPS(object s, EventArgs e)
+		{
+			Navigation.PushAsync(new InformationGPSPage());
 		}
 	}
 }
