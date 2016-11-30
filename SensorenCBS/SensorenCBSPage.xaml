@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:local="clr-namespace:SensorenCBS" 
-		x:Class="SensorenCBS.MotionPage">
+		x:Class="SensorenCBS.SensorenCBSPage">
 
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
@@ -13,9 +13,8 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
-			<Label Text="X" x:Name="lblX" />
-			<Label Text="Y" x:Name="lblY" />
-			<Label Text="Z" x:Name="lblZ" />
+			<Button Text="GPS information" Clicked="btnGPS"/>
+			<Button Text="Motion information" Clicked="btnMTN"/>
 
 		</StackLayout>
 	</ContentPage.Content>
