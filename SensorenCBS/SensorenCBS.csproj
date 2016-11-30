@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="EmptyTextFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GPS_INFO\" />
