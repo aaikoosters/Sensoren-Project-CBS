@@ -14,15 +14,26 @@ namespace SensorenCBS
 		public MotionPage()
 		{
 			InitializeComponent();
-			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
+
+			var slow = (MotionSensorDelay)01000000000;
+			var counter = 10;
+			var getal = 1;
+
+			//CrossDeviceMotion.Current.Start(MotionSensorDelay.Default);
+
+			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Default);
 			CrossDeviceMotion.Current.SensorValueChanged += (s, a) =>
 			{
 
 				switch (a.SensorType)
 				{
-
+					
 					case MotionSensorType.Accelerometer:
-						Debug.WriteLine("A: {0},{1},{2}", ((MotionVector)a.Value).X, ((MotionVector)a.Value).Y, ((MotionVector)a.Value).Z);
+						Debug.WriteLineIf(slow.Equals(counter), " slow is geweest on update");
+						getal++;
+						Debug.WriteLine(slow + ",A " + getal);
+						//Debug.WriteLine("A: {0},{1},{2}", ((MotionVector)a.Value).X, ((MotionVector)a.Value).Y, ((MotionVector)a.Value).Z);
+
 						lblX.Text = "X: " + ((MotionVector)a.Value).X;
 						lblY.Text = "Y: " + ((MotionVector)a.Value).Y;
 						lblZ.Text = "Z: " + ((MotionVector)a.Value).Z;
