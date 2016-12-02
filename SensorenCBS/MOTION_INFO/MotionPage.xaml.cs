@@ -11,9 +11,9 @@ namespace SensorenCBS
 	{
 		public const MotionSensorDelay Default = (MotionSensorDelay)1000;
 
-		float mAccel;
-		float mAccelCurrent;
-		float mAccelLast;
+		//float mAccel;
+		//float mAccelCurrent;
+		//float mAccelLast;
 		//int opgetild = 0;
 
 
@@ -23,9 +23,9 @@ namespace SensorenCBS
 			InitializeComponent();
 
 
-			mAccelLast = 9.80665f;
-			mAccelCurrent = 9.80665f;
-			mAccel = 0.00f;
+			//mAccelLast = 9.80665f;
+			//mAccelCurrent = 9.80665f;
+			//mAccel = 0.00f;
 
 			//accelX();
 			//accel();
@@ -33,36 +33,18 @@ namespace SensorenCBS
 			verschuiven();
 			optillen();
 
-			Gyroscope();
-			Accelerometer();
-			Compass();
-			Magentometer();
-		
-		
-		}
+			//Gyroscope();
+			//Accelerometer();
+			//Compass();
+			//Magentometer();
 
-		void Magentometer()
-		{
+			CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Default);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Magnetometer, MotionSensorDelay.Default);
-			motionDetect();
-		}
-
-		void Compass()
-		{
 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Default);
-			motionDetect();
-		}
-
-		void Accelerometer()
-		{
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Default);
 			motionDetect();
-		}
-
-		void Gyroscope()
-		{
-			CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Default);
-			motionDetect();
+		
+		
 		}
 
 		void optillen()
@@ -73,10 +55,6 @@ namespace SensorenCBS
 		void verschuiven()
 		{
 			//throw new NotImplementedException();
-		}
-
-		string detection(string aaik) {
-			return "aaik";
 		} 
 
 		void motionDetect() 

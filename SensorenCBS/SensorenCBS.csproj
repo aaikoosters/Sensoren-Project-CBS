@@ -51,6 +51,7 @@
     <Compile Include="MOTION_INFO\MotionPage.xaml.cs">
       <DependentUpon>MotionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MOTION_INFO\Motion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
