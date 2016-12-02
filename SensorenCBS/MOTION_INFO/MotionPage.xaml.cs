@@ -10,11 +10,12 @@ namespace SensorenCBS
 	public partial class MotionPage : ContentPage
 	{
 		public const MotionSensorDelay Default = (MotionSensorDelay)1000;
-		private float[] mGravity;
-		private float mAccel;
-		private float mAccelCurrent;
-		private float mAccelLast;
-		private int opgetild = 0;
+
+		float mAccel;
+		float mAccelCurrent;
+		float mAccelLast;
+		//int opgetild = 0;
+
 
 
 		public MotionPage()
@@ -26,55 +27,129 @@ namespace SensorenCBS
 			mAccelCurrent = 9.80665f;
 			mAccel = 0.00f;
 
+			//accelX();
+			//accel();
 
-			//CrossDeviceMotion.Current.Start(MotionSensorDelay.Default);
+			verschuiven();
+			optillen();
 
+			Gyroscope();
+			Accelerometer();
+			Compass();
+			Magentometer();
+		
+		
+		}
+
+		void Magentometer()
+		{
+			CrossDeviceMotion.Current.Start(MotionSensorType.Magnetometer, MotionSensorDelay.Default);
+			motionDetect();
+		}
+
+		void Compass()
+		{
+			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Default);
+			motionDetect();
+		}
+
+		void Accelerometer()
+		{
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Default);
-			CrossDeviceMotion.Current.SensorValueChanged += (s, a) =>
-			{
+			motionDetect();
+		}
 
-				switch (a.SensorType)
+		void Gyroscope()
+		{
+			CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Default);
+			motionDetect();
+		}
+
+		void optillen()
+		{
+			
+		}
+
+		void verschuiven()
+		{
+			//throw new NotImplementedException();
+		}
+
+		string detection(string aaik) {
+			return "aaik";
+		} 
+
+		void motionDetect() 
+		{
+			//CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Default);
+				CrossDeviceMotion.Current.SensorValueChanged += (s, a) =>
 				{
-					
-					case MotionSensorType.Accelerometer:
 
-						//Debug.WriteLine("A: {0},{1},{2}", ((MotionVector)a.Value).X, ((MotionVector)a.Value).Y, ((MotionVector)a.Value).Z);
+					switch (a.SensorType)
+					{
 
-						//lblX.Text = "X: " + ((MotionVector)a.Value).X;
-						//lblY.Text = "Y: " + ((MotionVector)a.Value).Y;
-						//lblZ.Text = "Z: " + ((MotionVector)a.Value).Z;
-						float xx = (float)((MotionVector)a.Value).X;
-						float yy = (float)((MotionVector)a.Value).Y;
-						float zz = (float)((MotionVector)a.Value).Z;
+						case MotionSensorType.Gyroscope:
 
-
-						mAccelLast = mAccelCurrent;
-						mAccelCurrent = (float)Math.Sqrt(xx * xx + yy * yy + zz * zz);
-						float delta = mAccelCurrent - mAccelLast;
-						Debug.WriteLine("mAccel = {0}", mAccel); // mAccel is gelijk aan x tot dat er een keer bewogen is
-
-						mAccel = mAccel * 1.0f + delta;
-						if (mAccel > 2)
-						{
-							opgetild++;
-							lblOp.Text = opgetild.ToString();
-							Debug.WriteLine("mAccel = {0} * {1} + {2} ", mAccel, 0.7f, delta);
-							Debug.WriteLine("mAccel: {0},Delta: {1},mAccelLast: {2}, mAccelCurrent {3}", mAccel.ToString(), delta.ToString(), mAccelLast.ToString(), mAccelCurrent.ToString());
-							//lblAccel.Text = ("mAccel: {0}, delta: {1}, mAccelLast {2}, mAccelCurrent {3}", mAccel.ToString(), delta.ToString(), mAccelLast.ToString(), mAccelCurrent.ToString());
-							lblAccel.Text = "Something happend: " + DateTime.Now;
-						}
-
-						lblZ.Text = zz.ToString();
-						lblX.Text = xx.ToString();
-						lblY.Text = yy.ToString();
-
+						var xG = ((float)((MotionVector)a.Value).X).ToString("N3");
+						var yG = ((float)((MotionVector)a.Value).Y).ToString("N3");
+						var zG = ((float)((MotionVector)a.Value).Z).ToString("N3");
+						lblGyro.Text = (string.Format("X: {0}\nY: {1}\nZ: {2}", xG, yG, zG));
 						break;
 
-				}
-			};
+						case MotionSensorType.Accelerometer:
 
-			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
+							//float xx = (float)((MotionVector)a.Value).X;
+							//float yy = (float)((MotionVector)a.Value).Y;
+							//float zz = (float)((MotionVector)a.Value).Z;
+							var xA = (float)((MotionVector)a.Value).X;
+							var yA = (float)((MotionVector)a.Value).Y; 
+							var zA = (float)((MotionVector)a.Value).Z;
+							lblAcc.Text = string.Format("X: {0}\nY: {1}\nZ: {2}", xA.ToString("N3"), yA.ToString("N3"), zA.ToString("N3"));
+						break;
 
+							//mAccelLast = mAccelCurrent;
+							////mAccelCurrent = (float)Math.Sqrt(xx * xx + yy * yy + zz * zz);
+							//float deltaAcc = mAccelCurrent - mAccelLast;
+
+							//mAccel = mAccel * 0.8f + deltaAcc;
+							//if (mAccel > 3)
+							//{
+							//	//if (xx < 0) { }
+							//	lblAccel.Text = "Er is geacceleerd: " + DateTime.Now;
+							//}
+
+							////lblZ.Text = "Z: " + zz;
+							////lblX.Text = "X: " + xx;
+							////lblY.Text = "Y: " + yy;
+							//return;
+							//break;
+
+						case MotionSensorType.Compass:
+						var or = (a.Value.Value);
+						String.Format("{0:0.00}", or);
+						//lblCom.Text = string.Format("Orientation: {0}", or);
+						lblCom.Text = heading(or);
+						break;
+
+						case MotionSensorType.Magnetometer:
+							 //return;
+							var xM = (float)((MotionVector)a.Value).X; xM.ToString("N3");
+							var yM = (float)((MotionVector)a.Value).Y; xM.ToString("N3");
+							var zM = (float)((MotionVector)a.Value).Z; xM.ToString("N3");
+						lblMag.Text = string.Format("X: {0}\nY: {1}\nZ: {2}", xM, yM, zM);
+							break;
+
+					}
+				};
+				//CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
+			}
+
+		string heading(double? or)
+		{
+			string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
+			return caridnals[(int)Math.Round(((double)or * 10 % 3600) / 225)];
 		}
-	}
+
 }
+}
+
