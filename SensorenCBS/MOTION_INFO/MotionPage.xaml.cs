@@ -39,12 +39,13 @@ namespace SensorenCBS
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Default);
 			//motionDetect();
 			//mtn
-			mtn = new Motion(lblGyro); 
+			mtn = new Motion(lblGyro);
 
 			// object met bovenstaande om beter te kunnen lezen/begrijpen 
 
 			//lblGyro.Text = mtn.Gyro(MotionSensorType.Gyroscope);
-			mtn.MagnetometerMotionDetect(MotionSensorType.Magnetometer);
+			//mtn.MagnetometerMotionDetect(MotionSensorType.Magnetometer);
+			mtn.CompassMotionDetect(MotionSensorType.Compass);
 
 			//lblGyro.Text = Motion.Gyro;
 			//lblMag
