@@ -10,7 +10,7 @@ namespace SensorenCBS
 	public partial class MotionPage : ContentPage
 	{
 		public const MotionSensorDelay Default = (MotionSensorDelay)1000;
-
+		Motion mtn;
 		//float mAccel;
 		//float mAccelCurrent;
 		//float mAccelLast;
@@ -33,18 +33,32 @@ namespace SensorenCBS
 			verschuiven();
 			optillen();
 
-			//Gyroscope();
-			//Accelerometer();
-			//Compass();
-			//Magentometer();
-
 			CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, MotionSensorDelay.Default);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Magnetometer, MotionSensorDelay.Default);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Default);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, MotionSensorDelay.Default);
-			motionDetect();
-		
-		
+			//motionDetect();
+			//mtn
+			mtn = new Motion(lblGyro); 
+
+			// object met bovenstaande om beter te kunnen lezen/begrijpen 
+
+			//lblGyro.Text = mtn.Gyro(MotionSensorType.Gyroscope);
+			mtn.MagnetometerMotionDetect(MotionSensorType.Magnetometer);
+
+			//lblGyro.Text = Motion.Gyro;
+			//lblMag
+			//lblAcc
+			//lblGyro
+
+
+
+		}
+
+
+		string naast(MotionSensorType gyroscope)
+		{
+			throw new NotImplementedException();
 		}
 
 		void optillen()
@@ -64,11 +78,20 @@ namespace SensorenCBS
 				{
 
 					switch (a.SensorType)
-					{
+					{ 
 
 						case MotionSensorType.Gyroscope:
 
-						var xG = ((float)((MotionVector)a.Value).X).ToString("N3");
+						var motionVectorValue = a.Value;
+							if (motionVectorValue == null)
+								throw new Exception("Motion Vector Value is nulls");
+
+
+
+							//var motionVector = (MotionVector)motionVectorValue;
+
+
+							var xG = ((float)((MotionVector)a.Value).X).ToString("N3");
 						var yG = ((float)((MotionVector)a.Value).Y).ToString("N3");
 						var zG = ((float)((MotionVector)a.Value).Z).ToString("N3");
 						lblGyro.Text = (string.Format("X: {0}\nY: {1}\nZ: {2}", xG, yG, zG));
@@ -106,7 +129,7 @@ namespace SensorenCBS
 						var or = (a.Value.Value);
 						String.Format("{0:0.00}", or);
 						//lblCom.Text = string.Format("Orientation: {0}", or);
-						lblCom.Text = heading(or);
+						lblCom.Text = heading(or) + ", " + or;
 						break;
 
 						case MotionSensorType.Magnetometer:
@@ -119,15 +142,16 @@ namespace SensorenCBS
 
 					}
 				};
+
 				//CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer);
 			}
 
 		string heading(double? or)
 		{
 			string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
-			return caridnals[(int)Math.Round(((double)or * 10 % 3600) / 225)];
+			return caridnals[(int)Math.Round(((double)or * 10 % 3600) / 225)] + ", " +or;
 		}
 
-}
+	}
 }
 
