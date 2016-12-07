@@ -14,5 +14,10 @@ namespace SensorenCBS
 		{
 			Navigation.PushAsync(new InformationGPSPage());
 		}
+
+		void btnMTN(object s, EventArgs e)
+		{
+			Navigation.PushAsync(new MotionPage());
+		}
 	}
 }
