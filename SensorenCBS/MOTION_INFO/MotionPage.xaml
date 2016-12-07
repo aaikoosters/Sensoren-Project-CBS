@@ -13,10 +13,10 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
-			<Label Text="Gyroscoop" x:Name="lblGyro" FontSize="30"/>
-			<Label Text="Accelermeter" x:Name="lblAcc" FontSize="30"/>
-			<Label Text="Compas" x:Name="lblCom" FontSize="30"/>
-			<Label Text="Magnetometer" x:Name="lblMag" FontSize="30"/>
+			<Label Text="Gyroscoop" x:Name="lblGyro" FontSize="20"/>
+			<Label Text="Accelermeter" x:Name="lblAcc" FontSize="20"/>
+			<Label Text="Compas" x:Name="lblCom" FontSize="20"/>
+			<Label Text="Magnetometer" x:Name="lblMag" FontSize="20"/>
 
 
 		</StackLayout>

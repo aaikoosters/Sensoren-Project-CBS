@@ -51,7 +51,10 @@
     <Compile Include="MOTION_INFO\MotionPage.xaml.cs">
       <DependentUpon>MotionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MOTION_INFO\Motion.cs" />
+    <Compile Include="MOTION_INFO\Sensor\MagnetometerMotionDetect.cs" />
+    <Compile Include="MOTION_INFO\Sensor\AccelerometerMotionDetect.cs" />
+    <Compile Include="MOTION_INFO\Sensor\GyroscopeMotionDetect.cs" />
+    <Compile Include="MOTION_INFO\Sensor\CompasMotionDetect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -83,6 +86,7 @@
   <ItemGroup>
     <Folder Include="GPS_INFO\" />
     <Folder Include="MOTION_INFO\" />
+    <Folder Include="MOTION_INFO\Sensor\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
