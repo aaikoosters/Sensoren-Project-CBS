@@ -17,4 +17,4 @@ namespace SensorenCBS.iOS
 			UIApplication.Main(args, null, "AppDelegate");
 		}
 	}
-}
+} 

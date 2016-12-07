@@ -1,0 +1,35 @@
+﻿Log:
+01-12-2016
+Getest met de Galaxy S6 Edge, Galaxay Tab S2, Galaxy A5(16) en de LG G3
+De waardes van de latitude en de longitude verschillen tussen de A5, LG en de Tab en Edge
+Na onderzoek blijkt dat de Tab en de Edge de zelfde chipset bevatten wat verklaart waarom deze vaak de zelfde waardes retouneren.
+Bij de A5 en de G3 ben ik er nog niet overuit wat voor de overeenkomst zorgt.
+
+Log:
+01-12-2016
+
+Telefoon recht in de hand: 
+X: -1 0 1
+Y: 
+Z: 
+
+Telefoon recht neer:
+X: -1 < 0 > 1
+Y: -1 < 0 > 1
+Z: > 9
+
+Testing: 
+
+30-11-2016:
+Nog niet mogelijk om te debuggen op iOS apparaten
+Mogelijk op te debuggen op Android apparaten
+	Tablet & Phone wel weer geven:
+	- Time
+	- Latitude
+	- Longitude
+	- Accuracy van lat en Long
+	Tablet & Phone niet weer geven:
+	- Altitude
+	- Altitude Accuracy
+	- Heading
+	- Speed
