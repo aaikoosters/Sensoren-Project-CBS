@@ -9,12 +9,8 @@ namespace SensorenCBS
 {
 	public partial class MotionPage : ContentPage
 	{
-		MagnetometerMotionDetect mmd;
-		AccelerometerMotionDetect amd;
-		GyroscopeMotionDetect gmd;
-		CompasMotionDetect cmd;
 		MotionSensorDelay delayDefault;
-		
+
 		public MotionPage()
 		{
 			InitializeComponent();
@@ -30,18 +26,18 @@ namespace SensorenCBS
 				switch (a.SensorType)
 				{
 					case MotionSensorType.Magnetometer:
-						mmd = new MagnetometerMotionDetect(lblMag, a);
+						var mmd = new MagnetometerMotionDetect(lblMag, a);
 						break;
 					case MotionSensorType.Gyroscope:
-						gmd = new GyroscopeMotionDetect(lblGyro, a);
+						var gmd = new GyroscopeMotionDetect(lblGyro, a);
 						break;
 					case MotionSensorType.Accelerometer:
-						amd = new AccelerometerMotionDetect(lblAcc, a);
+						var amd = new AccelerometerMotionDetect(lblAcc, a);
 						break;
 					case MotionSensorType.Compass:
-						cmd = new CompasMotionDetect(lblCom, a);
+						var cmd = new CompasMotionDetect(lblCom, a);
 						break;
-						
+
 
 				}
 			};

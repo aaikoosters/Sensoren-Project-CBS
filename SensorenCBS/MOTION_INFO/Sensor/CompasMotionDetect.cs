@@ -23,7 +23,7 @@ namespace SensorenCBS
 		string heading(double? or)
 		{
 			string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
-			return "Compas\n" + caridnals[(int)Math.Round(((double)or * 10 % 3600) / 225)] + "\n" + string.Format("{0:0}", or);
+			return "Compas\n" + caridnals[(int)Math.Round(((double)or * 10 % 3600) / 225)] + ", " + string.Format("{0:0}", or);
 		}
 	}
 }
