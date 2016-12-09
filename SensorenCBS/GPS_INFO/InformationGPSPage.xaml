@@ -16,6 +16,9 @@
 			<Label Text="Information" x:Name="lblInfo"/>
 			<Label Text="Speed" x:Name="lblSpeed"/>
 			<Label Text="Heading" x:Name="lblHeading"/>
+			<Label Text="Total Distance" x:Name="lblTotDistance"/>
+			<Label Text="Average Speed" x:Name="lblAvgSpeed"/>
+			
 			
 			
 			
