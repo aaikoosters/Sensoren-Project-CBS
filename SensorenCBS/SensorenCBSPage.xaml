@@ -15,6 +15,7 @@
 
 			<Button Text="GPS information" Clicked="btnGPS"/>
 			<Button Text="Motion information" Clicked="btnMTN"/>
+			<Button Text="Location Information" x:Name="btnAndroidLocation" Clicked="btnAndroidLocationCL"/>
 
 		</StackLayout>
 	</ContentPage.Content>

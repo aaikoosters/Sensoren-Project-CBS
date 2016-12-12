@@ -22,9 +22,9 @@ namespace SensorenCBS
 		{
 			CrossDeviceMotion.Current.Start(MotionSensorType.Magnetometer, motionDelay);
 
-			var xG = ((float)((MotionVector)b.Value).X).ToString("N3");
-			var yG = ((float)((MotionVector)b.Value).Y).ToString("N3");
-			var zG = ((float)((MotionVector)b.Value).Z).ToString("N3");
+			var xG = ((float)((MotionVector)b.Value).X).ToString("N1");
+			var yG = ((float)((MotionVector)b.Value).Y).ToString("N1");
+			var zG = ((float)((MotionVector)b.Value).Z).ToString("N1");
 			_label.Text = string.Format("Magnetometer\nX: {0}\nY: {1}\nZ: {2}", xG, yG, zG);
 
 		}

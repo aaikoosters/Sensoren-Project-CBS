@@ -115,6 +115,12 @@
     <Reference Include="DeviceMotion.Plugin">
       <HintPath>..\packages\Xam.Plugin.DeviceMotion.1.1.2\lib\Xamarin.iOS10\DeviceMotion.Plugin.dll</HintPath>
     </Reference>
+    <Reference Include="Geofence.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Geofence.1.1.2\lib\Xamarin.iOS10\Geofence.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Geofence.Plugin">
+      <HintPath>..\packages\Xam.Plugin.Geofence.1.1.2\lib\Xamarin.iOS10\Geofence.Plugin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SensorenCBS\SensorenCBS.csproj">
@@ -136,6 +142,7 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
+    <None Include="Helpers\CrossGeofenceListener.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

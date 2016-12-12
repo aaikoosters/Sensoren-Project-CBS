@@ -28,6 +28,12 @@ namespace SensorenCBS
 			_label.Text = string.Format("Accelerometer\nX: {0}\nY: {1}\nZ: {2}", xG, yG, zG);
 
 		}
+
+		public void pickThePhoneUp()
+		{
+
+
+		}
 	}
 }
 

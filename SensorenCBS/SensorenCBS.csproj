@@ -30,10 +30,10 @@
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="SensorenCBSPage.xaml" />
-    <EmbeddedResource Include="GPS_INFO\InformationGPSPage.xaml">
+    <EmbeddedResource Include="MOTION_INFO\MotionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="MOTION_INFO\MotionPage.xaml">
+    <EmbeddedResource Include="GPS_INFO\GeoLocator\InformationGPSPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -45,9 +45,6 @@
       <DependentUpon>SensorenCBSPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GPS_INFO\InformationGPSPage.xaml.cs">
-      <DependentUpon>InformationGPSPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MOTION_INFO\MotionPage.xaml.cs">
       <DependentUpon>MotionPage.xaml</DependentUpon>
     </Compile>
@@ -55,6 +52,10 @@
     <Compile Include="MOTION_INFO\Sensor\AccelerometerMotionDetect.cs" />
     <Compile Include="MOTION_INFO\Sensor\GyroscopeMotionDetect.cs" />
     <Compile Include="MOTION_INFO\Sensor\CompasMotionDetect.cs" />
+    <Compile Include="GPS_INFO\GeoLocator\InformationGPSPage.xaml.cs">
+      <DependentUpon>InformationGPSPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GPS_INFO\Location\ILocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -78,15 +79,24 @@
     <Reference Include="DeviceMotion.Plugin">
       <HintPath>..\packages\Xam.Plugin.DeviceMotion.1.1.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\DeviceMotion.Plugin.dll</HintPath>
     </Reference>
+    <Reference Include="Geofence.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Geofence.1.1.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Geofence.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Geofence.Plugin">
+      <HintPath>..\packages\Xam.Plugin.Geofence.1.1.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Geofence.Plugin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Loggin.txt" />
+    <None Include="Helpers\CrossGeofenceListener.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GPS_INFO\" />
     <Folder Include="MOTION_INFO\" />
     <Folder Include="MOTION_INFO\Sensor\" />
+    <Folder Include="GPS_INFO\GeoLocator\" />
+    <Folder Include="GPS_INFO\Location\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
