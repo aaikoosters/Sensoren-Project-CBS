@@ -9,7 +9,6 @@ namespace SensorenCBS
 		public SensorenCBSPage()
 		{
 			InitializeComponent();
-			checkDevice();
 		}
 
 		void btnGPS(object s, EventArgs e)
@@ -22,16 +21,9 @@ namespace SensorenCBS
 			Navigation.PushAsync(new MotionPage());
 		}
 
-		void checkDevice()
+		void btnWiFi(object s, EventArgs e)
 		{
-			if (Device.OS != TargetPlatform.Android) 
-			{
-				btnAndroidLocation.IsVisible = false;
-			}
-		}
-		void btnAndroidLocationCL(object s, EventArgs e)
-		{
-			Debug.WriteLine("btnAndroidLocation");
+			//
 		}
 
 
