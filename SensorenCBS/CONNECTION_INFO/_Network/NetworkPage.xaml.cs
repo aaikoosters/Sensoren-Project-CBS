@@ -13,11 +13,17 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 			isNetworkConnected();
+			networkConnectionType();
 		}
 
 		void isNetworkConnected()
 		{
 			lblStat.Text = network.connected();
 		}
-}
+
+		void networkConnectionType()
+		{
+			lblconnType.Text = network.connectionType();
+		}
+	}
 }

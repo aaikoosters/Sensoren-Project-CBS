@@ -12,13 +12,18 @@ namespace SensorenCBS.iOS
 	{
 
 		public bool IsConnected { get; set; }
+
+		public string ConnectionType { get; set; }
+
 		public void CheckNetworkConnection()
 		{
 			InternetConnectionStatus();
 		}
 
+		// Checking if there is a connection
 		private void UpdateNetworkStatus()
 		{
+			
 			if (InternetConnectionStatus())
 			{
 				IsConnected = true;
@@ -87,6 +92,7 @@ namespace SensorenCBS.iOS
 			return isReachable && noConnectionRequired;
 		}
 
+		// GPS network connection?????
 		private bool InternetConnectionStatus()
 		{
 			NetworkReachabilityFlags flags;
@@ -107,6 +113,7 @@ namespace SensorenCBS.iOS
 			return true;
 		}
 
+		// Checking if there is a WIFI connection
 		private bool LocalWifiConnectionStatus()
 		{
 			NetworkReachabilityFlags flags;
@@ -116,6 +123,15 @@ namespace SensorenCBS.iOS
 					return true;
 			}
 			return false;
+		}
+
+		public void CheckNetworkConnectionType()
+		{
+			if (IsConnected)
+			{
+
+				// do something like checking the connectionType
+			}
 		}
 	}
 }

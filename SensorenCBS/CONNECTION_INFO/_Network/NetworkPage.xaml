@@ -13,7 +13,9 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
-			<Label Text="Fetching networkConnection" x:Name="lblStat"/>
+			<Label Text="Fetching network Connection" x:Name="lblStat"/>
+			<Label Text="Fetching network Connection Type" x:Name="lblconnType"/>
+			
 			
 			
 			

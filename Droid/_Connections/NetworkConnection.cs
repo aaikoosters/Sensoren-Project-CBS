@@ -11,20 +11,24 @@ namespace SensorenCBS.Droid
 {
 	public class NetworkConnection : INetworkConnection
 	{
+		ConnectivityManager connectivityManager;
+		NetworkInfo activeNetworkInfo;
 		public NetworkConnection()
 		{
+			// Get the connectiviyManager (Android typical)
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+			// Get the network information, give the details about the current active network
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 		}
 
 		public bool IsConnected { get; set; }
+		public string ConnectionType { get; set;}
 
 		public void CheckNetworkConnection()
 		{
-			// Get the connectiviyManager (Android typical)
-			var connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-			// Get the network information, give the details about the current active network
-			var activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			
 			// When the info is not null and it is connected or trying to connected you pass
-			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
+			if (activeNetworkInfo != null && activeNetworkInfo.IsConnected)
 			{
 				IsConnected = true;
 			}
@@ -32,6 +36,14 @@ namespace SensorenCBS.Droid
 				IsConnected = false;
 			}
 
+		}
+
+		public void CheckNetworkConnectionType()
+		{
+			if ((activeNetworkInfo != null) && IsConnected)
+			{
+				ConnectionType = activeNetworkInfo.Type.ToString();
+			}
 		}
 	}
 }
