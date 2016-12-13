@@ -36,6 +36,9 @@
     <EmbeddedResource Include="GPS_INFO\GeoLocator\InformationGPSPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="NETWORK_INFO\WiFiPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -55,6 +58,10 @@
     <Compile Include="GPS_INFO\GeoLocator\InformationGPSPage.xaml.cs">
       <DependentUpon>InformationGPSPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NETWORK_INFO\WiFiPage.xaml.cs">
+      <DependentUpon>WiFiPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NETWORK_INFO\INetworking.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -102,7 +109,6 @@
     <Folder Include="GPS_INFO\GeoLocator\" />
     <Folder Include="GPS_INFO\Location\" />
     <Folder Include="NETWORK_INFO\" />
-    <Folder Include="NETWORK_INFO\WIFI\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
