@@ -24,11 +24,10 @@ namespace SensorenCBS.Droid
 		public bool IsConnected { get; set; }
 		public string ConnectionType { get; set;}
 
-		public void CheckNetworkConnection()
+		public void CheckNetwork()
 		{
-			
 			// When the info is not null and it is connected or trying to connected you pass
-			if (activeNetworkInfo != null && activeNetworkInfo.IsConnected)
+			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				IsConnected = true;
 			}
@@ -40,9 +39,14 @@ namespace SensorenCBS.Droid
 
 		public void CheckNetworkConnectionType()
 		{
-			if ((activeNetworkInfo != null) && IsConnected)
+			
+			// When the info is not null and it is connected or trying to connected you pass
+			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
-				ConnectionType = activeNetworkInfo.Type.ToString();
+				ConnectionType = "Connection type: " + activeNetworkInfo.Type;
+			}
+			else {
+				ConnectionType = "There isn't a connection";
 			}
 		}
 	}

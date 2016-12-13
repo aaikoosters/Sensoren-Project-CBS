@@ -12,8 +12,14 @@ namespace SensorenCBS
 		public NetworkPage()
 		{
 			InitializeComponent();
-			isNetworkConnected();
-			networkConnectionType();
+			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+			{
+				InitializeComponent();
+				isNetworkConnected();
+				networkConnectionType();
+				return false;
+			});
+
 		}
 
 		void isNetworkConnected()

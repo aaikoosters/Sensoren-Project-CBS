@@ -12,31 +12,23 @@ namespace SensorenCBS
 		public Network()
 		{
 			networkConnection = DependencyService.Get<INetworkConnection>();
-			networkConnected = networkConnection.IsConnected;
-			networkConnType = networkConnection.ConnectionType;
 
+			networkConnection.CheckNetworkConnection();
+			networkConnection.CheckNetworkConnectionType();
 		}
 
 		public string connected()
 		{
-			networkConnection.CheckNetworkConnection();
+			networkConnected = networkConnection.IsConnected;
 			var networkStatus = networkConnected ? "You are Connected" : "You are not Connected";
 			return networkStatus;
-
 		}
 
 		public string connectionType()
 		{
-			networkConnection.CheckNetworkConnectionType();
-			var networkType = "Not known";
-			if (networkConnected)
-			{
-				return networkType = networkConnType;
-			}
-			else {
-
-				return networkType;
-			}
+			networkConnType = networkConnection.ConnectionType;
+			var networktype = networkConnType;
+			return networktype;
 		}
 
 	}
