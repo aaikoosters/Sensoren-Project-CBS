@@ -23,7 +23,7 @@ namespace SensorenCBS
 
 		void btnWifi(object s, EventArgs e)
 		{
-			Navigation.PushAsync(new WiFiPage());
+			Navigation.PushAsync(new NetworkPage());
 		}
 
 
