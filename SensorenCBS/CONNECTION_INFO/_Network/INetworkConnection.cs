@@ -10,5 +10,7 @@ namespace SensorenCBS
 		void CheckNetworkConnection();
 		void CheckNetworkConnectionType();
 		void CheckExtraConnectionInfo();
+		void GetDetailState();
+		void GetState();
 	}
 }

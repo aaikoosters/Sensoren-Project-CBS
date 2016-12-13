@@ -22,7 +22,9 @@ namespace SensorenCBS.Droid
 		{
 			// Get the connectiviyManager (Android typical)
 			// Get the network information, give the details about the current active network
-			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			activeNetworkInfo.GetDetailedState();
+			activeNetworkInfo.GetState();
 		}
 
 		public void CheckNetworkConnection()
@@ -69,6 +71,16 @@ namespace SensorenCBS.Droid
 			else {
 				ExtraConnectionInfo = "";
 			}
+		}
+
+		public void GetDetailState()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void GetState()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

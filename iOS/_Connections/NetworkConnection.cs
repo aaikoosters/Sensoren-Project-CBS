@@ -146,5 +146,15 @@ namespace SensorenCBS.iOS
 		{
 			throw new NotImplementedException();
 		}
+
+		public void GetDetailState()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void GetState()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
