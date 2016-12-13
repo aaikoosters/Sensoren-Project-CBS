@@ -13,20 +13,24 @@ namespace SensorenCBS.Droid
 	{
 		ConnectivityManager connectivityManager;
 		NetworkInfo activeNetworkInfo;
+
+		public bool IsConnected { get; set; }
+		public string ConnectionType { get; set; }
+		public string ExtraConnectionInfo { get; set; }
+
 		public NetworkConnection()
 		{
 			// Get the connectiviyManager (Android typical)
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
 			// Get the network information, give the details about the current active network
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 		}
 
-		public bool IsConnected { get; set; }
-		public string ConnectionType { get; set;}
-
-		public void CheckNetwork()
+		public void CheckNetworkConnection()
 		{
 			// When the info is not null and it is connected or trying to connected you pass
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+			
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				IsConnected = true;
@@ -34,19 +38,36 @@ namespace SensorenCBS.Droid
 			else {
 				IsConnected = false;
 			}
-
 		}
 
 		public void CheckNetworkConnectionType()
 		{
 			
 			// When the info is not null and it is connected or trying to connected you pass
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+			
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				ConnectionType = "Connection type: " + activeNetworkInfo.Type;
 			}
 			else {
-				ConnectionType = "There isn't a connection";
+				ConnectionType = "";
+			}
+		}
+
+		public void CheckExtraConnectionInfo()
+		{
+			// When the info is not null and it is connected or trying to connected you pass
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+			
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
+			{
+				ExtraConnectionInfo = "Extra connection information: " + activeNetworkInfo.ExtraInfo;
+			}
+			else {
+				ExtraConnectionInfo = "";
 			}
 		}
 	}

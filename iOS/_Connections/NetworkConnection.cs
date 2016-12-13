@@ -15,6 +15,14 @@ namespace SensorenCBS.iOS
 
 		public string ConnectionType { get; set; }
 
+		public string ExtraConnectionInfo
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public void CheckNetworkConnection()
 		{
 			InternetConnectionStatus();
@@ -132,6 +140,11 @@ namespace SensorenCBS.iOS
 
 				// do something like checking the connectionType
 			}
+		}
+
+		public void CheckExtraConnectionInfo()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

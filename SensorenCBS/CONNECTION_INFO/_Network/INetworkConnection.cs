@@ -5,8 +5,10 @@ namespace SensorenCBS
 	{
 		bool IsConnected { get; }
 		string ConnectionType { get; }
+		string ExtraConnectionInfo { get; }
+
 		void CheckNetworkConnection();
 		void CheckNetworkConnectionType();
-		
+		void CheckExtraConnectionInfo();
 	}
 }

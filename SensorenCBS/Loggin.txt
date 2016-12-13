@@ -1,4 +1,7 @@
-﻿Testing/Log:
+﻿
+
+
+Testing/Log:
 13-12-2016
 Het is mogelijk om de connectie te zien maar hij gaat buggen op het moment dat je je netwerk uitschakelt
 Dan veranderen de waardes niet en het is niet zichtbaar of je verbonden bent met mobiel netwerk

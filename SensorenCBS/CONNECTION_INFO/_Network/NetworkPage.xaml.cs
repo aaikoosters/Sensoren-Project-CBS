@@ -14,9 +14,9 @@ namespace SensorenCBS
 			InitializeComponent();
 			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
 			{
-				InitializeComponent();
 				isNetworkConnected();
 				networkConnectionType();
+				extraConnectionInfo();
 				return false;
 			});
 
@@ -30,6 +30,11 @@ namespace SensorenCBS
 		void networkConnectionType()
 		{
 			lblconnType.Text = network.connectionType();
+		}
+
+		void extraConnectionInfo()
+		{
+			lblextConnInfo.Text = network.connectionExtraInfo();
 		}
 	}
 }
