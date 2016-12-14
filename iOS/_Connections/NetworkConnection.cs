@@ -156,12 +156,20 @@ namespace SensorenCBS.iOS
 			throw new NotImplementedException();
 		}
 
+<<<<<<< HEAD
 		public void CheckConnectionState()
+=======
+		public void GetDetailState()
+>>>>>>> origin/WiFi
 		{
 			throw new NotImplementedException();
 		}
 
+<<<<<<< HEAD
 		public void CheckConnectionDetailState()
+=======
+		public void GetState()
+>>>>>>> origin/WiFi
 		{
 			throw new NotImplementedException();
 		}

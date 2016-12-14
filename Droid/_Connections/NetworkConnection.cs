@@ -26,10 +26,16 @@ namespace SensorenCBS.Droid
 		{
 			// Get the connectiviyManager (Android typical)
 			// Get the network information, give the details about the current active network
+<<<<<<< HEAD
 			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
 			
 			var requistroutetohost = connectivityManager.;
+=======
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			activeNetworkInfo.GetDetailedState();
+			activeNetworkInfo.GetState();
+>>>>>>> origin/WiFi
 		}
 
 		public void CheckNetworkConnection()
@@ -78,6 +84,7 @@ namespace SensorenCBS.Droid
 			}
 		}
 
+<<<<<<< HEAD
 		public void CheckConnectionState()
 		{
 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
@@ -104,6 +111,16 @@ namespace SensorenCBS.Droid
 			else {
 				ConnectionDetailStateInfo = "";
 			}
+=======
+		public void GetDetailState()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void GetState()
+		{
+			throw new NotImplementedException();
+>>>>>>> origin/WiFi
 		}
 	}
 }
