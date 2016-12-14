@@ -11,16 +11,27 @@ namespace SensorenCBS
 
 		public NetworkPage()
 		{
+			
 			InitializeComponent();
 			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
 			{
-				isNetworkConnected();
-				networkConnectionType();
-				extraConnectionInfo();
-				connectionState();
+				callMethods();
 				return false;
 			});
+		}
 
+		void callMethods()
+		{
+			isNetworkConnected();
+			networkConnectionType();
+			extraConnectionInfo();
+			connectionState();
+			mobileSignal();
+		}
+
+		void mobileSignal()
+		{
+			lblMobileStrenght.Text = network.mobileStrengthInfo();
 		}
 
 		void connectionState()

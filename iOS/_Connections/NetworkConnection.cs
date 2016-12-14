@@ -32,6 +32,22 @@ namespace SensorenCBS.iOS
 			}
 		}
 
+		public bool isMobile
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
+		public string MobileStrengthInfo
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public void CheckNetworkConnection()
 		{
 			InternetConnectionStatus();
@@ -162,6 +178,11 @@ namespace SensorenCBS.iOS
 		}
 
 		public void CheckConnectionDetailState()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void CheckMobileStrenght()
 		{
 			throw new NotImplementedException();
 		}

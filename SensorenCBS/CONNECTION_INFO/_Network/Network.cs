@@ -57,5 +57,17 @@ namespace SensorenCBS
 			var detailStateInfo = networkDetailStateInfo;
 			return detailStateInfo;
 		}
+
+		public string mobileStrengthInfo()
+		{
+			//if (networkConnection.isMobile)
+			//{
+				networkConnection.CheckMobileStrenght();
+				var mobileStrength = networkConnection.MobileStrengthInfo;
+				return mobileStrength;
+			//}
+			//return "";
+
+		}
 	}
 }
