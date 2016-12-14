@@ -10,7 +10,7 @@ using Application = Android.App.Application;
 [assembly: Dependency(typeof(NetworkConnection))]
 namespace SensorenCBS.Droid
 {
-	public class NetworkConnection : INetworkConnection, PhoneStateListener
+	public class NetworkConnection : INetworkConnection
 	{
 		ConnectivityManager connectivityManager;
 		NetworkInfo activeNetworkInfo;
