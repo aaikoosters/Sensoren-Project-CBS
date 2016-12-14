@@ -17,9 +17,16 @@ namespace SensorenCBS
 				isNetworkConnected();
 				networkConnectionType();
 				extraConnectionInfo();
+				connectionState();
 				return false;
 			});
 
+		}
+
+		void connectionState()
+		{
+			lblConnState.Text = network.connectionStateInfo();
+			lblConnDetailState.Text = network.connectionDetailStateInfo();
 		}
 
 		void isNetworkConnected()
@@ -36,5 +43,6 @@ namespace SensorenCBS
 		{
 			lblextConnInfo.Text = network.connectionExtraInfo();
 		}
+
 	}
 }

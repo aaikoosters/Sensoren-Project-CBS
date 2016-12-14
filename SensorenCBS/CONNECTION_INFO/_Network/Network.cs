@@ -40,5 +40,22 @@ namespace SensorenCBS
 			return extraInfo;
 		}
 
+		public string connectionStateInfo()
+		{
+			networkConnection.CheckConnectionState();
+
+			var networkStateInfo = networkConnection.ConnectionStateInfo;
+			var stateInfo = networkStateInfo;
+			return stateInfo;
+		}
+
+		public string connectionDetailStateInfo()
+		{
+			networkConnection.CheckConnectionDetailState();
+
+			var networkDetailStateInfo = networkConnection.ConnectionDetailStateInfo;
+			var detailStateInfo = networkDetailStateInfo;
+			return detailStateInfo;
+		}
 	}
 }

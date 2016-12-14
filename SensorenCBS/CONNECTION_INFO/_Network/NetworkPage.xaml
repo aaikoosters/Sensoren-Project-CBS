@@ -15,7 +15,11 @@
 
 			<Label Text="Fetching network Connection.." x:Name="lblStat"/>
 			<Label Text="Fetching network Connection Type.." x:Name="lblconnType"/>
-			<Label Text="Fetching extra connection Info.." x:Name="lblextConnInfo"/>
+			<Label Text="Fetching extra Connection Info.." x:Name="lblextConnInfo"/>
+			<Label Text="Fetching Connection State.." x:Name="lblConnState"/>
+			<Label Text="Fetching Connection Detail State.." x:Name="lblConnDetailState"/>
+			
+			
 			
 			
 			

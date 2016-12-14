@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Net;
+using Android.Telephony;
 using SensorenCBS.Droid;
 using Xamarin.Forms;
 using Application = Android.App.Application;
@@ -9,7 +10,7 @@ using Application = Android.App.Application;
 [assembly: Dependency(typeof(NetworkConnection))]
 namespace SensorenCBS.Droid
 {
-	public class NetworkConnection : INetworkConnection
+	public class NetworkConnection : INetworkConnection, PhoneStateListener
 	{
 		ConnectivityManager connectivityManager;
 		NetworkInfo activeNetworkInfo;
@@ -17,12 +18,18 @@ namespace SensorenCBS.Droid
 		public bool IsConnected { get; set; }
 		public string ConnectionType { get; set; }
 		public string ExtraConnectionInfo { get; set; }
+		public string ConnectionStateInfo { get; set; }
+		public string ConnectionDetailStateInfo { get; set; }
+		
 
 		public NetworkConnection()
 		{
 			// Get the connectiviyManager (Android typical)
 			// Get the network information, give the details about the current active network
 			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+			
+			var requistroutetohost = connectivityManager.;
 		}
 
 		public void CheckNetworkConnection()
@@ -68,6 +75,34 @@ namespace SensorenCBS.Droid
 			}
 			else {
 				ExtraConnectionInfo = "";
+			}
+		}
+
+		public void CheckConnectionState()
+		{
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
+			{
+				ConnectionStateInfo = "Connection State information: " + activeNetworkInfo.GetState();
+			}
+			else {
+				ConnectionStateInfo = "";
+			}
+		}
+
+		public void CheckConnectionDetailState()
+		{
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
+			{
+				ConnectionDetailStateInfo = "Detail Conn State information: " + activeNetworkInfo.GetDetailedState();
+			}
+			else {
+				ConnectionDetailStateInfo = "";
 			}
 		}
 	}
