@@ -2,7 +2,7 @@
 <ContentPage 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="SensorenCBS.InformationGPSPage">
+		x:Class="SensorenCBS.NetworkPage">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 10, 20, 20"
@@ -13,11 +13,14 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
-			<Label Text="Fetching Information" x:Name="lblInfo"/>
-			<Label Text="Fetching Speed" x:Name="lblSpeed"/>
-			<Label Text="Fetching Heading" x:Name="lblHeading"/>
-			<Label Text="Fetching Total Distance" x:Name="lblTotDistance"/>
-			<Label Text="Fetching Average Speed" x:Name="lblAvgSpeed"/>
+			<Label Text="Fetching network Connection.." x:Name="lblStat"/>
+			<Label Text="Fetching network Connection Type.." x:Name="lblconnType"/>
+			<Label Text="Fetching extra Connection Info.." x:Name="lblextConnInfo"/>
+			<Label Text="Fetching Connection State.." x:Name="lblConnState"/>
+			<Label Text="Fetching Connection Detail State.." x:Name="lblConnDetailState"/>
+			
+			
+			
 			
 			
 			

@@ -1,4 +1,13 @@
-﻿Log:
+﻿
+
+
+Testing/Log:
+13-12-2016
+Het is mogelijk om de connectie te zien maar hij gaat buggen op het moment dat je je netwerk uitschakelt
+Dan veranderen de waardes niet en het is niet zichtbaar of je verbonden bent met mobiel netwerk
+
+
+Log:
 01-12-2016
 Getest met de Galaxy S6 Edge, Galaxay Tab S2, Galaxy A5(16) en de LG G3
 De waardes van de latitude en de longitude verschillen tussen de A5, LG en de Tab en Edge
