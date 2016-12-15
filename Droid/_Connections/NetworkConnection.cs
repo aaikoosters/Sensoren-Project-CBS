@@ -23,23 +23,8 @@ namespace SensorenCBS.Droid
 
 		public NetworkConnection()
 		{
-// <<<<<<< HEAD
-// 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-// 			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
-// =======
-// 			// Get the connectiviyManager (Android typical)
-// 			// Get the network information, give the details about the current active network
-// <<<<<<< HEAD
-// 			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
-// 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-//
-// 			var requistroutetohost = connectivityManager.;
-// =======
-// 			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
-// 			activeNetworkInfo.GetDetailedState();
-// 			activeNetworkInfo.GetState();
-// >>>>>>> origin/WiFi
-// >>>>>>> origin/WiFi
+			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 		}
 
 		public void CheckNetworkConnection()
