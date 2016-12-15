@@ -23,8 +23,23 @@ namespace SensorenCBS.Droid
 
 		public NetworkConnection()
 		{
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+// <<<<<<< HEAD
+// 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+// 			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+// =======
+// 			// Get the connectiviyManager (Android typical)
+// 			// Get the network information, give the details about the current active network
+// <<<<<<< HEAD
+// 			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+// 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
+//
+// 			var requistroutetohost = connectivityManager.;
+// =======
+// 			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+// 			activeNetworkInfo.GetDetailedState();
+// 			activeNetworkInfo.GetState();
+// >>>>>>> origin/WiFi
+// >>>>>>> origin/WiFi
 		}
 
 		public void CheckNetworkConnection()
@@ -40,7 +55,7 @@ namespace SensorenCBS.Droid
 
 		public void CheckNetworkConnectionType()
 		{
-			
+
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				ConnectionType = "Connection type: " + activeNetworkInfo.Type;
@@ -61,6 +76,7 @@ namespace SensorenCBS.Droid
 			}
 		}
 
+// <<<<<<< HEAD
 		public void CheckConnectionState()
 		{
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
@@ -81,6 +97,16 @@ namespace SensorenCBS.Droid
 			else {
 				ConnectionDetailStateInfo = "";
 			}
+// =======
+// 		public void GetDetailState()
+// 		{
+// 			throw new NotImplementedException();
+// 		}
+//
+// 		public void GetState()
+// 		{
+// 			throw new NotImplementedException();
+// >>>>>>> origin/WiFi
 		}
 	}
 }

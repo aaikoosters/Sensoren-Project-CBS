@@ -40,7 +40,7 @@ namespace SensorenCBS.iOS
 		// Checking if there is a connection
 		private void UpdateNetworkStatus()
 		{
-			
+
 			if (InternetConnectionStatus())
 			{
 				IsConnected = true;
