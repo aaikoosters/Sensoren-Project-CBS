@@ -76,7 +76,6 @@ namespace SensorenCBS.Droid
 			}
 		}
 
-// <<<<<<< HEAD
 		public void CheckConnectionState()
 		{
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
@@ -97,16 +96,6 @@ namespace SensorenCBS.Droid
 			else {
 				ConnectionDetailStateInfo = "";
 			}
-// =======
-// 		public void GetDetailState()
-// 		{
-// 			throw new NotImplementedException();
-// 		}
-//
-// 		public void GetState()
-// 		{
-// 			throw new NotImplementedException();
-// >>>>>>> origin/WiFi
 		}
 	}
 }
