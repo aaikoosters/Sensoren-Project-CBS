@@ -20,24 +20,15 @@ namespace SensorenCBS.Droid
 		public string ExtraConnectionInfo { get; set; }
 		public string ConnectionStateInfo { get; set; }
 		public string ConnectionDetailStateInfo { get; set; }
-		
 
 		public NetworkConnection()
 		{
-			// Get the connectiviyManager (Android typical)
-			// Get the network information, give the details about the current active network
-			//activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-			
-			var requistroutetohost = connectivityManager.;
+			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 		}
 
 		public void CheckNetworkConnection()
 		{
-			// When the info is not null and it is connected or trying to connected you pass
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-			
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				IsConnected = true;
@@ -50,10 +41,6 @@ namespace SensorenCBS.Droid
 		public void CheckNetworkConnectionType()
 		{
 			
-			// When the info is not null and it is connected or trying to connected you pass
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-			
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				ConnectionType = "Connection type: " + activeNetworkInfo.Type;
@@ -65,10 +52,6 @@ namespace SensorenCBS.Droid
 
 		public void CheckExtraConnectionInfo()
 		{
-			// When the info is not null and it is connected or trying to connected you pass
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-			
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				ExtraConnectionInfo = "Extra connection information: " + activeNetworkInfo.ExtraInfo;
@@ -80,9 +63,6 @@ namespace SensorenCBS.Droid
 
 		public void CheckConnectionState()
 		{
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				ConnectionStateInfo = "Connection State information: " + activeNetworkInfo.GetState();
@@ -94,9 +74,6 @@ namespace SensorenCBS.Droid
 
 		public void CheckConnectionDetailState()
 		{
-			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
-
-			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
 			{
 				ConnectionDetailStateInfo = "Detail Conn State information: " + activeNetworkInfo.GetDetailedState();

@@ -20,7 +20,6 @@ namespace SensorenCBS
 				connectionState();
 				return false;
 			});
-
 		}
 
 		void connectionState()

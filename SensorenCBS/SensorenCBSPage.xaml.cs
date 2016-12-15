@@ -21,9 +21,9 @@ namespace SensorenCBS
 			Navigation.PushAsync(new MotionPage());
 		}
 
-		void btnWifi(object s, EventArgs e)
+		void btnConn(object s, EventArgs e)
 		{
-			Navigation.PushAsync(new NetworkPage());
+			Navigation.PushAsync(new ConnectionPage());
 		}
 
 
