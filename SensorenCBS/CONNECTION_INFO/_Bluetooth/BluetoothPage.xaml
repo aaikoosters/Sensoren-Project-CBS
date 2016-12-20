@@ -13,6 +13,7 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
+			<Button Text="Turn Bluetooth on" Clicked="btnConn" x:Name="btnBlueState" />
 			<Label Text="Fetching bluetooth Connection.." x:Name="lblStat"/>
 			<ListView x:Name="listDevices"/>
 			

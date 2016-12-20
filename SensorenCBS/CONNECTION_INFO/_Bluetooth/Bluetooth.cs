@@ -17,5 +17,12 @@ namespace SensorenCBS
 			var bluetoothEnabled = bluetoothConnection.isBluetoothOn;
 			return bluetoothEnabled ? "Bluetooth is Enabled" : "Bluetooth is Disabled";
 		}
+
+		public void changeState(bool change)
+		{
+			bluetoothConnection.ChangeBluetoothState(change);
+			//bluetoothConnection.CheckBluetoothIsEnabled();
+			//var bluetoothState = bluetoothConnection.isBluetoothOn;
+		}
 	}
 }

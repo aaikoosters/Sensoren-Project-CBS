@@ -36,8 +36,12 @@ namespace SensorenCBS.Droid
 			_bluetoothAdapter.StartDiscovery();
 		}
 
-
-
+		public void ChangeBluetoothState(bool OnOff)
+		{
+			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+			if (OnOff) { _bluetoothAdapter.Disable(); }
+			else { _bluetoothAdapter.Enable(); }
+		}
 	}
 }
 

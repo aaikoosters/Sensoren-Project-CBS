@@ -22,6 +22,11 @@ namespace SensorenCBS.iOS
 
 		public bool isBluetoothOn { get; set; }
 
+		public void ChangeBluetoothState(bool OnOff)
+		{
+			throw new NotImplementedException();
+		}
+
 		public void CheckBluetoothIsEnabled()
 		{
 			throw new NotImplementedException();

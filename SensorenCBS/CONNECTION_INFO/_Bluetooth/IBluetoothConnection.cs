@@ -11,6 +11,7 @@ namespace SensorenCBS
 
 		void CheckBluetoothIsEnabled();
 		void DiscoverBluetoothDevices();
+		void ChangeBluetoothState(bool OnOff);
 
 	}
 
