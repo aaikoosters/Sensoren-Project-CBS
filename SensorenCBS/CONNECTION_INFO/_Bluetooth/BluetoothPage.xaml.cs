@@ -37,7 +37,6 @@ namespace SensorenCBS
 
 		}
 
-<<<<<<< HEAD
 		void bluetoothInfo()
 		{
 			lblAbled.Text = bluetooth.isEnabled();
@@ -45,12 +44,5 @@ namespace SensorenCBS
 			lblState.Text = bluetooth.bluetoothState();
 			lblName.Text = bluetooth.bluetoothName();
 		}
-=======
-
-		//void btnBlueCon(object ob, EventArgs ea)
-		//{
-
-		//}
->>>>>>> origin/Bluetooth
 	}
 }
