@@ -7,10 +7,8 @@ namespace SensorenCBS
 	public interface IBluetoothConnection
 	{
 		bool isBluetoothOn { get; }
-		Array discoverdBluetDevices { get; }
 
 		void CheckBluetoothIsEnabled();
-		void DiscoverBluetoothDevices();
 		void ChangeBluetoothState(bool OnOff);
 
 	}

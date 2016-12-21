@@ -34,9 +34,10 @@ namespace SensorenCBS
 			isBluetoothEnabled();
 		}
 
+
 		//void btnBlueCon(object ob, EventArgs ea)
 		//{
-			
+
 		//}
 	}
 }

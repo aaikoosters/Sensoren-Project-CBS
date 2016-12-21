@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Bluetooth;
 using SensorenCBS.Droid;
 using Xamarin.Forms;
@@ -9,10 +10,9 @@ namespace SensorenCBS.Droid
 	public class BluetoothConnection : IBluetoothConnection
 	{
 		BluetoothAdapter _bluetoothAdapter;
-		
+
 		public bool isBluetoothOn { get; set; }
 		public string bluetoothAddress { get; set; }
-		public Array discoverdBluetDevices { get; set; }
 
 		public BluetoothConnection()
 		{
@@ -30,24 +30,13 @@ namespace SensorenCBS.Droid
 			}
 		}
 
-		public void DiscoverBluetoothDevices()
-		{
-			_bluetoothAdapter.StartDiscovery();
-		}
-
 		public void ChangeBluetoothState(bool OnOff)
 		{
 			if (OnOff) { _bluetoothAdapter.Enable(); }
 			else { _bluetoothAdapter.Disable(); }
 		}
 
-		public void DiscoverBluetoothAddress()
-		{
-			if (isBluetoothOn)
-			{
-				bluetoothAddress = _bluetoothAdapter.Address;
-			}
-		}
+
 	}
 }
 
