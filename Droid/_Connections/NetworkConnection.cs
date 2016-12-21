@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Net;
+using Android.Net.Wifi;
 using Android.Telephony;
 using SensorenCBS.Droid;
 using Xamarin.Forms;
@@ -25,6 +26,7 @@ namespace SensorenCBS.Droid
 		{
 			connectivityManager = (ConnectivityManager)Application.Context.GetSystemService(Context.ConnectivityService);
 			activeNetworkInfo = connectivityManager.ActiveNetworkInfo;
+			//wifiInfo = connectivityManager.
 		}
 
 		public void CheckNetworkConnection()
@@ -61,7 +63,7 @@ namespace SensorenCBS.Droid
 			}
 		}
 
-// <<<<<<< HEAD
+
 		public void CheckConnectionState()
 		{
 			if (activeNetworkInfo != null && activeNetworkInfo.IsConnectedOrConnecting)
@@ -82,16 +84,6 @@ namespace SensorenCBS.Droid
 			else {
 				ConnectionDetailStateInfo = "";
 			}
-// =======
-// 		public void GetDetailState()
-// 		{
-// 			throw new NotImplementedException();
-// 		}
-//
-// 		public void GetState()
-// 		{
-// 			throw new NotImplementedException();
-// >>>>>>> origin/WiFi
 		}
 	}
 }

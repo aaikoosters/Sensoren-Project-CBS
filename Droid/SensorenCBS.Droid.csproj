@@ -171,6 +171,7 @@
     <Compile Include="NetworkState.cs" />
     <Compile Include="_Connections\NetworkConnection.cs" />
     <Compile Include="_Connections\BluetoothConnection.cs" />
+    <Compile Include="_Connections\WifiConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

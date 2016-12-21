@@ -45,6 +45,9 @@
     <EmbeddedResource Include="CONNECTION_INFO\_Bluetooth\BluetoothPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="CONNECTION_INFO\_Network\WifiNetworkPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -77,6 +80,11 @@
     <Compile Include="CONNECTION_INFO\_Bluetooth\BluetoothPage.xaml.cs">
       <DependentUpon>BluetoothPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CONNECTION_INFO\_Network\WifiNetworkPage.xaml.cs">
+      <DependentUpon>WifiNetworkPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CONNECTION_INFO\_Network\Wifi.cs" />
+    <Compile Include="CONNECTION_INFO\_Network\IWifiConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

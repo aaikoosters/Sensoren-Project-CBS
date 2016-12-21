@@ -1,11 +1,11 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace SensorenCBS
 {
 	public class Network
 	{
 		INetworkConnection networkConnection = DependencyService.Get<INetworkConnection>();
+		//WifiInfo wifiInfo = new WifiInfo();
 		//INetworkConnection ;
 
 		public Network()

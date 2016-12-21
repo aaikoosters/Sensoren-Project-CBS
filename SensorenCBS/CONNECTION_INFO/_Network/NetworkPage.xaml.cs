@@ -7,11 +7,15 @@ namespace SensorenCBS
 {
 	public partial class NetworkPage : ContentPage
 	{
-		Network network = new Network();
+		Network network;
+		bool isConnected;
+		string type;
 
 		public NetworkPage()
 		{
 			InitializeComponent();
+			network = new Network();
+
 			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
 			{
 				isNetworkConnected();
@@ -20,6 +24,8 @@ namespace SensorenCBS
 				connectionState();
 				return false;
 			});
+
+
 		}
 
 		void connectionState()
@@ -30,12 +36,20 @@ namespace SensorenCBS
 
 		void isNetworkConnected()
 		{
+			
 			lblStat.Text = network.connected();
+			if (network.connected() == "You are Connected")
+			{
+				isConnected = true;
+			}
+			else { isConnected = false; }
 		}
 
 		void networkConnectionType()
 		{
-			lblconnType.Text = network.connectionType();
+			type = network.connectionType();
+			lblconnType.Text = type;
+
 		}
 
 		void extraConnectionInfo()
@@ -43,5 +57,9 @@ namespace SensorenCBS
 			lblextConnInfo.Text = network.connectionExtraInfo();
 		}
 
+		void btnWifi(object s, EventArgs e)
+		{
+			Navigation.PushAsync(new WifiNetworkPage());
+		}
 	}
 }

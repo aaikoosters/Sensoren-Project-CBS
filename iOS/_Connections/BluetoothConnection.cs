@@ -9,7 +9,7 @@ namespace SensorenCBS.iOS
 	{
 		public BluetoothConnection()
 		{
-			
+
 		}
 
 		public string bluetoothAddress { get; set; }
@@ -34,3 +34,4 @@ namespace SensorenCBS.iOS
 		}
 	}
 
+}
