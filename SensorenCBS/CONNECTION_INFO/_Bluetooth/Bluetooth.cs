@@ -21,8 +21,24 @@ namespace SensorenCBS
 		public void changeState(bool change)
 		{
 			bluetoothConnection.ChangeBluetoothState(change);
-			//bluetoothConnection.CheckBluetoothIsEnabled();
-			//var bluetoothState = bluetoothConnection.isBluetoothOn;
+		}
+
+		public string bluetoothAddress()
+		{
+			bluetoothConnection.DiscoverBluetoothInformation();
+			return bluetoothConnection.bluetoothAddress;
+		}
+
+		public string bluetoothState()
+		{
+			bluetoothConnection.DiscoverBluetoothInformation();
+			return bluetoothConnection.bluetoothState;
+		}
+
+		public string bluetoothName()
+		{
+			bluetoothConnection.DiscoverBluetoothInformation();
+			return bluetoothConnection.bluetoothName;
 		}
 	}
 }

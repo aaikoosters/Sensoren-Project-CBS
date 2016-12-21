@@ -7,36 +7,42 @@ namespace SensorenCBS
 	public partial class BluetoothPage : ContentPage
 	{
 		Bluetooth bluetooth = new Bluetooth();
-		bool stateOnOff = false;
-
 
 		public BluetoothPage()
 		{
 			InitializeComponent();
-			isBluetoothEnabled();
+			startMethods();
+
 		}
 
-		void isBluetoothEnabled()
+		void startMethods()
 		{
-			var lblStatText = bluetooth.isEnabled();
-			lblStat.Text = lblStatText;
+			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+			{
+				bluetoothInfo();
+				return false;
+			});
 		}
 
 		void btnConnOn(object s, EventArgs e)
 		{
 			bluetooth.changeState(true);
-			isBluetoothEnabled();
+			startMethods();
 		}
 
 		void btnConnOff(object s, EventArgs e)
 		{
 			bluetooth.changeState(false);
-			isBluetoothEnabled();
+			startMethods();
+
 		}
 
-		//void btnBlueCon(object ob, EventArgs ea)
-		//{
-			
-		//}
+		void bluetoothInfo()
+		{
+			lblAbled.Text = bluetooth.isEnabled();
+			lblAddress.Text = bluetooth.bluetoothAddress();
+			lblState.Text = bluetooth.bluetoothState();
+			lblName.Text = bluetooth.bluetoothName();
+		}
 	}
 }

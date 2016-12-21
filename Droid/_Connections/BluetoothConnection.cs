@@ -12,7 +12,10 @@ namespace SensorenCBS.Droid
 		
 		public bool isBluetoothOn { get; set; }
 		public string bluetoothAddress { get; set; }
-		public Array discoverdBluetDevices { get; set; }
+		public string bluetoothState { get; set; }
+		public string bluetoothName { get; set; }
+		public string bluetoothHashCode { get; set; }
+		
 
 		public BluetoothConnection()
 		{
@@ -41,13 +44,13 @@ namespace SensorenCBS.Droid
 			else { _bluetoothAdapter.Disable(); }
 		}
 
-		public void DiscoverBluetoothAddress()
+		public void DiscoverBluetoothInformation()
 		{
-			if (isBluetoothOn)
-			{
-				bluetoothAddress = _bluetoothAdapter.Address;
-			}
+			bluetoothAddress = string.Format("Bluetooth address: {0}", _bluetoothAdapter.Address);
+			bluetoothState = string.Format("Bluetooth is: {0}", _bluetoothAdapter.State);
+			bluetoothName = string.Format("Bluetooth name: {0}", _bluetoothAdapter.Name);
 		}
+
 	}
 }
 

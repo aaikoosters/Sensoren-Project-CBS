@@ -16,8 +16,10 @@
 			<Button Text="Turn Bluetooth on" Clicked="btnConnOn" x:Name="btnBlueStateOn" />
 			<Button Text="Turn Bluetooth off" Clicked="btnConnOff" x:Name="btnBlueStateOf" />
 			
-			<Label Text="Fetching bluetooth Connection.." x:Name="lblStat"/>
-			<ListView x:Name="listDevices"/>
+			<Label Text="Fetching bluetooth Connection.." x:Name="lblAbled"/>
+			<Label Text="Fetching bluetooth Name" x:Name="lblName"/>
+			<Label Text="Fetching bluetooth Address" x:Name="lblAddress"/>
+			<Label Text="Fetching bluetooth State.." x:Name="lblState"/>
 			
 			
 			
