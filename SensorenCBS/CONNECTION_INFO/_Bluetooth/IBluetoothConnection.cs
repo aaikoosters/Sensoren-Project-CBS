@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace SensorenCBS
@@ -7,7 +7,7 @@ namespace SensorenCBS
 	public interface IBluetoothConnection
 	{
 		bool isBluetoothOn { get; }
-		Array discoverdBluetDevices { get; }
+		Dictionary<string, string> discoverdBluetDevices { get; }
 
 		void CheckBluetoothIsEnabled();
 		void DiscoverBluetoothDevices();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SensorenCBS.iOS;
 using Xamarin.Forms;
 
@@ -12,15 +13,16 @@ namespace SensorenCBS.iOS
 			
 		}
 
-		public Array discoverdBluetDevices
+
+		public bool isBluetoothOn { get; set; }
+
+		Dictionary<string, string> IBluetoothConnection.discoverdBluetDevices
 		{
 			get
 			{
 				throw new NotImplementedException();
 			}
 		}
-
-		public bool isBluetoothOn { get; set; }
 
 		public void ChangeBluetoothState(bool OnOff)
 		{

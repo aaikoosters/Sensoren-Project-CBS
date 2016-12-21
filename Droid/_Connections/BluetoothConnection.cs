@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Bluetooth;
 using SensorenCBS.Droid;
 using Xamarin.Forms;
@@ -9,18 +10,19 @@ namespace SensorenCBS.Droid
 	public class BluetoothConnection : IBluetoothConnection
 	{
 		BluetoothAdapter _bluetoothAdapter;
-		
-		public bool isBluetoothOn { get; set; }
+		private HashSet<BluetoothDevice> _pairedDevices;
 
-		public Array discoverdBluetDevices { get; set; }
+		public bool isBluetoothOn { get; set; }
+		public Dictionary<string, string> discoverdBluetDevices { get; set; }
 
 		public BluetoothConnection()
 		{
+			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+			_pairedDevices = (HashSet<BluetoothDevice>)_bluetoothAdapter.BondedDevices;
 		}
 
 		public void CheckBluetoothIsEnabled()
 		{
-			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
 			if (_bluetoothAdapter.IsEnabled)
 			{
 				isBluetoothOn = true;
@@ -32,16 +34,20 @@ namespace SensorenCBS.Droid
 
 		public void DiscoverBluetoothDevices()
 		{
-			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-			_bluetoothAdapter.StartDiscovery();
+			var devices = new Dictionary<string, string>();
+			foreach (BluetoothDevice bt in _pairedDevices)
+			{
+				discoverdBluetDevices.Add(bt.Address, bt.Name);
+			}
 		}
 
 		public void ChangeBluetoothState(bool OnOff)
 		{
 			_bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-			if (OnOff) { _bluetoothAdapter.Disable(); }
-			else { _bluetoothAdapter.Enable(); }
+			if (OnOff) { _bluetoothAdapter.Enable();  }
+			else { _bluetoothAdapter.Disable(); }
 		}
+
 	}
 }
 

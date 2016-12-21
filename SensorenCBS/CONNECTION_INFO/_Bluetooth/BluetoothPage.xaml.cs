@@ -20,32 +20,33 @@ namespace SensorenCBS
 		{
 			var lblStatText = bluetooth.isEnabled();
 			lblStat.Text = lblStatText;
-
-			if (lblStatText == "Bluetooth is Enabled")
-			{
-				btnBlueState.Text = "Turn Bluetooth off";
-				stateOnOff = true;
-			}
-			else {
-				btnBlueState.Text = "Turn Bluetooth on";
-				stateOnOff = false;
-			}
 		}
 
-		void btnConn(object s, EventArgs e)
+		void btnConnOn(object s, EventArgs e)
 		{
-			if (stateOnOff)
-			{
-				btnBlueState.Text = "Turn Bluetooth off";
-				lblStat.Text = "Bluetooth is Enabled";
-			}
-			else {
-				btnBlueState.Text = "Turn Bluetooth on";
-				lblStat.Text = "Bluetooth is Disabled";
-				
-			}
-			bluetooth.changeState(stateOnOff);
+			bluetooth.changeState(true);
+			InitializeComponent();
+			isBluetoothEnabled();
+		}
 
+		void btnConnOff(object s, EventArgs e)
+		{
+			bluetooth.changeState(false);
+			InitializeComponent();
+			isBluetoothEnabled();
+		}
+
+		void btnDiscoverdBluetoothDevices(object s, EventArgs e)
+		{
+			var items = bluetooth.fetchDevices();
+			listDevices.ItemsSource = items;
+
+			//foreach (var dev in items)
+			//{
+			//	//var listViewItem = new ListViewItem(dev);
+
+
+			//}
 		}
 
 		//void btnBlueCon(object ob, EventArgs ea)

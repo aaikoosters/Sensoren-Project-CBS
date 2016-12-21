@@ -1,5 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
+using System.Collections.Generic;
+
 
 namespace SensorenCBS
 {
@@ -24,5 +26,12 @@ namespace SensorenCBS
 			//bluetoothConnection.CheckBluetoothIsEnabled();
 			//var bluetoothState = bluetoothConnection.isBluetoothOn;
 		}
+
+		public Dictionary<string, string> fetchDevices()
+		{
+			bluetoothConnection.DiscoverBluetoothDevices();
+			return bluetoothConnection.discoverdBluetDevices;
+		}
+	
 	}
 }
