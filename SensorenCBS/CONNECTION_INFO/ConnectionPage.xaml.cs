@@ -16,5 +16,10 @@ namespace SensorenCBS
 		{
 			Navigation.PushAsync(new NetworkPage());
 		}
+
+		void btnBlue(object s, EventArgs e)
+		{
+			Navigation.PushAsync(new BluetoothPage());
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.Azure.Mobile;
 using Xamarin.Forms;
 
 namespace SensorenCBS
@@ -25,7 +26,5 @@ namespace SensorenCBS
 		{
 			Navigation.PushAsync(new ConnectionPage());
 		}
-
-
 	}
 }
