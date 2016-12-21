@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="SensorenCBS.BluetoothPage">
+	<ContentPage.Padding>
+		<OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 10, 20, 20"
+                    Android="20, 20, 20, 20"
+                    WinPhone="20, 20, 20, 20" />
+	</ContentPage.Padding>
+	
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
+
+			<Button Text="Turn Bluetooth on" Clicked="btnConnOn" x:Name="btnBlueStateOn" />
+			<Button Text="Turn Bluetooth off" Clicked="btnConnOff" x:Name="btnBlueStateff" />
+
+			
+			<Label Text="Fetching bluetooth Connection.." x:Name="lblAbled"/>
+			<Label Text="Fetching bluetooth Name" x:Name="lblName"/>
+			<Label Text="Fetching bluetooth Address" x:Name="lblAddress"/>
+			<Label Text="Fetching bluetooth State.." x:Name="lblState"/>
+			
+			
+			
+			
+			
+			
+			
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

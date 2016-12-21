@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Microsoft.Azure.Mobile;
 
 namespace SensorenCBS.Droid
 {
@@ -22,6 +23,7 @@ namespace SensorenCBS.Droid
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
 
+			MobileCenter.Configure("63c09b98-3844-4c37-9a43-315caa0a3f32");
 			LoadApplication(new App());
 		}
 	}
