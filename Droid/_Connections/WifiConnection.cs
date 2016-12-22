@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.Content;
 using Android.Net.Wifi;
 using SensorenCBS.Droid;
@@ -18,17 +19,15 @@ namespace SensorenCBS.Droid
 		public string WifiBSSID { get; set; }
 		public int WifiFrequency { get; set; }
 		public int WifiLinkSpeed { get; set; }
-		public int WifiIpAddress { get; set; }
+		public string WifiIpAddress { get; set; }
 		public string WifiMacAddress { get; set; }
 		public int WifiNetworkId { get; set; }
 		public int WifiRssi { get; set; }
 		public string WifiRssiLevel { get; set; }
+		public List<string> AllWifiBssids { get; set; }
 
-		public WifiConnection()
-		{
-			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-			wifiInfo = wifiManager.ConnectionInfo;
-		}
+		List<string> _wifiBssids = new List<string>();
+
 
 		public void CheckWifiSSID()
 		{
@@ -37,21 +36,37 @@ namespace SensorenCBS.Droid
 
 		public void CheckWifiBBSID()
 		{
+			
+			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			wifiInfo = wifiManager.ConnectionInfo;
+
 			WifiBSSID = wifiInfo.BSSID;
 		}
 
 		public void CheckWifiInformation()
 		{
+			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			wifiInfo = wifiManager.ConnectionInfo;
 
 			WifiFrequency = wifiInfo.Frequency;
-			WifiIpAddress = wifiInfo.IpAddress;
+			WifiIpAddress = wifiInfo.IpAddress.ToString();
 			WifiLinkSpeed = wifiInfo.LinkSpeed;
-			WifiMacAddress=  wifiInfo.MacAddress;
-			WifiNetworkId =  wifiInfo.NetworkId;
+			WifiMacAddress = wifiInfo.MacAddress;
+			WifiNetworkId = wifiInfo.NetworkId;
 			WifiRssi = wifiInfo.Rssi;
-
 		}
 
+		public void CheckAllWifiBSSID()
+		{
+			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			wifiInfo = wifiManager.ConnectionInfo;
 
+			if (_wifiBssids.Count == 0 || _wifiBssids[(_wifiBssids.Count - 1)] != wifiInfo.BSSID)
+			{
+				_wifiBssids.Add(wifiInfo.BSSID);
+				AllWifiBssids = _wifiBssids;
+			}
+
+		}
 	}
 }
