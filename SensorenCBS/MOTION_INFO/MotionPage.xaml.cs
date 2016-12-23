@@ -15,7 +15,7 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 			delayDefault = MotionSensorDelay.Default;
-
+			// start the sensor, in this case you start all four meters
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, delayDefault);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, delayDefault);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Gyroscope, delayDefault);
@@ -23,8 +23,10 @@ namespace SensorenCBS
 
 			CrossDeviceMotion.Current.SensorValueChanged += (s, a) =>
 			{
+				// chose the right type
 				switch (a.SensorType)
 				{
+					// call the right type and set the label with the returned text
 					case MotionSensorType.Magnetometer:
 						var mmd = new MagnetometerMotionDetect(lblMag, a);
 						break;

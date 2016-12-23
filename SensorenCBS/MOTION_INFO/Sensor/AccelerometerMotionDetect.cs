@@ -12,27 +12,27 @@ namespace SensorenCBS
 
 		public AccelerometerMotionDetect(Label label, SensorValueChangedEventArgs svca)
 		{
+			// set label
 			_label = label;
+			// set delay
 			motionDelay = MotionSensorDelay.Default;
+			// start processing accelerometer
 			AccelerometerDetect(svca);
 
 		}
 
 		public void AccelerometerDetect(SensorValueChangedEventArgs b)
 		{
-			//CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, motionDelay);
-
-			var xG = ((float)((MotionVector)b.Value).X).ToString("N3");
-			var yG = ((float)((MotionVector)b.Value).Y).ToString("N3");
-			var zG = ((float)((MotionVector)b.Value).Z).ToString("N3");
-			_label.Text = string.Format("Accelerometer\nX: {0}\nY: {1}\nZ: {2}", xG, yG, zG);
+			var _xA = ((float)((MotionVector)b.Value).X).ToString("N3");
+			var _yA = ((float)((MotionVector)b.Value).Y).ToString("N3");
+			var _zA = ((float)((MotionVector)b.Value).Z).ToString("N3");
+			_label.Text = string.Format("Accelerometer\nX: {0}\nY: {1}\nZ: {2}", _xA, _yA, _zA);
 
 		}
 
 		public void pickThePhoneUp()
 		{
-
-
+			// need to uses this one to check if the phone is pucked up
 		}
 	}
 }

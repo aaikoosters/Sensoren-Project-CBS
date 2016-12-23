@@ -12,8 +12,11 @@ namespace SensorenCBS
 
 		public MagnetometerMotionDetect(Label label, SensorValueChangedEventArgs svca)
 		{
+			// set label
 			_label = label;
+			// set delay
 			motionDelay = MotionSensorDelay.Default;
+			// start processing Magnetometer
 			MagnetometerDetect(svca);
 
 		}
@@ -22,10 +25,10 @@ namespace SensorenCBS
 		{
 			CrossDeviceMotion.Current.Start(MotionSensorType.Magnetometer, motionDelay);
 
-			var xG = ((float)((MotionVector)b.Value).X).ToString("N1");
-			var yG = ((float)((MotionVector)b.Value).Y).ToString("N1");
-			var zG = ((float)((MotionVector)b.Value).Z).ToString("N1");
-			_label.Text = string.Format("Magnetometer\nX: {0}\nY: {1}\nZ: {2}", xG, yG, zG);
+			var _xM = ((float)((MotionVector)b.Value).X).ToString("N1");
+			var _xY = ((float)((MotionVector)b.Value).Y).ToString("N1");
+			var _zM = ((float)((MotionVector)b.Value).Z).ToString("N1");
+			_label.Text = string.Format("Magnetometer\nX: {0}\nY: {1}\nZ: {2}", _xM, _xY, _zM);
 
 		}
 	}
