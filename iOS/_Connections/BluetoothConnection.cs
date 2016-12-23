@@ -9,42 +9,14 @@ namespace SensorenCBS.iOS
 	{
 		public BluetoothConnection()
 		{
-			
+
 		}
 
-		public string bluetoothAddress
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public string bluetoothName
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public string bluetoothState
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public Array discoverdBluetDevices
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
+		public string bluetoothAddress { get; set; }
+		public string bluetoothName { get; set; }
+		public string bluetoothState { get; set; }
 		public bool isBluetoothOn { get; set; }
+
 
 		public void ChangeBluetoothState(bool OnOff)
 		{
@@ -56,15 +28,10 @@ namespace SensorenCBS.iOS
 			throw new NotImplementedException();
 		}
 
-		public void DiscoverBluetoothDevices()
-		{
-			throw new NotImplementedException();
-		}
-
 		public void DiscoverBluetoothInformation()
 		{
 			throw new NotImplementedException();
 		}
 	}
-}
 
+}

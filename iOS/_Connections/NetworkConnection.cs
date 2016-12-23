@@ -12,25 +12,10 @@ namespace SensorenCBS.iOS
 	{
 
 		public bool IsConnected { get; set; }
-
 		public string ConnectionType { get; set; }
 		public string ConnectionStateInfo { get; set; }
-
-		public string ExtraConnectionInfo
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public string ConnectionDetailStateInfo
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
+		public string ExtraConnectionInfo { get; set; }
+		public string ConnectionDetailStateInfo { get; set; }
 
 		public void CheckNetworkConnection()
 		{
@@ -144,11 +129,7 @@ namespace SensorenCBS.iOS
 
 		public void CheckNetworkConnectionType()
 		{
-			if (IsConnected)
-			{
-
-				// do something like checking the connectionType
-			}
+			throw new NotImplementedException();
 		}
 
 		public void CheckExtraConnectionInfo()

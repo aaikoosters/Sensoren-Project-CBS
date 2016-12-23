@@ -15,5 +15,6 @@ namespace SensorenCBS
 		void CheckConnectionState();
 		void CheckConnectionDetailState();
 
+
 	}
 }

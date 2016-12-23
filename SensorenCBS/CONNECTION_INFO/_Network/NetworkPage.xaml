@@ -18,6 +18,8 @@
 			<Label Text="Fetching extra Connection Info.." x:Name="lblextConnInfo"/>
 			<Label Text="Fetching Connection State.." x:Name="lblConnState"/>
 			<Label Text="Fetching Connection Detail State.." x:Name="lblConnDetailState"/>
+
+			<Button Text="Wifi information" x:Name="btnWifiInformation" Clicked="btnWifi" />
 			
 			
 			
