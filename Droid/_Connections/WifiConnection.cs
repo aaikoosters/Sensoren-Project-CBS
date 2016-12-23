@@ -31,6 +31,8 @@ namespace SensorenCBS.Droid
 
 		public void CheckWifiSSID()
 		{
+			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			wifiInfo = wifiManager.ConnectionInfo;
 			WifiSSID = wifiInfo.SSID + ", " + wifiInfo.HiddenSSID;
 		}
 
