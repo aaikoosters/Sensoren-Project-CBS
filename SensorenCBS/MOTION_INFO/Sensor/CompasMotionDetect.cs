@@ -8,10 +8,10 @@ namespace SensorenCBS
 	public class CompasMotionDetect
 	{
 		Label _label;
-		public CompasMotionDetect(Label label, SensorValueChangedEventArgs svca)
+		public string orCompas { get; set; }
+		
+		public CompasMotionDetect(SensorValueChangedEventArgs svca)
 		{
-			// set label
-			_label = label;
 			// start processing compass
 			CompasDetect(svca);
 		}
@@ -21,7 +21,7 @@ namespace SensorenCBS
 			// set variable
 			var _or = (b.Value.Value);
 			// set label text with the heading and the grades
-			_label.Text = heading(_or);
+			orCompas = heading(_or);
 		}
 
 		string heading(double? or)

@@ -7,13 +7,14 @@ namespace SensorenCBS
 {
 	public class AccelerometerMotionDetect
 	{
-		Label _label;
 		MotionSensorDelay motionDelay;
 
-		public AccelerometerMotionDetect(Label label, SensorValueChangedEventArgs svca)
+		public string xAccel { get; set; }
+		public string yAccel { get; set; }
+		public string zAccel { get; set; }
+
+		public AccelerometerMotionDetect(SensorValueChangedEventArgs svca)
 		{
-			// set label
-			_label = label;
 			// set delay
 			motionDelay = MotionSensorDelay.Default;
 			// start processing accelerometer
@@ -23,11 +24,9 @@ namespace SensorenCBS
 
 		public void AccelerometerDetect(SensorValueChangedEventArgs b)
 		{
-			var _xA = ((float)((MotionVector)b.Value).X).ToString("N3");
-			var _yA = ((float)((MotionVector)b.Value).Y).ToString("N3");
-			var _zA = ((float)((MotionVector)b.Value).Z).ToString("N3");
-			_label.Text = string.Format("Accelerometer\nX: {0}\nY: {1}\nZ: {2}", _xA, _yA, _zA);
-
+			xAccel = ((float)((MotionVector)b.Value).X).ToString("N3");
+			yAccel = ((float)((MotionVector)b.Value).Y).ToString("N3");
+			zAccel = ((float)((MotionVector)b.Value).Z).ToString("N3");
 		}
 
 		public void pickThePhoneUp()
@@ -39,7 +38,7 @@ namespace SensorenCBS
 
 // De acceleratie meter
 //mAccelLast = mAccelCurrent;
-////mAccelCurrent = (float)Math.Sqrt(xx * xx + yy * yy + zz * zz);
+//mAccelCurrent = (float)Math.Sqrt(xx * xx + yy * yy + zz * zz);
 //float deltaAcc = mAccelCurrent - mAccelLast;
 
 //mAccel = mAccel * 0.8f + deltaAcc;
@@ -49,8 +48,8 @@ namespace SensorenCBS
 //	lblAccel.Text = "Er is geacceleerd: " + DateTime.Now;
 //}
 
-////lblZ.Text = "Z: " + zz;
-////lblX.Text = "X: " + xx;
-////lblY.Text = "Y: " + yy;
+//lblZ.Text = "Z: " + zz;
+//lblX.Text = "X: " + xx;
+//lblY.Text = "Y: " + yy;
 //return;
 //break;

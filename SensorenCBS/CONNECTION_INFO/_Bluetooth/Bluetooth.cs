@@ -1,12 +1,11 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace SensorenCBS
 {
 	public class Bluetooth
 	{
 		IBluetoothConnection bluetoothConnection = DependencyService.Get<IBluetoothConnection>();
-		
+
 		public Bluetooth()
 		{
 		}

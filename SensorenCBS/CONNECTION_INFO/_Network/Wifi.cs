@@ -1,22 +1,21 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
-using System.Collections.Generic;
 
 namespace SensorenCBS
 {
 	public class Wifi
 	{
-		IWifiConnection wifiConnection = DependencyService.Get<IWifiConnection>();
+		IWifiConnection _wifiConnection = DependencyService.Get<IWifiConnection>();
 
-		public string wifiSSID() { wifiConnection.CheckWifiSSID(); return wifiConnection.WifiSSID; }
-		public string wifiBSSID() { wifiConnection.CheckWifiBBSID(); return wifiConnection.WifiBSSID; }
-		public int wifiFrequency() { wifiConnection.CheckWifiInformation(); return wifiConnection.WifiFrequency; }
-		public int wifiLinkSpeed() { wifiConnection.CheckWifiInformation(); return wifiConnection.WifiLinkSpeed; }
-		public string wifiIpAddress() { wifiConnection.CheckWifiInformation(); return wifiConnection.WifiIpAddress;}
-		public string wifiMacAddress() { wifiConnection.CheckWifiInformation(); return wifiConnection.WifiMacAddress;}
-		public int wifiNetworkId() { wifiConnection.CheckWifiInformation(); return wifiConnection.WifiNetworkId;}
-		public int wifiRssi() { wifiConnection.CheckWifiInformation(); return wifiConnection.WifiRssi; }
-		public List<string> wifiAllBSSID() { wifiConnection.CheckAllWifiBSSID(); return wifiConnection.AllWifiBssids; }
+		public string wifiSSID() { _wifiConnection.CheckWifiSSID(); return _wifiConnection.WifiSSID; }
+		public string wifiBSSID() { _wifiConnection.CheckWifiBBSID(); return _wifiConnection.WifiBSSID; }
+		public int wifiFrequency() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiFrequency; }
+		public int wifiLinkSpeed() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiLinkSpeed; }
+		public string wifiIpAddress() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiIpAddress; }
+		public string wifiMacAddress() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiMacAddress; }
+		public int wifiNetworkId() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiNetworkId; }
+		public int wifiRssi() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiRssi; }
+		public List<string> wifiAllBSSID() { _wifiConnection.CheckAllWifiBSSID(); return _wifiConnection.AllWifiBssids; }
 
 	}
 }
