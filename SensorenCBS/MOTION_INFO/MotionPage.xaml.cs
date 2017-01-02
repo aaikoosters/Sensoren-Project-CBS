@@ -49,8 +49,6 @@ namespace SensorenCBS
 
 						pickedPhoneUpChecker(amd);
 
-						Debug.WriteLine(string.Format("Acceleration: {0}, Opgekapt: {1}", amd.acceleration, pickedPhoneUp));
-
 						break;
 					case MotionSensorType.Compass:
 						var cmd = new CompasMotionDetect(a);
