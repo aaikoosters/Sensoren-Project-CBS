@@ -1,4 +1,7 @@
-﻿using DeviceMotion.Plugin;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using DeviceMotion.Plugin;
 using DeviceMotion.Plugin.Abstractions;
 using Xamarin.Forms;
 
@@ -7,6 +10,8 @@ namespace SensorenCBS
 	public partial class MotionPage : ContentPage
 	{
 		MotionSensorDelay delayDefault;
+		int pickedPhoneUp, verschoven;
+		bool boolPickedUp = false;
 
 		public MotionPage()
 		{
@@ -40,7 +45,12 @@ namespace SensorenCBS
 						break;
 					case MotionSensorType.Accelerometer:
 						var amd = new AccelerometerMotionDetect(a);
-						lblAcc.Text = string.Format("Accelerometer\nX: {0}\nY: {1}\nZ: {2}", amd.xAccel, amd.yAccel, amd.zAccel);
+						lblAcc.Text = string.Format("Accelerometer\nX: {0:##.000}\nY: {1:##.000}\nZ: {2:##.000}", amd.xAccel, amd.yAccel, amd.zAccel);
+
+						pickedPhoneUpChecker(amd);
+
+						Debug.WriteLine(string.Format("Acceleration: {0}, Opgekapt: {1}", amd.acceleration, pickedPhoneUp));
+
 						break;
 					case MotionSensorType.Compass:
 						var cmd = new CompasMotionDetect(a);
@@ -52,6 +62,25 @@ namespace SensorenCBS
 			};
 		}
 
+		void pickedPhoneUpChecker(AccelerometerMotionDetect amd)
+		{
+			if (amd.acceleration < 9 || amd.acceleration > 10)
+			{
+				if (amd.yAccel > 1 && amd.zAccel < 9)
+				{
+					boolPickedUp = true;
+					//pickedPhoneUp++;
+				}
+			} else
+			{
+				if (boolPickedUp && amd.yAccel < 1)
+				{
+					pickedPhoneUp++;
+					boolPickedUp = false;
+				}
+			}
+			lblPickedUp.Text = pickedPhoneUp.ToString();
+		}
 	}
 }
 
