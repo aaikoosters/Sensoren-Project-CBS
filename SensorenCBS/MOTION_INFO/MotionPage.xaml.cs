@@ -10,7 +10,7 @@ namespace SensorenCBS
 	public partial class MotionPage : ContentPage
 	{
 		MotionSensorDelay delayDefault;
-		int pickedPhoneUp, verschoven;
+		int pickedPhoneUp { get; set; }
 		bool boolPickedUp = false;
 
 		public MotionPage()
@@ -73,7 +73,7 @@ namespace SensorenCBS
 			{
 				if (boolPickedUp && amd.yAccel < 1)
 				{
-					pickedPhoneUp++;
+					pickedPhoneUp++;// pipickedPhoneUp;
 					boolPickedUp = false;
 				}
 			}

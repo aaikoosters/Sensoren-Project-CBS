@@ -7,5 +7,5 @@
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.BLUETOOTH" />
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-	<application android:label="SensorenCBS"></application>
+	<application android:label="CBS"></application>
 </manifest>
