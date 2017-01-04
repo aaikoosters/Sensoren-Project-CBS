@@ -13,6 +13,9 @@ namespace SensorenCBS
 		int pickedPhoneUp { get; set; }
 		bool boolPickedUp = false;
 
+
+
+
 		public MotionPage()
 		{
 			InitializeComponent();
@@ -46,7 +49,7 @@ namespace SensorenCBS
 					case MotionSensorType.Accelerometer:
 						var amd = new AccelerometerMotionDetect(a);
 						lblAcc.Text = string.Format("Accelerometer\nX: {0:##.000}\nY: {1:##.000}\nZ: {2:##.000}", amd.xAccel, amd.yAccel, amd.zAccel);
-
+						BindingContext = new CBSItem();
 						pickedPhoneUpChecker(amd);
 
 						break;
@@ -60,7 +63,7 @@ namespace SensorenCBS
 			};
 		}
 
-		void pickedPhoneUpChecker(AccelerometerMotionDetect amd)
+		async void pickedPhoneUpChecker(AccelerometerMotionDetect amd)
 		{
 			if (amd.acceleration < 9 || amd.acceleration > 10)
 			{
@@ -69,15 +72,40 @@ namespace SensorenCBS
 					boolPickedUp = true;
 					//pickedPhoneUp++;
 				}
-			} else
+			}
+			else
 			{
 				if (boolPickedUp && amd.yAccel < 1)
 				{
-					pickedPhoneUp++;// pipickedPhoneUp;
+					var cbsItem = (CBSItem)BindingContext;
+					cbsItem.pickedUp = boolPickedUp;
+					cbsItem.timeAndDay = DateTime.Now;
+					await App.Database.SaveItemAsync(cbsItem);
+
+					//pickedPhoneUp++;// pipickedPhoneUp;
 					boolPickedUp = false;
+					//var cbsItem = (CBSItem)BindingContext;
+					//await App.Database.SaveItemAsync(cbsItem);
 				}
 			}
+			////Debug.WriteLine(await App.Database.CountPickedUp());
+			//List<string> items = new List<string>();
+			//items = App.Database.CountPickedUp();
+			//lblPickedUp.Text = pickedPhoneUp.ToString();
+			//lblPickedUp.Text = App.Database.CountPickedUp().;
+
+			getListItemFromCBS();
 			lblPickedUp.Text = pickedPhoneUp.ToString();
+
+
+		}
+
+
+
+		async void getListItemFromCBS()
+		{
+			List<CBSItem> list = await App.Database.GetItemsAsync();
+			pickedPhoneUp = list.Count;
 		}
 	}
 }
