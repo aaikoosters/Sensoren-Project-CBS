@@ -7,12 +7,27 @@ namespace SensorenCBS
 {
 	public partial class App : Application
 	{
+		static CBSDatabase database;
+
 		public App()
 		{
 			InitializeComponent();
 			MobileCenter.Start(typeof(Analytics), typeof(Crashes));
 			MainPage = new NavigationPage(new SensorenCBSPage());
 		}
+
+		public CBSDatabase Database
+		{
+			get
+			{
+				if (database == null)
+				{
+					database = new CBSDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("TodoSQLite.db3"));
+				}
+				return database;
+			}
+		}
+
 
 		protected override void OnStart()
 		{

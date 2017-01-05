@@ -10,6 +10,7 @@ namespace SensorenCBS
 	public partial class MotionPage : ContentPage
 	{
 		MotionSensorDelay delayDefault;
+		CBS_Tables.PickUpPhone pickUpItem;
 		int pickedPhoneUp { get; set; }
 		bool boolPickedUp = false;
 
@@ -17,6 +18,8 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 			delayDefault = MotionSensorDelay.Default;
+			pickUpItem = (CBS_Tables.PickUpPhone)BindingContext;
+
 			// start the sensor, in this case you start all four meters
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, delayDefault);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, delayDefault);
@@ -48,6 +51,8 @@ namespace SensorenCBS
 						lblAcc.Text = string.Format("Accelerometer\nX: {0:##.000}\nY: {1:##.000}\nZ: {2:##.000}", amd.xAccel, amd.yAccel, amd.zAccel);
 
 						pickedPhoneUpChecker(amd);
+						var textPickedUp = App.Database.GetCountedPickUps();
+						lblPickedUp.Text = textPickedUp.ToString();
 
 						break;
 					case MotionSensorType.Compass:
@@ -69,15 +74,26 @@ namespace SensorenCBS
 					boolPickedUp = true;
 					//pickedPhoneUp++;
 				}
-			} else
+			}
+			else
 			{
 				if (boolPickedUp && amd.yAccel < 1)
 				{
+					
+					pickUpItem.pickUpDate = DateTime.Now;
+
+					saveDate();
+
 					pickedPhoneUp++;// pipickedPhoneUp;
 					boolPickedUp = false;
 				}
 			}
-			lblPickedUp.Text = pickedPhoneUp.ToString();
+			//lblPickedUp.Text = pickedPhoneUp.ToString();
+		}
+
+		async void saveDate()
+		{
+			await App.Database.SaveItemAsyncPickUpPhone(pickUpItem);
 		}
 	}
 }
