@@ -51,6 +51,8 @@ namespace SensorenCBS
 						lblAcc.Text = string.Format("Accelerometer\nX: {0:##.000}\nY: {1:##.000}\nZ: {2:##.000}", amd.xAccel, amd.yAccel, amd.zAccel);
 						BindingContext = new CBSItem();
 						pickedPhoneUpChecker(amd);
+						var textPickedUp = App.Database.GetCountedPickUps();
+						lblPickedUp.Text = textPickedUp.ToString();
 
 						break;
 					case MotionSensorType.Compass:
@@ -94,19 +96,19 @@ namespace SensorenCBS
 			//lblPickedUp.Text = pickedPhoneUp.ToString();
 			//lblPickedUp.Text = App.Database.CountPickedUp().;
 
-			getListItemFromCBS();
-			lblPickedUp.Text = pickedPhoneUp.ToString();
+			////getListItemFromCBS();
+			//lblPickedUp.Text = pickedPhoneUp.ToString();
 
 
 		}
 
 
 
-		async void getListItemFromCBS()
-		{
-			List<CBSItem> list = await App.Database.GetItemsAsync();
-			pickedPhoneUp = list.Count;
-		}
+		//async void getListItemFromCBS()
+		//{
+		//	List<CBSItem> list = await App.Database.GetItemsAsync();
+		//	pickedPhoneUp = list.Count;
+		//}
 	}
 }
 

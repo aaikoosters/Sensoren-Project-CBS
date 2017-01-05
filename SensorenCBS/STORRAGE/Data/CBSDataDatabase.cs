@@ -28,15 +28,20 @@ namespace SensorenCBS
 
 		}
 
-
+		public string GetCountedPickUps()
+		{
+			//return databaseAsync.Table<CBS_Tables.PickUpPhone>().CountAsync(); 
+			var teruns =  database.Table<CBSItem>().CountAsync().ToString();
+			return teruns;
+		}
 
 
 		public Task<int> SaveItemAsync(CBSItem item)
 		{
-			if (item.timeAndDay != DateTime.Now)
-			{
-				return database.UpdateAsync(item);
-			}
+			//if (item.timeAndDay != DateTime.Now)
+			//{
+			//	return database.UpdateAsync(item);
+			//}
 			return database.InsertAsync(item);
 		}
 
