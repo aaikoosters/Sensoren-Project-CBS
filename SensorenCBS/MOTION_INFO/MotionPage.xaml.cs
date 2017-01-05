@@ -46,7 +46,7 @@ namespace SensorenCBS
 					case MotionSensorType.Accelerometer:
 						var amd = new AccelerometerMotionDetect(a);
 						lblAcc.Text = string.Format("Accelerometer\nX: {0:##.000}\nY: {1:##.000}\nZ: {2:##.000}", amd.xAccel, amd.yAccel, amd.zAccel);
-
+						BindingContext = new TodoItem();
 						pickedPhoneUpChecker(amd);
 
 						break;
@@ -75,10 +75,27 @@ namespace SensorenCBS
 				{
 					pickedPhoneUp++;// pipickedPhoneUp;
 					boolPickedUp = false;
+					savings();
 				}
 			}
+			ophalings();
 			lblPickedUp.Text = pickedPhoneUp.ToString();
 		}
-	}
+
+		async void ophalings()
+		{
+			var turing = await App.Database.GetCountedPickUps();
+			lblPickedUp.Text = "" + turing.ToString();
+		}
+
+		void savings()
+		{
+			var todoItem = (TodoItem)BindingContext;
+			todoItem.Name = "Name: " + DateTime.Now;
+			todoItem.Notes = "Notes: " + DateTime.Now;
+			todoItem.Done = true;
+			App.Database.SaveItemAsync(todoItem);
+		}
+}
 }
 
