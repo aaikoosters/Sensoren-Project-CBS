@@ -37,7 +37,10 @@ using System.Collections.Generic;
 using ConcurrentStringDictionary = System.Collections.Generic.Dictionary<string, object>;
 using SQLite.Extensions;
 #else
-using ConcurrentStringDictionary = System.Collections.Concurrent.ConcurrentDictionary<string, object>;
+//using ConcurrentStringDictionary = System.Collections.;
+//using ConcurrentStringDictionary = System.Collections.Generic.Dictionary<string, object>;
+//using ConcurrentStringDictionary = System.Collections.Concurrent.ConcurrentDictionary<string, object>;
+//usign ConcurrentStringDictionary = System.Collections.
 #endif
 using System.Reflection;
 using System.Linq;
@@ -2010,7 +2013,7 @@ namespace SensorenCBS
 			return exact;
 		}
 
-		ConcurrentStringDictionary _insertCommandMap;
+		//ConcurrentStringDictionary _insertCommandMap;
 
 		public PreparedSqlLiteInsertCommand GetInsertCommand(SQLiteConnection conn, string extra)
 		{

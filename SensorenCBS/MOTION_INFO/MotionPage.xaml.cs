@@ -10,13 +10,28 @@ namespace SensorenCBS
 	public partial class MotionPage : ContentPage
 	{
 		MotionSensorDelay delayDefault;
+		SQLiteConnection database;
 		int pickedPhoneUp { get; set; }
-		bool boolPickedUp = false;
+		bool boolPickedUp;
+
 
 		public MotionPage()
 		{
+
+			//database = new CBSDataDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("CBSSQLite.db3"));
+
 			InitializeComponent();
+
+			database = new SQLiteConnection("CBSSQLite.db3");
+			database.CreateTable<SQLite_Tables.PickedUpTable>();
+
 			delayDefault = MotionSensorDelay.Default;
+			startingSensoring();
+
+		}
+
+		void startingSensoring()
+		{
 			// start the sensor, in this case you start all four meters
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, delayDefault);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, delayDefault);
@@ -73,11 +88,26 @@ namespace SensorenCBS
 			{
 				if (boolPickedUp && amd.yAccel < 1)
 				{
+					insertIntoDatabase(database);
 					pickedPhoneUp++;// pipickedPhoneUp;
 					boolPickedUp = false;
 				}
 			}
 			lblPickedUp.Text = pickedPhoneUp.ToString();
+			var query = database.Table<SQLite_Tables.PickedUpTable>();
+
+			foreach (var stock in query)
+				Debug.WriteLine("Opgepakt  tijd en datum: " + stock.timeAndDay);
+		}
+
+		void insertIntoDatabase(SQLiteConnection db)
+		{
+			var s = database.Insert(new SQLite_Tables.PickedUpTable
+			{
+				timeAndDay = DateTime.Now,
+				pickedUp = true
+			});
+
 		}
 	}
 }
