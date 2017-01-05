@@ -7,7 +7,7 @@ namespace SensorenCBS
 {
 	public partial class App : Application
 	{
-		static TodoItemDatabase database;
+		static CBSDatabase database;
 
 		public App()
 		{
@@ -16,13 +16,13 @@ namespace SensorenCBS
 			MainPage = new NavigationPage(new SensorenCBSPage());
 		}
 
-		public static TodoItemDatabase Database
+		public static CBSDatabase Database
 		{
 			get
 			{
 				if (database == null)
 				{
-					database = new TodoItemDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("TodoSQLite.db3"));
+					database = new CBSDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("CBSSQLite.db3"));
 				}
 				return database;
 			}
