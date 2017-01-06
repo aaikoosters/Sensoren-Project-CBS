@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace SensorenCBS
@@ -18,6 +18,7 @@ namespace SensorenCBS
 			Device.StartTimer(new TimeSpan(0, 0, 5), () =>
 			{
 				InitializeComponent();
+				BindingContext = new Network_ssid();
 				checkWifiInformation();
 				return true;
 
@@ -27,7 +28,14 @@ namespace SensorenCBS
 
 		void checkWifiInformation()
 		{
-			lblTime.Text = DateTime.Now.ToString();
+			BindingContext = new Network_ssid();
+
+			savings();
+			ophalen();
+
+
+
+			//lblTime.Text = DateTime.Now.ToString();
 			lblSSID.Text += wifi.wifiSSID();
 			lblBSSID.Text += wifi.wifiBSSID();
 			lblFreq.Text += wifi.wifiFrequency() + "MHz";
@@ -44,6 +52,21 @@ namespace SensorenCBS
 				lblAllBSSID.Text += "\n" + bs; 
 			}
 
+		}
+
+		void savings()
+		{
+			var networkSSID = (Network_ssid)BindingContext;
+			networkSSID.Ssid = wifi.wifiSSID();
+			networkSSID.Bssid = wifi.wifiBSSID();
+			App.PickUpDatabase.SaveItemAsyncNetwork(networkSSID);
+		}
+
+		async void ophalen()
+		{
+			var turing = await App.PickUpDatabase.GetCountedSSID();
+			lblTime.Text = "aantal veschillende ssid's: " + turing.ToString();
+			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}
 	}
 }

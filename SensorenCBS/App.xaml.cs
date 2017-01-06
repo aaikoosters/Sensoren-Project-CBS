@@ -7,7 +7,8 @@ namespace SensorenCBS
 {
 	public partial class App : Application
 	{
-		static PickUp_Database database;
+		static PickUp_Database pickup_database;
+		static Network_Database network_database;
 
 		public App()
 		{
@@ -16,15 +17,27 @@ namespace SensorenCBS
 			MainPage = new NavigationPage(new SensorenCBSPage());
 		}
 
-		public static PickUp_Database Database
+		public static PickUp_Database PickUpDatabase
 		{
 			get
 			{
-				if (database == null)
+				if (pickup_database == null)
 				{
-					database = new PickUp_Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("CBSSQLite.db3"));
+					pickup_database = new PickUp_Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("CBSSQLite.db3"));
 				}
-				return database;
+				return pickup_database;
+			}
+		}
+
+		public static Network_Database NetworkDatabase
+		{
+			get
+			{
+				if (network_database == null)
+				{
+					network_database = new Network_Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("Network.db3"));
+				}
+				return network_database;
 			}
 		}
 

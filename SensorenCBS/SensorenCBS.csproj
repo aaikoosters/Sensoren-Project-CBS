@@ -89,6 +89,7 @@
     <Compile Include="STORAGE\Models\PickedUp.cs" />
     <Compile Include="STORAGE\Data\PickUp_Database.cs" />
     <Compile Include="STORAGE\Models\Networking.cs" />
+    <Compile Include="STORAGE\Data\Network_Database.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

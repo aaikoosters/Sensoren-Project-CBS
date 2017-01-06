@@ -88,15 +88,15 @@ namespace SensorenCBS
 
 		async void ophalings()
 		{
-			var turing = await App.Database.GetCountedPickUps();
+			var turing = await App.PickUpDatabase.GetCountedPickUps();
 			lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}
 
 		void savings()
 		{
-			var todoItem = (PickedUp)BindingContext;
-			todoItem.TimeDay = DateTime.Now;
-			App.Database.SaveItemAsync(todoItem);
+			var pickUps = (PickedUp)BindingContext;
+			pickUps.TimeDay = DateTime.Now;
+			App.PickUpDatabase.SaveItemAsync(pickUps);
 		}
 	}
 }
