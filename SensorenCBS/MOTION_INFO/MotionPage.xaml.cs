@@ -98,6 +98,6 @@ namespace SensorenCBS
 			todoItem.TimeDay = DateTime.Now;
 			App.Database.SaveItemAsync(todoItem);
 		}
-}
+	}
 }
 

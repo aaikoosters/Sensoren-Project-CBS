@@ -87,7 +87,8 @@
     <Compile Include="CONNECTION_INFO\_Network\IWifiConnection.cs" />
     <Compile Include="IFileHelper.cs" />
     <Compile Include="STORAGE\Models\PickedUp.cs" />
-    <Compile Include="STORAGE\Data\CBSDatabase.cs" />
+    <Compile Include="STORAGE\Data\PickUp_Database.cs" />
+    <Compile Include="STORAGE\Models\Networking.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

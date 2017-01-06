@@ -5,11 +5,11 @@ using SQLite;
 
 namespace SensorenCBS
 {
-	public class CBSDatabase
+	public class PickUp_Database
 	{
 		readonly SQLiteAsyncConnection database;
 
-		public CBSDatabase(string dbPath)
+		public PickUp_Database(string dbPath)
 		{
 			database = new SQLiteAsyncConnection(dbPath);
 			database.CreateTableAsync<PickedUp>().Wait();
@@ -19,11 +19,6 @@ namespace SensorenCBS
 		{
 			return database.Table<PickedUp>().ToListAsync();
 		}
-
-		//public Task<List<PickedUp>> GetItemsNotDoneAsync()
-		//{
-		//	return database.QueryAsync<PickedUp>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
-		//}
 
 		public Task<PickedUp> GetItemAsync(int id)
 		{
