@@ -20,7 +20,13 @@
 			<Label Text="Fetching Connection Detail State.." x:Name="lblConnDetailState"/>
 
 			<Button Text="Wifi information" x:Name="btnWifiInformation" Clicked="btnWifi" />
-			
+			<ListView x:Name="avaibleList">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<TextCell Text="{Binding DisplayName}" />
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
 			
 			
 			

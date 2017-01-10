@@ -12,8 +12,10 @@ namespace SensorenCBS
 		public PickUp_Database(string dbPath)
 		{
 			database = new SQLiteAsyncConnection(dbPath);
-			database.CreateTableAsync<PickedUp>().Wait();
+			database.CreateTableAsync<PickedUp>().Wait(); 
 			database.CreateTableAsync<Network_ssid>().Wait();
+			database.CreateTableAsync<Network_bssid>().Wait();
+			
 		}
 
 		//pickup
@@ -54,6 +56,12 @@ namespace SensorenCBS
 			return turning;
 		}
 
+		public string GetKnowSSID(int id)
+		{
+			var know = database.Table<Network_ssid>().Where(n => n.ID == id).FirstOrDefaultAsync().ToString();
+			return know;
+		}
+
 		//network
 		public Task<int> SaveSsidAsyncNetwork(Network_ssid item)
 		{
@@ -65,7 +73,6 @@ namespace SensorenCBS
 				return database.InsertAsync(item);
 			}
 		}
-
 
 		//network
 		public Task<int> GetCountedSSID()

@@ -54,20 +54,6 @@ namespace SensorenCBS
 
 		}
 
-
-
-		bool checkBSSDInDatabase()
-		{
-			return true;
-			//throw new NotImplementedException();
-		}
-
-		bool checkSssidInDatabase()
-		{
-			return true;
-			//throw new NotImplementedException();
-		}
-
 		void saveSSID()
 		{
 			var networkSSID = (Network_ssid)BindingContext;
