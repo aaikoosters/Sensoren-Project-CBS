@@ -12,11 +12,9 @@ namespace SensorenCBS.Droid
 {
 	public class WifiConnection : IWifiConnection
 	{
-		/*
-		 * The WiFiManager and the WiFiInfo are the Assembly Implementation to use/read information from WiFi
-		 * U need to use Android.Net.Wifi to implement it.
-		 * 
-		 * */
+
+		// The WiFiManager and the WiFiInfo are the Assembly Implementation to use/read information from WiFi
+		// U need to use Android.Net.Wifi to implement it.
 		WifiManager wifiManager;
 		WifiInfo wifiInfo;
 
@@ -61,9 +59,9 @@ namespace SensorenCBS.Droid
 			WifiIpAddress = wifiInfo.IpAddress.ToString();
 			WifiLinkSpeed = wifiInfo.LinkSpeed;
 			WifiMacAddress = wifiInfo.MacAddress;
-			// the network ID, or -1 if there is no currently connected network 
+			// the network ID, or -1 if there is no currently connected network
 			WifiNetworkId = wifiInfo.NetworkId;
-			// Returns the received signal strength indicator of the current 802.11 network, in dBm. 
+			// Returns the received signal strength indicator of the current 802.11 network, in dBm.
 			WifiRssi = wifiInfo.Rssi;
 		}
 

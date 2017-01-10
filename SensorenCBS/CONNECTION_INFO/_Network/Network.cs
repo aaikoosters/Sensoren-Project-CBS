@@ -5,13 +5,6 @@ namespace SensorenCBS
 	public class Network
 	{
 		INetworkConnection networkConnection = DependencyService.Get<INetworkConnection>();
-		//WifiInfo wifiInfo = new WifiInfo();
-		//INetworkConnection ;
-
-		public Network()
-		{
-
-		}
 
 		public string connected()
 		{
