@@ -15,7 +15,6 @@ namespace SensorenCBS.Droid
 		
 		// The WiFiManager and the WiFiInfo are the Assembly Implementation to use/read information from WiFi
 		// U need to use Android.Net.Wifi to implement it.
-		 
 		WifiManager wifiManager;
 		WifiInfo wifiInfo;
 

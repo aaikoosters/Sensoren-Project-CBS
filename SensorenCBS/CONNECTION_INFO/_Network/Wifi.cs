@@ -7,7 +7,7 @@ namespace SensorenCBS
 	{
 		IWifiConnection _wifiConnection = DependencyService.Get<IWifiConnection>();
 
-		public string wifiSSID() { _wifiConnection.CheckWifiSSID(); return _wifiConnection.WifiSSID; }
+		public string wifiSSID() { _wifiConnection.CheckWifiSSID(); return _wifiConnection.WifiSSID;}
 		public string wifiBSSID() { _wifiConnection.CheckWifiBBSID(); return _wifiConnection.WifiBSSID; }
 		public int wifiFrequency() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiFrequency; }
 		public int wifiLinkSpeed() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiLinkSpeed; }

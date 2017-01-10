@@ -14,11 +14,12 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 			wifi = new Wifi();
+			BindingContext = new Network_ssid();
+
 			checkWifiInformation();
 			Device.StartTimer(new TimeSpan(0, 0, 5), () =>
 			{
 				InitializeComponent();
-				BindingContext = new Network_ssid();
 				checkWifiInformation();
 				return true;
 
@@ -30,7 +31,16 @@ namespace SensorenCBS
 		{
 			BindingContext = new Network_ssid();
 
-			savings();
+			if (checkSssidInDatabase())
+			{
+				if (checkBSSDInDatabase()){
+					saveBSSID();
+				}
+				saveAccespointTimes();
+			}
+			else {
+				saveSSID();
+			}
 			ophalen();
 
 
@@ -54,12 +64,40 @@ namespace SensorenCBS
 
 		}
 
-		void savings()
+
+
+		bool checkBSSDInDatabase()
+		{
+			throw new NotImplementedException();
+		}
+
+		bool checkSssidInDatabase()
+		{
+			throw new NotImplementedException();
+		}
+
+		void saveSSID()
 		{
 			var networkSSID = (Network_ssid)BindingContext;
 			networkSSID.Ssid = wifi.wifiSSID();
 			networkSSID.Bssid = wifi.wifiBSSID();
-			App.PickUpDatabase.SaveItemAsyncNetwork(networkSSID);
+			networkSSID.Frequency = wifi.wifiFrequency();
+			networkSSID.IP = wifi.wifiIpAddress();
+			networkSSID.MAC = wifi.wifiMacAddress();
+			networkSSID.NetworkID = wifi.wifiNetworkId();
+			networkSSID.Rssi = wifi.wifiRssi();
+			
+			App.PickUpDatabase.SaveSsidAsyncNetwork(networkSSID);
+		}
+
+		void saveBSSID()
+		{
+			throw new NotImplementedException();
+		}
+
+		void saveAccespointTimes()
+		{
+			throw new NotImplementedException();
 		}
 
 		async void ophalen()
