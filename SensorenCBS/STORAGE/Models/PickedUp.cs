@@ -12,7 +12,7 @@ namespace SensorenCBS
 
 	public class Network_ssid
 	{
-		[PrimaryKey, AutoIncrement]
+		[PrimaryKey]
 		public int ID { get; set; }
 		public string Ssid { get; set; }
 		public string Bssid { get; set; }
@@ -22,5 +22,13 @@ namespace SensorenCBS
 		public int NetworkID { get; set; }
 		public int Rssi { get; set; }
 
-	} 
+	}
+
+	public class Network_bssid
+	{
+		[PrimaryKey]
+		public int Bssid { get; set;}
+		public string Ssid { get; set; }
+		public DateTime time { get; set; }
+	}
 }

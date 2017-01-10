@@ -8,7 +8,7 @@ namespace SensorenCBS
 	public partial class WifiNetworkPage : ContentPage
 	{
 		Wifi wifi;
-		List<string> bssids = new List<string>();
+		//List<string> bssids = new List<string>();
 
 		public WifiNetworkPage()
 		{
@@ -30,17 +30,7 @@ namespace SensorenCBS
 		void checkWifiInformation()
 		{
 			BindingContext = new Network_ssid();
-
-			if (checkSssidInDatabase())
-			{
-				if (checkBSSDInDatabase()){
-					saveBSSID();
-				}
-				saveAccespointTimes();
-			}
-			else {
-				saveSSID();
-			}
+			saveSSID();
 			ophalen();
 
 
@@ -68,12 +58,14 @@ namespace SensorenCBS
 
 		bool checkBSSDInDatabase()
 		{
-			throw new NotImplementedException();
+			return true;
+			//throw new NotImplementedException();
 		}
 
 		bool checkSssidInDatabase()
 		{
-			throw new NotImplementedException();
+			return true;
+			//throw new NotImplementedException();
 		}
 
 		void saveSSID()
@@ -88,16 +80,6 @@ namespace SensorenCBS
 			networkSSID.Rssi = wifi.wifiRssi();
 			
 			App.PickUpDatabase.SaveSsidAsyncNetwork(networkSSID);
-		}
-
-		void saveBSSID()
-		{
-			throw new NotImplementedException();
-		}
-
-		void saveAccespointTimes()
-		{
-			throw new NotImplementedException();
 		}
 
 		async void ophalen()

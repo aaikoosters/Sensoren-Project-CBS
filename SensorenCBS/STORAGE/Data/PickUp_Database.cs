@@ -54,14 +54,6 @@ namespace SensorenCBS
 			return turning;
 		}
 
-
-		public bool getPossibleSSID(string ssid)
-		{
-			var isSsidFilled = database.Table<Network_ssid>().Where(s => s.Ssid == ssid).FirstAsync().ToString();
-			if (isSsidFilled.Equals("")) { return true; }
-			return false;
-		}
-
 		//network
 		public Task<int> SaveSsidAsyncNetwork(Network_ssid item)
 		{
@@ -74,12 +66,6 @@ namespace SensorenCBS
 			}
 		}
 
-		public Task<int> SaveBssidAsyncNetwork(Network_ssid item)
-		{ }
-
-		public Task<int> SaveTimesAccespointAsyncNetwork(Network_ssid item)
-		{ }
-		
 
 		//network
 		public Task<int> GetCountedSSID()
