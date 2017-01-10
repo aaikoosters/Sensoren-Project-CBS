@@ -28,6 +28,16 @@ namespace SensorenCBS
 
 		}
 
+		void availebleNetwork()
+		{
+			var networks = network.availebleWifiConnections();
+			foreach (var n in networks)
+			{
+				listAvailable.ItemsSource = n;
+			}
+			//listAvailable.ItemsSource
+		}
+
 		void connectionState()
 		{
 			lblConnState.Text = network.connectionStateInfo();

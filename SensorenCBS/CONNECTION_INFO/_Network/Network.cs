@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace SensorenCBS
 {
@@ -49,6 +50,13 @@ namespace SensorenCBS
 			var networkDetailStateInfo = networkConnection.ConnectionDetailStateInfo;
 			var detailStateInfo = networkDetailStateInfo;
 			return detailStateInfo;
+		}
+
+		public List<string> availebleWifiConnections()
+		{
+			networkConnection.CheckWifiPoints();
+			var networks = networkConnection.AllNetworkSSID;
+			return networks;
 		}
 	}
 }

@@ -77,5 +77,26 @@ namespace SensorenCBS.Droid
 			}
 
 		}
+
+		public static List<string> WifiNetworks;
+		public void CheckAllSSID()
+		{
+			WifiNetworks = new List<string>();
+			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			var wifiReceiver = new WifiReceiver();
+			wifiManager.StartScan();
+		}
+
+		class WifiReceiver : BroadcastReceiver
+		{
+			public override void OnReceive(Context context, Intent intent)
+			{
+				var scanwifinetworks = WifiManager.ScanResultsAvailableAction;
+				foreach (ScanResult wifinetork in scanwifinetworks)
+				{
+					WifiNetworks.Add(wifinetork.Ssid);
+				}
+			}
+		}
 	}
 }

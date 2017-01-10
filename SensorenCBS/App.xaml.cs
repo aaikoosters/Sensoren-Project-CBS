@@ -23,7 +23,7 @@ namespace SensorenCBS
 			{
 				if (pickup_database == null)
 				{
-					pickup_database = new PickUp_Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("CBSSQLite.db3"));
+					pickup_database = new PickUp_Database(DependencyService.Get<IFileHelperDatabase>().GetLocalFilePath("CBSSQLite.db3"));
 				}
 				return pickup_database;
 			}
@@ -35,7 +35,7 @@ namespace SensorenCBS
 			{
 				if (network_database == null)
 				{
-					network_database = new Network_Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("Network.db3"));
+					network_database = new Network_Database(DependencyService.Get<IFileHelperDatabase>().GetLocalFilePath("Network.db3"));
 				}
 				return network_database;
 			}

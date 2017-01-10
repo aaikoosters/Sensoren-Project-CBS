@@ -1,4 +1,5 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
+using Android.Content;
 using Android.Net;
 using SensorenCBS.Droid;
 using Xamarin.Forms;
@@ -85,6 +86,12 @@ namespace SensorenCBS.Droid
 			else {
 				ConnectionDetailStateInfo = "";
 			}
+		}
+
+		public List<string> CheckWifiPoints()
+		{
+			var connections = WifiConnection.WifiNetworks;
+			return connections;
 		}
 	}
 }

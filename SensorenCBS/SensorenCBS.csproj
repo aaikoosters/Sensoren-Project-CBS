@@ -85,7 +85,7 @@
     </Compile>
     <Compile Include="CONNECTION_INFO\_Network\Wifi.cs" />
     <Compile Include="CONNECTION_INFO\_Network\IWifiConnection.cs" />
-    <Compile Include="IFileHelper.cs" />
+    <Compile Include="IFileHelperDatabase.cs" />
     <Compile Include="STORAGE\Models\PickedUp.cs" />
     <Compile Include="STORAGE\Data\PickUp_Database.cs" />
     <Compile Include="STORAGE\Models\Networking.cs" />
