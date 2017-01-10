@@ -14,8 +14,6 @@ namespace SensorenCBS
 		public int pickedPhoneUp { get; set;}
 		public float acceleration { get; set;}
 
-		List<int> addedPickup = new List<int>();
-
 		public AccelerometerMotionDetect(SensorValueChangedEventArgs svca)
 		{
 			// set delay
@@ -40,21 +38,3 @@ namespace SensorenCBS
 		}
 	}
 }
-
-// De acceleratie meter
-//mAccelLast = mAccelCurrent;
-//mAccelCurrent = (float)Math.Sqrt(xx * xx + yy * yy + zz * zz);
-//float deltaAcc = mAccelCurrent - mAccelLast;
-
-//mAccel = mAccel * 0.8f + deltaAcc;
-//if (mAccel > 3)
-//{
-	
-//	lblAccel.Text = "Er is geacceleerd: " + DateTime.Now;
-//}
-
-//lblZ.Text = "Z: " + zz;
-//lblX.Text = "X: " + xx;
-//lblY.Text = "Y: " + yy;
-//return;
-//break;

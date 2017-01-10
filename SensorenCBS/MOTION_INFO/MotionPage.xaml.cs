@@ -16,7 +16,14 @@ namespace SensorenCBS
 		public MotionPage()
 		{
 			InitializeComponent();
+			usingMovementSensors();
+			ophalings();
 			delayDefault = MotionSensorDelay.Default;
+
+		}
+
+		void usingMovementSensors()
+		{
 			// start the sensor, in this case you start all four meters
 			CrossDeviceMotion.Current.Start(MotionSensorType.Accelerometer, delayDefault);
 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, delayDefault);
@@ -37,7 +44,7 @@ namespace SensorenCBS
 						var gmd = new GyroscopeMotionDetect(a);
 						if (gmd != null)
 						{
-							lblGyro.Text = string.Format("Magnetometer\nX: {0}\nY: {1}\nZ: {2}", gmd.xGyro, gmd.yGyro, gmd.zGyro);
+							lblGyro.Text = string.Format("Gyroscoop\nX: {0:0}\nY: {1:0}\nZ: {2:0}", gmd.xGyro, gmd.yGyro, gmd.zGyro);
 						}
 						else {
 							lblGyro.Text = "Phone does not have a gyroscope";
@@ -45,8 +52,8 @@ namespace SensorenCBS
 						break;
 					case MotionSensorType.Accelerometer:
 						var amd = new AccelerometerMotionDetect(a);
-						lblAcc.Text = string.Format("Accelerometer\nX: {0:##.000}\nY: {1:##.000}\nZ: {2:##.000}", amd.xAccel, amd.yAccel, amd.zAccel);
-						BindingContext = new TodoItem();
+						lblAcc.Text = string.Format("Accelerometer\nX: {0:0.0}\nY: {1:0.0}\nZ: {2:0.0}", amd.xAccel, amd.yAccel, amd.zAccel);
+						BindingContext = new PickedUp();
 						pickedPhoneUpChecker(amd);
 
 						break;
@@ -67,35 +74,30 @@ namespace SensorenCBS
 				if (amd.yAccel > 1 && amd.zAccel < 9)
 				{
 					boolPickedUp = true;
-					//pickedPhoneUp++;
 				}
 			} else
 			{
 				if (boolPickedUp && amd.yAccel < 1)
 				{
-					pickedPhoneUp++;// pipickedPhoneUp;
 					boolPickedUp = false;
 					savings();
+					ophalings();
 				}
 			}
-			ophalings();
-			lblPickedUp.Text = pickedPhoneUp.ToString();
 		}
 
 		async void ophalings()
 		{
-			var turing = await App.Database.GetCountedPickUps();
-			lblPickedUp.Text = "" + turing.ToString();
+			var turing = await App.PickUpDatabase.GetCountedPickUps();
+			lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}
 
 		void savings()
 		{
-			var todoItem = (TodoItem)BindingContext;
-			todoItem.Name = "Name: " + DateTime.Now;
-			todoItem.Notes = "Notes: " + DateTime.Now;
-			todoItem.Done = true;
-			App.Database.SaveItemAsync(todoItem);
+			var pickUps = (PickedUp)BindingContext;
+			pickUps.TimeDay = DateTime.Now;
+			App.PickUpDatabase.SaveItemAsync(pickUps);
 		}
-}
+	}
 }
 
