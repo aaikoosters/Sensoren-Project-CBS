@@ -8,7 +8,6 @@ namespace SensorenCBS
 	public partial class App : Application
 	{
 		static PickUp_Database pickup_database;
-		static Network_Database network_database;
 
 		public App()
 		{
@@ -29,6 +28,7 @@ namespace SensorenCBS
 			}
 		}
 
+<<<<<<< HEAD
 		public static Network_Database NetworkDatabase
 		{
 			get
@@ -41,6 +41,8 @@ namespace SensorenCBS
 			}
 		}
 
+=======
+>>>>>>> master
 		protected override void OnStart()
 		{
 			// Handle when your app starts
