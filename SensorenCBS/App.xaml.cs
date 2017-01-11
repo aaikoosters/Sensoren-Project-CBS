@@ -28,21 +28,6 @@ namespace SensorenCBS
 			}
 		}
 
-<<<<<<< HEAD
-		public static Network_Database NetworkDatabase
-		{
-			get
-			{
-				if (network_database == null)
-				{
-					network_database = new Network_Database(DependencyService.Get<IFileHelperDatabase>().GetLocalFilePath("Network.db3"));
-				}
-				return network_database;
-			}
-		}
-
-=======
->>>>>>> master
 		protected override void OnStart()
 		{
 			// Handle when your app starts

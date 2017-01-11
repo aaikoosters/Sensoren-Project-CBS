@@ -51,12 +51,5 @@ namespace SensorenCBS
 			var detailStateInfo = networkDetailStateInfo;
 			return detailStateInfo;
 		}
-
-		public List<string> availebleWifiConnections()
-		{
-			networkConnection.CheckWifiPoints();
-			var networks = networkConnection.AllNetworkSSID;
-			return networks;
-		}
 	}
 }

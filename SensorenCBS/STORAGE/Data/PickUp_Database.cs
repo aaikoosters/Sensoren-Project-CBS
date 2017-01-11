@@ -74,16 +74,7 @@ namespace SensorenCBS
 			}
 		}
 
-<<<<<<< HEAD
-		//public Task<int> SaveBssidAsyncNetwork(Network_ssid item)
-		//{ }
 
-		//public Task<int> SaveTimesAccespointAsyncNetwork(Network_ssid item)
-		//{ }
-		
-
-=======
->>>>>>> master
 		//network
 		public Task<int> GetCountedSSID()
 		{

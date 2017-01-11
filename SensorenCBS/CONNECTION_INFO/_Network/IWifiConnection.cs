@@ -15,13 +15,13 @@ namespace SensorenCBS
 		int WifiNetworkId { get;  }
 		int WifiRssi { get;  }
 		List<string> AllWifiBssids { get; }
-		List<string> AllNetworkSSID { get; }
+		//List<string> AllNetworkSSID { get; }
 
 		void CheckWifiSSID();
 		void CheckWifiBBSID();
 		void CheckAllWifiBSSID();
 		void CheckWifiInformation();
-		void CheckWifiPoints();
+		//void CheckWifiPoints();
 
 	}
 }

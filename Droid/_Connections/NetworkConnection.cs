@@ -87,11 +87,5 @@ namespace SensorenCBS.Droid
 				ConnectionDetailStateInfo = "";
 			}
 		}
-
-		public List<string> CheckWifiPoints()
-		{
-			var connections = WifiConnection.WifiNetworks;
-			return connections;
-		}
 	}
 }
