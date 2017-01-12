@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Net.Wifi;
 using SensorenCBS.Droid;
@@ -29,6 +30,13 @@ namespace SensorenCBS.Droid
 		public int WifiRssi { get; set; }
 		public string WifiRssiLevel { get; set; }
 		public List<string> AllWifiBssids { get; set; }
+		public List<string> NearbyWifiList { get; set; }
+		//public List<KeyValuePair<string, string>> wifiList { get; set; }
+
+
+		public IList<ScanResult> Results { get; set; }
+		public string NearbyWifi { get; set; }
+
 		// private list to add bssids to the public stack: AllWifiBssids
 		List<string> _wifiBssids = new List<string>();
 
@@ -77,5 +85,37 @@ namespace SensorenCBS.Droid
 			}
 
 		}
+
+		Dictionary<string, string> dictionary;
+		public void FetchNearbyWifi()
+		{
+			//var nearbyList = new List<string>(); // listView
+			dictionary = new Dictionary<string, string>();
+			var lv = new List<string>();
+			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			if (wifiManager.IsWifiEnabled == false)
+			{
+				wifiManager.SetWifiEnabled(true);
+			}
+			Results = wifiManager.ScanResults;
+
+			var size = Results.Count;
+			size = size - 1;
+			while (size >= 0)
+			{
+				dictionary.Add(Results[size].Bssid, Results[size].Ssid);
+				size--;
+			}
+			List<KeyValuePair<string, string>> list = dictionary.ToList();
+			foreach (KeyValuePair<string, string> pair in list)
+			{
+				//lv.Add(pair.Key + ", " + pair.Value);
+				lv.Add(pair.Key +", " + pair.Value);
+				
+				Console.WriteLine("000000000000000 " + pair.Key + pair.Value);
+			}
+			NearbyWifiList = lv;
+		}
 	}
 }
+

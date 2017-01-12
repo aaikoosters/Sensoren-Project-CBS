@@ -21,6 +21,7 @@ namespace SensorenCBS
 			{
 				InitializeComponent();
 				checkWifiInformation();
+				scanNearbyWifi();
 				return true;
 
 			});
@@ -30,20 +31,8 @@ namespace SensorenCBS
 		void checkWifiInformation()
 		{
 			BindingContext = new Network_ssid();
-
-			if (checkSssidInDatabase())
-			{
-				if (checkBSSDInDatabase()){
-					saveBSSID();
-				}
-				saveAccespointTimes();
-			}
-			else {
-				saveSSID();
-			}
+			saveSSID();
 			ophalen();
-
-
 
 			//lblTime.Text = DateTime.Now.ToString();
 			lblSSID.Text += wifi.wifiSSID();
@@ -59,21 +48,9 @@ namespace SensorenCBS
 
 			foreach (var bs in wifi.wifiAllBSSID())
 			{
-				lblAllBSSID.Text += "\n" + bs; 
+				//lblAllBSSID.Text += "\n" + bs; 
 			}
 
-		}
-
-
-
-		bool checkBSSDInDatabase()
-		{
-			throw new NotImplementedException();
-		}
-
-		bool checkSssidInDatabase()
-		{
-			throw new NotImplementedException();
 		}
 
 		void saveSSID()
@@ -90,14 +67,14 @@ namespace SensorenCBS
 			App.PickUpDatabase.SaveSsidAsyncNetwork(networkSSID);
 		}
 
-		void saveBSSID()
+		void scanNearbyWifi()
 		{
-			throw new NotImplementedException();
-		}
-
-		void saveAccespointTimes()
-		{
-			throw new NotImplementedException();
+			var nearbyWifi = wifi.wifiList();
+			foreach (string pair in nearbyWifi)
+			{
+				lblAllBSSID.Text += ("\n" + pair);
+			}
+			//lblAllBSSID.Text = nearbyWifi;
 		}
 
 		async void ophalen()

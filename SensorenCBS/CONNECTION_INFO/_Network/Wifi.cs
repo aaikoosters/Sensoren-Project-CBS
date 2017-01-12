@@ -17,5 +17,7 @@ namespace SensorenCBS
 		public int wifiRssi() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiRssi; }
 		public List<string> wifiAllBSSID() { _wifiConnection.CheckAllWifiBSSID(); return _wifiConnection.AllWifiBssids; }
 
+		public List<string> wifiList() { _wifiConnection.FetchNearbyWifi(); return _wifiConnection.NearbyWifiList; }
+		//public List<string> wifiList { _wifiConnection.FetchNearbyWifi(); return _wifiConnection.NearbyWifi; }
 	}
 }

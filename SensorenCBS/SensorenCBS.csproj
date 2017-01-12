@@ -48,6 +48,9 @@
     <EmbeddedResource Include="CONNECTION_INFO\_Network\WifiNetworkPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="CONNECTION_INFO\NearbyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -89,6 +92,11 @@
     <Compile Include="STORAGE\Models\PickedUp.cs" />
     <Compile Include="STORAGE\Data\PickUp_Database.cs" />
     <Compile Include="STORAGE\Models\Networking.cs" />
+    <Compile Include="EmptyCSharpFile.cs" />
+    <Compile Include="CONNECTION_INFO\NearbyPage.xaml.cs">
+      <DependentUpon>NearbyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CONNECTION_INFO\_Network\INearbyConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
