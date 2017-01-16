@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace SensorenCBS
@@ -17,7 +18,13 @@ namespace SensorenCBS
 		public int wifiRssi() { _wifiConnection.CheckWifiInformation(); return _wifiConnection.WifiRssi; }
 		public List<string> wifiAllBSSID() { _wifiConnection.CheckAllWifiBSSID(); return _wifiConnection.AllWifiBssids; }
 
-		public List<string> wifiList() { _wifiConnection.FetchNearbyWifi(); return _wifiConnection.NearbyWifiList; }
-		//public List<string> wifiList { _wifiConnection.FetchNearbyWifi(); return _wifiConnection.NearbyWifi; }
+		public void FetchNearbyWifi(DateTime time)
+		{
+			//// call the native function
+			//_wifiConnection.FetchNearbyWifi(); 
+			_wifiConnection.FetchNearbyWifi(time);
+			//_wifiConnection.
+			//return _wifiConnection.NearbyWifiList; 
+		}
 	}
 }

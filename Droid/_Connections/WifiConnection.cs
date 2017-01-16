@@ -14,12 +14,12 @@ namespace SensorenCBS.Droid
 	public class WifiConnection : IWifiConnection
 	{
 
-		// The WiFiManager and the WiFiInfo are the Assembly Implementation to use/read information from WiFi
-		// U need to use Android.Net.Wifi to implement it.
+		//// The WiFiManager and the WiFiInfo are the Assembly Implementation to use/read information from WiFi
+		//// U need to use Android.Net.Wifi to implement it.
 		WifiManager wifiManager;
 		WifiInfo wifiInfo;
 
-		// inheritance from IWifiConnection
+		//// inheritance from IWifiConnection
 		public string WifiSSID { get; set; }
 		public string WifiBSSID { get; set; }
 		public int WifiFrequency { get; set; }
@@ -31,17 +31,17 @@ namespace SensorenCBS.Droid
 		public string WifiRssiLevel { get; set; }
 		public List<string> AllWifiBssids { get; set; }
 		public List<string> NearbyWifiList { get; set; }
-		//public List<KeyValuePair<string, string>> wifiList { get; set; }
+		////public List<KeyValuePair<string, string>> wifiList { get; set; }
 
 
 		public IList<ScanResult> Results { get; set; }
 		public string NearbyWifi { get; set; }
 
-		// private list to add bssids to the public stack: AllWifiBssids
+		//// private list to add bssids to the public stack: AllWifiBssids
 		List<string> _wifiBssids = new List<string>();
 
 
-		// With this u can check the SSID from the connected WiFi
+		//// With this u can check the SSID from the connected WiFi
 		public void CheckWifiSSID()
 		{
 			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
@@ -49,12 +49,12 @@ namespace SensorenCBS.Droid
 			WifiSSID = wifiInfo.SSID + ", " + wifiInfo.HiddenSSID;
 		}
 
-		// the BSSID, in the form of a six-byte MAC address: XX:XX:XX:XX:XX:XX
+		//// the BSSID, in the form of a six-byte MAC address: XX:XX:XX:XX:XX:XX
 		public void CheckWifiBBSID()
 		{
 			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
 			wifiInfo = wifiManager.ConnectionInfo;
-			// BSSID is the name of the acces point u are using
+			//// BSSID is the name of the acces point u are using
 			WifiBSSID = wifiInfo.BSSID;
 		}
 
@@ -67,9 +67,9 @@ namespace SensorenCBS.Droid
 			WifiIpAddress = wifiInfo.IpAddress.ToString();
 			WifiLinkSpeed = wifiInfo.LinkSpeed;
 			WifiMacAddress = wifiInfo.MacAddress;
-			// the network ID, or -1 if there is no currently connected network
+			//// the network ID, or -1 if there is no currently connected network
 			WifiNetworkId = wifiInfo.NetworkId;
-			// Returns the received signal strength indicator of the current 802.11 network, in dBm.
+			//// Returns the received signal strength indicator of the current 802.11 network, in dBm.
 			WifiRssi = wifiInfo.Rssi;
 		}
 
@@ -77,7 +77,7 @@ namespace SensorenCBS.Droid
 		{
 			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
 			wifiInfo = wifiManager.ConnectionInfo;
-			// In this method there is a check or the bssid is a new/unique bssid
+			//// In this method there is a check or the bssid is a new/unique bssid
 			if (_wifiBssids.Count == 0 || _wifiBssids[(_wifiBssids.Count - 1)] != wifiInfo.BSSID)
 			{
 				_wifiBssids.Add(wifiInfo.BSSID);
@@ -86,11 +86,16 @@ namespace SensorenCBS.Droid
 
 		}
 
-		Dictionary<string, string> dictionary;
-		public void FetchNearbyWifi()
+		//Dictionary<string, string> dictionary;
+		//// Fetching the native nearby Wifi Connection and save it to the database
+		public void FetchNearbyWifi(DateTime timeSaved)
 		{
+			//// make the connection to the database
+			object BindingContext = new NearbyBSSID();
+			var nearbyBS = (NearbyBSSID)BindingContext;
+
 			//var nearbyList = new List<string>(); // listView
-			dictionary = new Dictionary<string, string>();
+			//dictionary = new Dictionary<string, string>();
 			var lv = new List<string>();
 			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
 			if (wifiManager.IsWifiEnabled == false)
@@ -101,20 +106,34 @@ namespace SensorenCBS.Droid
 
 			var size = Results.Count;
 			size = size - 1;
+			int aantal = 0;
 			while (size >= 0)
 			{
-				dictionary.Add(Results[size].Bssid, Results[size].Ssid);
-				size--;
-			}
-			List<KeyValuePair<string, string>> list = dictionary.ToList();
-			foreach (KeyValuePair<string, string> pair in list)
-			{
-				//lv.Add(pair.Key + ", " + pair.Value);
-				lv.Add(pair.Key +", " + pair.Value);
+				nearbyBS.time = timeSaved;
+				nearbyBS.BSSID = Results[size].Bssid;
+				nearbyBS.SSID = Results[size].Ssid;
+				nearbyBS.BSSID = Results[size].Bssid;
+				nearbyBS.BSSID = Results[size].Bssid;
+				nearbyBS.Cabilities = Results[size].Capabilities;
 				
-				Console.WriteLine("000000000000000 " + pair.Key + pair.Value);
+				App.Database.SaveNearbyBSSID(nearbyBS);
+				Console.WriteLine(nearbyBS + ", " + nearbyBS.ID + ", " + nearbyBS.BSSID);
+				
+
+				//dictionary.Add(Results[size].Bssid, Results[size].Level.ToString());
+				size--;
+				aantal++;
 			}
-			NearbyWifiList = lv;
+			Console.WriteLine("-------------"+ aantal + "----------------------");
+			//List<KeyValuePair<string, string>> list = dictionary.ToList();
+			//foreach (KeyValuePair<string, string> pair in list)
+			//{
+			//	//lv.Add(pair.Key + ", " + pair.Value);
+			//	lv.Add(pair.Key +", " + pair.Value);
+				
+			//	Console.WriteLine("000000000000000 " + pair.Key + pair.Value);
+			//}
+			//NearbyWifiList = lv;
 		}
 	}
 }

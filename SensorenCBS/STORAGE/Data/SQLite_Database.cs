@@ -5,15 +5,16 @@ using SQLite;
 
 namespace SensorenCBS
 {
-	public class PickUp_Database
+	public class SQLite_Database
 	{
 		readonly SQLiteAsyncConnection database;
 
-		public PickUp_Database(string dbPath)
+		public SQLite_Database(string dbPath)
 		{
 			database = new SQLiteAsyncConnection(dbPath);
 			database.CreateTableAsync<PickedUp>().Wait();
 			database.CreateTableAsync<Network_ssid>().Wait();
+			database.CreateTableAsync<NearbyBSSID>().Wait();
 		}
 
 		//pickup
@@ -50,7 +51,7 @@ namespace SensorenCBS
 		public Task<int> GetCountedPickUps()
 		{
 			//return databaseAsync.Table<CBS_Tables.PickUpPhone>().CountAsync(); 
-			var turning =  database.Table<PickedUp>().CountAsync();
+			var turning = database.Table<PickedUp>().CountAsync();
 			return turning;
 		}
 
@@ -82,5 +83,28 @@ namespace SensorenCBS
 			var turning = database.Table<Network_ssid>().CountAsync();
 			return turning;
 		}
+
+		// NEARBY
+		public Task<int> SaveNearbyBSSID(NearbyBSSID item)
+		{
+			if (item.ID != 0)
+			{
+				return database.UpdateAsync(item);
+			}
+			return database.InsertAsync(item);
+		}
+
+		public Task<List<NearbyBSSID>> GetBSSIDSNearbyAsync(DateTime savedTime)
+		{
+			//return database.Table<NearbyBSSID>().Where(bss => bss.time = DateTime.MinValue).ToListAsync();
+			//return database.Table<NearbyBSSID>().;
+			
+		}
+
+		public static IEnumerable<NearbyBSSID> QueryValuations()
+		{
+			//return App.Database.database.QueryAsync<NearbyBSSID>("select * from NearbyBSSID"sid);
+		}
+
 	}
 }	

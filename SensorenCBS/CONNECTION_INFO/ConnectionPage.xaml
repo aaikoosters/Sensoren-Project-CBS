@@ -16,7 +16,7 @@
 			<Button Text="WiFi Information" Clicked="btnWifi"/>
 			<Button Text="Bluetooth Information" Clicked="btnBlue"/>
 			<Button Text="Nearby Information" Clicked="btnNearby" />
-			
+			<Label Text="All BSSID: " x:Name="lblAllBSSID" />
 
 		</StackLayout>
 	</ContentPage.Content>

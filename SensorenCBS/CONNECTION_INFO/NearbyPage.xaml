@@ -20,6 +20,7 @@
 
 			<ios:UILabel Text="Hello world IOS"/> <!--For native IOS Implementation-->
 			<Label Text="Hello world Android"/> <!--For native Android Implementation-->
+			<Label Text="All BSSID: " x:Name="lblAllBSSID" />
 			
 		</StackLayout>
 	</ContentPage.Content>

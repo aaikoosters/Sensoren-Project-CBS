@@ -9,6 +9,7 @@ namespace SensorenCBS
 	{
 		Wifi wifi;
 		List<string> bssids = new List<string>();
+		DateTime timeNow;
 
 		public WifiNetworkPage()
 		{
@@ -63,24 +64,32 @@ namespace SensorenCBS
 			networkSSID.MAC = wifi.wifiMacAddress();
 			networkSSID.NetworkID = wifi.wifiNetworkId();
 			networkSSID.Rssi = wifi.wifiRssi();
-			
-			App.PickUpDatabase.SaveSsidAsyncNetwork(networkSSID);
+			App.Database.SaveSsidAsyncNetwork(networkSSID);
 		}
 
 		void scanNearbyWifi()
 		{
-			var nearbyWifi = wifi.wifiList();
-			foreach (string pair in nearbyWifi)
-			{
-				lblAllBSSID.Text += ("\n" + pair);
-			}
-			//lblAllBSSID.Text = nearbyWifi;
+			timeNow = DateTime.Now;
+			//// call wifi class who calls the Interface
+			wifi.FetchNearbyWifi(timeNow);
+			//var giveNearbyNetwork = await App.Database.GetBSSIDSNearbyAsync(timeNow);
+			//foreach (var item in giveNearbyNetwork)
+			//{
+			//	lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.time+ ", " + item.ID;
+			//}
+
 		}
 
 		async void ophalen()
 		{
-			var turing = await App.PickUpDatabase.GetCountedSSID();
+			var turing = await App.Database.GetCountedSSID();
 			lblTime.Text = "aantal veschillende ssid's: " + turing.ToString();
+
+			var giveNearbyNetwork = await App.Database.GetBSSIDSNearbyAsync(timeNow);
+			foreach (var item in giveNearbyNetwork)
+			{
+				lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.time + ", " + item.ID;
+			}
 			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}
 	}
