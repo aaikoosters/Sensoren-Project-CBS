@@ -10,17 +10,7 @@ namespace SensorenCBS
 		public NearbyPage()
 		{
 			InitializeComponent();
-			ophalen();
 		}
 
-		async void ophalen()
-		{
-			var giveNearbyNetwork = await App.Database.GetBSSIDSNearbyAsync(DateTime.Now);
-			foreach (var item in giveNearbyNetwork)
-			{
-				lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.time + ", " + item.ID;
-			}
-			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
-		}
 	}
 }

@@ -109,15 +109,15 @@ namespace SensorenCBS.Droid
 			int aantal = 0;
 			while (size >= 0)
 			{
-				nearbyBS.time = timeSaved;
+				nearbyBS.TimeNow = timeSaved;
 				nearbyBS.BSSID = Results[size].Bssid;
 				nearbyBS.SSID = Results[size].Ssid;
-				nearbyBS.BSSID = Results[size].Bssid;
-				nearbyBS.BSSID = Results[size].Bssid;
+				nearbyBS.Level = Results[size].Level;
+				nearbyBS.Frequency = Results[size].Frequency;
 				nearbyBS.Cabilities = Results[size].Capabilities;
 				
 				App.Database.SaveNearbyBSSID(nearbyBS);
-				Console.WriteLine(nearbyBS + ", " + nearbyBS.ID + ", " + nearbyBS.BSSID);
+				Console.WriteLine(nearbyBS + ", " + nearbyBS.BSSID);
 				
 
 				//dictionary.Add(Results[size].Bssid, Results[size].Level.ToString());

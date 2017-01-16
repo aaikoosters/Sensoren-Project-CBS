@@ -72,11 +72,7 @@ namespace SensorenCBS
 			timeNow = DateTime.Now;
 			//// call wifi class who calls the Interface
 			wifi.FetchNearbyWifi(timeNow);
-			//var giveNearbyNetwork = await App.Database.GetBSSIDSNearbyAsync(timeNow);
-			//foreach (var item in giveNearbyNetwork)
-			//{
-			//	lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.time+ ", " + item.ID;
-			//}
+
 
 		}
 
@@ -85,10 +81,11 @@ namespace SensorenCBS
 			var turing = await App.Database.GetCountedSSID();
 			lblTime.Text = "aantal veschillende ssid's: " + turing.ToString();
 
-			var giveNearbyNetwork = await App.Database.GetBSSIDSNearbyAsync(timeNow);
-			foreach (var item in giveNearbyNetwork)
+			//var giveNearbyNetwork = await App.Database.GetNearbyBSSID(timeNow);
+			var giveNearby = await App.Database.GetNearbyBSSID();
+			foreach (var item in giveNearby)
 			{
-				lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.time + ", " + item.ID;
+				lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
 			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}

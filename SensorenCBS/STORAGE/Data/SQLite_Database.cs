@@ -70,9 +70,7 @@ namespace SensorenCBS
 			{
 				return database.UpdateAsync(item);
 			}
-			else {
-				return database.InsertAsync(item);
-			}
+			return database.InsertAsync(item);
 		}
 
 
@@ -87,23 +85,19 @@ namespace SensorenCBS
 		// NEARBY
 		public Task<int> SaveNearbyBSSID(NearbyBSSID item)
 		{
-			if (item.ID != 0)
+			var know = database.Table<NearbyBSSID>().Where(i => i.BSSID == item.BSSID).FirstOrDefaultAsync();
+
+			if (item.BSSID.Equals(know))
 			{
 				return database.UpdateAsync(item);
 			}
 			return database.InsertAsync(item);
 		}
 
-		public Task<List<NearbyBSSID>> GetBSSIDSNearbyAsync(DateTime savedTime)
+		//pickup
+		public Task<List<NearbyBSSID>> GetNearbyBSSID()
 		{
-			//return database.Table<NearbyBSSID>().Where(bss => bss.time = DateTime.MinValue).ToListAsync();
-			//return database.Table<NearbyBSSID>().;
-			
-		}
-
-		public static IEnumerable<NearbyBSSID> QueryValuations()
-		{
-			//return App.Database.database.QueryAsync<NearbyBSSID>("select * from NearbyBSSID"sid);
+			return database.Table<NearbyBSSID>().ToListAsync();
 		}
 
 	}
