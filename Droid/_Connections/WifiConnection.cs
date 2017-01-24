@@ -88,15 +88,12 @@ namespace SensorenCBS.Droid
 
 		//Dictionary<string, string> dictionary;
 		//// Fetching the native nearby Wifi Connection and save it to the database
-		public void FetchNearbyWifi(DateTime timeSaved)
+		public async void FetchNearbyWifi(DateTime timeSaved)
 		{
 			//// make the connection to the database
 			object BindingContext = new NearbyBSSID();
 			var nearbyBS = (NearbyBSSID)BindingContext;
 
-			//var nearbyList = new List<string>(); // listView
-			//dictionary = new Dictionary<string, string>();
-			var lv = new List<string>();
 			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
 			if (wifiManager.IsWifiEnabled == false)
 			{
@@ -107,33 +104,42 @@ namespace SensorenCBS.Droid
 			var size = Results.Count;
 			size = size - 1;
 			int aantal = 0;
+			var level = 0;
 			while (size >= 0)
 			{
-				nearbyBS.TimeNow = timeSaved;
+				var _giveLevel = await App.Database.CheckIfBSSIDIsAlreadySavedAndHasLevel(Results[size].Bssid); //GetNearbyBSSID();
+
 				nearbyBS.BSSID = Results[size].Bssid;
 				nearbyBS.SSID = Results[size].Ssid;
 				nearbyBS.Level = Results[size].Level;
 				nearbyBS.Frequency = Results[size].Frequency;
 				nearbyBS.Cabilities = Results[size].Capabilities;
-				
-				App.Database.SaveNearbyBSSID(nearbyBS);
-				Console.WriteLine(nearbyBS + ", " + nearbyBS.BSSID);
-				
 
-				//dictionary.Add(Results[size].Bssid, Results[size].Level.ToString());
+
+				if (_giveLevel.Count > 0) // update
+				{
+					foreach (var item in _giveLevel)
+					{
+						level = item.Level;
+					}
+					if (level < Results[size].Level)
+					{
+						nearbyBS.TimeUpdated = timeSaved;
+						await App.Database.UpdateNearbyBSSID(nearbyBS);
+					}
+				}
+				else // save
+				{
+					nearbyBS.TimeFirstSaved = timeSaved;
+					await App.Database.SaveNearbyBSSID(nearbyBS);
+				}
+
+				Console.WriteLine(nearbyBS + ", " + nearbyBS.BSSID + ", " + nearbyBS.TimeFirstSaved + ", " + nearbyBS.TimeUpdated);
+
 				size--;
 				aantal++;
 			}
-			Console.WriteLine("-------------"+ aantal + "----------------------");
-			//List<KeyValuePair<string, string>> list = dictionary.ToList();
-			//foreach (KeyValuePair<string, string> pair in list)
-			//{
-			//	//lv.Add(pair.Key + ", " + pair.Value);
-			//	lv.Add(pair.Key +", " + pair.Value);
-				
-			//	Console.WriteLine("000000000000000 " + pair.Key + pair.Value);
-			//}
-			//NearbyWifiList = lv;
+			Console.WriteLine("-------------" + aantal + "----------------------");
 		}
 	}
 }

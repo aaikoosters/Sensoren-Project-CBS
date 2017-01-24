@@ -15,6 +15,8 @@ namespace SensorenCBS
 			database.CreateTableAsync<PickedUp>().Wait();
 			database.CreateTableAsync<Network_ssid>().Wait();
 			database.CreateTableAsync<NearbyBSSID>().Wait();
+			database.CreateTableAsync<LocationDB>().Wait();
+			database.CreateTableAsync<NearbyWithLocation>().Wait();
 		}
 
 		//pickup
@@ -85,19 +87,40 @@ namespace SensorenCBS
 		// NEARBY
 		public Task<int> SaveNearbyBSSID(NearbyBSSID item)
 		{
-			var know = database.Table<NearbyBSSID>().Where(i => i.BSSID == item.BSSID).FirstOrDefaultAsync();
-
-			if (item.BSSID.Equals(know))
-			{
-				return database.UpdateAsync(item);
-			}
 			return database.InsertAsync(item);
 		}
 
-		//pickup
+		public Task<List<NearbyBSSID>> UpdateNearbyBSSID(NearbyBSSID item)
+		{
+
+			return database.QueryAsync<NearbyBSSID>(string.Format(
+				" UPDATE NearbyBSSID SET SSID = '{0}', Level = {1}, Frequency = {2}, Cabilities = '{3}', TimeUpdated = '{4}' WHERE [BSSID] like '{5}';", 
+				item.SSID, item.Level, item.Frequency, item.Cabilities, item.TimeUpdated, item.BSSID)
+			);
+		}
+
+		//NEARGBY
 		public Task<List<NearbyBSSID>> GetNearbyBSSID()
 		{
 			return database.Table<NearbyBSSID>().ToListAsync();
+		}
+
+		public Task<List<NearbyBSSID>> GetItemsNotDoneAsync()
+		{
+			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY [Level] ASC");
+			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID] WHERE [BSSID] like '" + bssid + "';");
+			
+		}
+
+		public Task<List<NearbyBSSID>> GetSavedBSSIDLevel(int level)
+		{
+			return database.QueryAsync<NearbyBSSID>("SELECT level FROM [NearbyBSSID] WHERE [BSSID] like '{0}' LIMIT 2");
+		}
+
+		public Task<List<NearbyBSSID>> CheckIfBSSIDIsAlreadySavedAndHasLevel(string bssid)
+		{
+			//return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] WHERE [BSSID] like '04:c5:a4:f2:fa:11' LIMIT 2");
+			return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID] WHERE [BSSID] like '" + bssid + "';");
 		}
 
 	}

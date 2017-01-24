@@ -8,7 +8,6 @@ namespace SensorenCBS
 	public partial class WifiNetworkPage : ContentPage
 	{
 		Wifi wifi;
-		List<string> bssids = new List<string>();
 		DateTime timeNow;
 
 		public WifiNetworkPage()
@@ -70,7 +69,8 @@ namespace SensorenCBS
 		void scanNearbyWifi()
 		{
 			timeNow = DateTime.Now;
-			//// call wifi class who calls the Interface
+			/// call wifi class who calls the Interface
+			/// The working function can you find in WifiConnection.droid of .ios
 			wifi.FetchNearbyWifi(timeNow);
 
 
@@ -82,10 +82,13 @@ namespace SensorenCBS
 			lblTime.Text = "aantal veschillende ssid's: " + turing.ToString();
 
 			//var giveNearbyNetwork = await App.Database.GetNearbyBSSID(timeNow);
-			var giveNearby = await App.Database.GetNearbyBSSID();
+			var giveNearby = await App.Database.GetItemsNotDoneAsync(); //GetNearbyBSSID();
+			lblAllBSSID.Text = "";
 			foreach (var item in giveNearby)
 			{
-				lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
+				lblAllBSSID.Text += ("\n" + item.BSSID + ", " + item.Level + ", " + item.TimeFirstSaved + ", " + item.TimeUpdated);
+				
+				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
 			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}

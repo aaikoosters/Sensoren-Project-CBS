@@ -191,7 +191,6 @@
     <Compile Include="_Connections\BluetoothConnection.cs" />
     <Compile Include="_Connections\WifiConnection.cs" />
     <Compile Include="FileHelper.cs" />
-    <Compile Include="_Connections\NearbyConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
