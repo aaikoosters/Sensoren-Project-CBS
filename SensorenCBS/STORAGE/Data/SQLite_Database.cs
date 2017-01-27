@@ -114,7 +114,7 @@ namespace SensorenCBS
 
 		public Task<List<NearbyBSSID>> GetSavedBSSIDLevel(int level)
 		{
-			return database.QueryAsync<NearbyBSSID>("SELECT level FROM [NearbyBSSID] WHERE [BSSID] like '{0}' LIMIT 2");
+			return database.QueryAsync<NearbyBSSID>(String.Format("SELECT level FROM [NearbyBSSID] WHERE [BSSID] like '{0}' LIMIT 1", level));
 		}
 
 		public Task<List<NearbyBSSID>> CheckIfBSSIDIsAlreadySavedAndHasLevel(string bssid)

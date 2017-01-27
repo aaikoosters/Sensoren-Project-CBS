@@ -86,6 +86,7 @@ namespace SensorenCBS
 			lblAllBSSID.Text = "";
 			foreach (var item in giveNearby)
 			{
+				// fout bij te veel waardes!!!
 				lblAllBSSID.Text += ("\n" + item.BSSID + ", " + item.Level + ", " + item.TimeFirstSaved + ", " + item.TimeUpdated);
 				
 				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
