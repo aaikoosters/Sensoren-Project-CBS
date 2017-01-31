@@ -16,8 +16,10 @@ namespace SensorenCBS.Droid
 
 		//// The WiFiManager and the WiFiInfo are the Assembly Implementation to use/read information from WiFi
 		//// U need to use Android.Net.Wifi to implement it.
-		WifiManager wifiManager;
-		WifiInfo wifiInfo;
+		WifiManager _wifiManager;
+		WifiInfo _wifiInfo;
+		DateTime _now;
+		FetchingGPS _fetchGPS;
 
 		//// inheritance from IWifiConnection
 		public string WifiSSID { get; set; }
@@ -31,80 +33,82 @@ namespace SensorenCBS.Droid
 		public string WifiRssiLevel { get; set; }
 		public List<string> AllWifiBssids { get; set; }
 		public List<string> NearbyWifiList { get; set; }
-		////public List<KeyValuePair<string, string>> wifiList { get; set; }
+		///public List<KeyValuePair<string, string>> wifiList { get; set; }
 
 
 		public IList<ScanResult> Results { get; set; }
 		public string NearbyWifi { get; set; }
 
-		//// private list to add bssids to the public stack: AllWifiBssids
+		/// private list to add bssids to the public stack: AllWifiBssids
 		List<string> _wifiBssids = new List<string>();
 
 
-		//// With this u can check the SSID from the connected WiFi
+		/// With this u can check the SSID from the connected WiFi
 		public void CheckWifiSSID()
 		{
-			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-			wifiInfo = wifiManager.ConnectionInfo;
-			WifiSSID = wifiInfo.SSID + ", " + wifiInfo.HiddenSSID;
+			_wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			_wifiInfo = _wifiManager.ConnectionInfo;
+			WifiSSID = _wifiInfo.SSID + ", " + _wifiInfo.HiddenSSID;
 		}
 
-		//// the BSSID, in the form of a six-byte MAC address: XX:XX:XX:XX:XX:XX
+		/// the BSSID, in the form of a six-byte MAC address: XX:XX:XX:XX:XX:XX
 		public void CheckWifiBBSID()
 		{
-			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-			wifiInfo = wifiManager.ConnectionInfo;
-			//// BSSID is the name of the acces point u are using
-			WifiBSSID = wifiInfo.BSSID;
+			_wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			_wifiInfo = _wifiManager.ConnectionInfo;
+			/// BSSID is the name of the acces point u are using
+			WifiBSSID = _wifiInfo.BSSID;
 		}
 
 		public void CheckWifiInformation()
 		{
-			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-			wifiInfo = wifiManager.ConnectionInfo;
+			_wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			_wifiInfo = _wifiManager.ConnectionInfo;
 
-			WifiFrequency = wifiInfo.Frequency;
-			WifiIpAddress = wifiInfo.IpAddress.ToString();
-			WifiLinkSpeed = wifiInfo.LinkSpeed;
-			WifiMacAddress = wifiInfo.MacAddress;
+			WifiFrequency = _wifiInfo.Frequency;
+			WifiIpAddress = _wifiInfo.IpAddress.ToString();
+			WifiLinkSpeed = _wifiInfo.LinkSpeed;
+			WifiMacAddress = _wifiInfo.MacAddress;
 			//// the network ID, or -1 if there is no currently connected network
-			WifiNetworkId = wifiInfo.NetworkId;
+			WifiNetworkId = _wifiInfo.NetworkId;
 			//// Returns the received signal strength indicator of the current 802.11 network, in dBm.
-			WifiRssi = wifiInfo.Rssi;
+			WifiRssi = _wifiInfo.Rssi;
 		}
 
 		public void CheckAllWifiBSSID()
 		{
-			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-			wifiInfo = wifiManager.ConnectionInfo;
+			_wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			_wifiInfo = _wifiManager.ConnectionInfo;
 			//// In this method there is a check or the bssid is a new/unique bssid
-			if (_wifiBssids.Count == 0 || _wifiBssids[(_wifiBssids.Count - 1)] != wifiInfo.BSSID)
+			if (_wifiBssids.Count == 0 || _wifiBssids[(_wifiBssids.Count - 1)] != _wifiInfo.BSSID)
 			{
-				_wifiBssids.Add(wifiInfo.BSSID);
+				_wifiBssids.Add(_wifiInfo.BSSID);
 				AllWifiBssids = _wifiBssids;
 			}
 
 		}
 
-		//Dictionary<string, string> dictionary;
 		//// Fetching the native nearby Wifi Connection and save it to the database
 		public async void FetchNearbyWifi(DateTime timeSaved)
 		{
+			_now = timeSaved;
+
 			//// make the connection to the database
 			object BindingContext = new NearbyBSSID();
 			var nearbyBS = (NearbyBSSID)BindingContext;
 
-			wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
-			if (wifiManager.IsWifiEnabled == false)
+			_wifiManager = (WifiManager)Application.Context.GetSystemService(Context.WifiService);
+			if (_wifiManager.IsWifiEnabled == false)
 			{
-				wifiManager.SetWifiEnabled(true);
+				_wifiManager.SetWifiEnabled(true);
 			}
-			Results = wifiManager.ScanResults;
+			Results = _wifiManager.ScanResults;
 
 			var size = Results.Count;
 			size = size - 1;
 			int aantal = 0;
 			var level = 0;
+
 			while (size >= 0)
 			{
 				var _giveLevel = await App.Database.CheckIfBSSIDIsAlreadySavedAndHasLevel(Results[size].Bssid); //GetNearbyBSSID();
@@ -118,19 +122,19 @@ namespace SensorenCBS.Droid
 
 				if (_giveLevel.Count > 0) // update
 				{
-					foreach (var item in _giveLevel)
-					{
-						level = item.Level;
-					}
+					foreach (var item in _giveLevel) { level = item.Level; }
+
 					if (level < Results[size].Level)
 					{
-						nearbyBS.TimeUpdated = timeSaved;
+						nearbyBS.TimeUpdated = _now;
+						//_fetchGPS.updateFetchedGPS(nearbyBS.IDbssid);
 						await App.Database.UpdateNearbyBSSID(nearbyBS);
-					}
+					} // else do nothing
 				}
 				else // save
 				{
-					nearbyBS.TimeFirstSaved = timeSaved;
+					nearbyBS.TimeFirstSaved = _now;
+					//_fetchGPS.saveFetchedGPS(nearbyBS.IDbssid);
 					await App.Database.SaveNearbyBSSID(nearbyBS);
 				}
 
@@ -142,5 +146,6 @@ namespace SensorenCBS.Droid
 			Console.WriteLine("-------------" + aantal + "----------------------");
 		}
 	}
+
 }
 

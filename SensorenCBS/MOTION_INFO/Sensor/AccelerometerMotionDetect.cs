@@ -33,8 +33,8 @@ namespace SensorenCBS
 		public void pickThePhoneUp()
 		{
 			// need to uses this one to check if the phone is pucked up
-			var unMappedAccel = (float)Math.Sqrt(xAccel * xAccel + yAccel * yAccel + zAccel * zAccel);
-			acceleration = (float)(Math.Round(unMappedAccel * 10f) / 10f);
+			var _unMappedAccel = (float)Math.Sqrt(xAccel * xAccel + yAccel * yAccel + zAccel * zAccel);
+			acceleration = (float)(Math.Round(_unMappedAccel * 10f) / 10f);
 		}
 	}
 }

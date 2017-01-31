@@ -105,22 +105,40 @@ namespace SensorenCBS
 			return database.Table<NearbyBSSID>().ToListAsync();
 		}
 
-		public Task<List<NearbyBSSID>> GetItemsNotDoneAsync()
+		public Task<List<NearbyBSSID>> WifiWithLocatie()
 		{
-			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY [Level] ASC");
+			return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency, L.Latitude, L.Longitude, L.Accuracy FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
 			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID] WHERE [BSSID] like '" + bssid + "';");
 			
 		}
 
 		public Task<List<NearbyBSSID>> GetSavedBSSIDLevel(int level)
 		{
-			return database.QueryAsync<NearbyBSSID>(String.Format("SELECT level FROM [NearbyBSSID] WHERE [BSSID] like '{0}' LIMIT 1", level));
+			return database.QueryAsync<NearbyBSSID>(string.Format("SELECT level FROM [NearbyBSSID] WHERE [BSSID] like '{0}' LIMIT 1", level));
 		}
 
 		public Task<List<NearbyBSSID>> CheckIfBSSIDIsAlreadySavedAndHasLevel(string bssid)
 		{
-			//return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] WHERE [BSSID] like '04:c5:a4:f2:fa:11' LIMIT 2");
 			return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID] WHERE [BSSID] like '" + bssid + "';");
+		}
+
+		//network
+		public Task<int> saveGPS(LocationDB item)
+		{
+			if (item.IDlocation != 0)
+			{
+				return database.UpdateAsync(item);
+			}
+			return database.InsertAsync(item);
+		}
+
+		public Task<List<LocationDB>> UpdateGPS(LocationDB item)
+		{
+
+			return database.QueryAsync<LocationDB>(string.Format(
+				" UPDATE LocationDB SET Latitude = '{0}', Longitude = {1}, Accuracy = {2} WHERE [idBSSID] = '{3}';",
+				item.Latitude, item.Longitude, item.Accuracy, item.idBSSID)
+			);
 		}
 
 	}

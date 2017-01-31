@@ -14,14 +14,15 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 			wifi = new Wifi();
-			BindingContext = new Network_ssid();
+			//BindingContext = new Network_ssid();
 
 			checkWifiInformation();
 			Device.StartTimer(new TimeSpan(0, 0, 5), () =>
 			{
 				InitializeComponent();
 				checkWifiInformation();
-				scanNearbyWifi();
+				fetchNearbyWifi();
+				printNearbyBSSID();
 				return true;
 
 			});
@@ -66,14 +67,26 @@ namespace SensorenCBS
 			App.Database.SaveSsidAsyncNetwork(networkSSID);
 		}
 
-		void scanNearbyWifi()
+		void fetchNearbyWifi()
 		{
 			timeNow = DateTime.Now;
 			/// call wifi class who calls the Interface
 			/// The working function can you find in WifiConnection.droid of .ios
 			wifi.FetchNearbyWifi(timeNow);
 
+		}
 
+		async void printNearbyBSSID()
+		{
+			var giveNearby = await App.Database.WifiWithLocatie(); //GetNearbyBSSID();
+			lblAllBSSID.Text = "";
+			foreach (var item in giveNearby)
+			{
+				// fout bij te veel waardes!!!
+				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}", item.BSSID, item.Level, item.Frequency));
+
+				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
+			}
 		}
 
 		async void ophalen()
@@ -82,15 +95,15 @@ namespace SensorenCBS
 			lblTime.Text = "aantal veschillende ssid's: " + turing.ToString();
 
 			//var giveNearbyNetwork = await App.Database.GetNearbyBSSID(timeNow);
-			var giveNearby = await App.Database.GetItemsNotDoneAsync(); //GetNearbyBSSID();
-			lblAllBSSID.Text = "";
-			foreach (var item in giveNearby)
-			{
-				// fout bij te veel waardes!!!
-				lblAllBSSID.Text += ("\n" + item.BSSID + ", " + item.Level + ", " + item.TimeFirstSaved + ", " + item.TimeUpdated);
+			//var giveNearby = await App.Database.GetItemsNotDoneAsync(); //GetNearbyBSSID();
+			//lblAllBSSID.Text = "";
+			//foreach (var item in giveNearby)
+			//{
+			//	// fout bij te veel waardes!!!
+			//	lblAllBSSID.Text += ("\n" + item.BSSID + ", " + item.Level + ", " + item.TimeFirstSaved + ", " + item.TimeUpdated);
 				
-				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
-			}
+			//	//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
+			//}
 			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}
 	}
