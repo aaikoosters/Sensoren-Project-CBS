@@ -6,8 +6,9 @@ namespace SensorenCBS
 	{
 		//[PrimaryKey, AutoIncrement]
 		//public int bssidID { get; set; }
-		[PrimaryKey, AutoIncrement]
-		public int IDbssid { get; set; }
+		//[PrimaryKey, AutoIncrement]
+		//public int IDbssid { get; set; }
+		[PrimaryKey]
 		public string BSSID { get; set; }
 		public string SSID { get; set; }
 		public int Level { get; set; }
@@ -27,7 +28,7 @@ namespace SensorenCBS
 		public double Longitude { get; set; }
 		public double Accuracy { get; set; }
 		// foreign key
-		public int idBSSID { get; set; }
+		public string idBSSID { get; set; }
 	}
 
 	public class NearbyWithLocation

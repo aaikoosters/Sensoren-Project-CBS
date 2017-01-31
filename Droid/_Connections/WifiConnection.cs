@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Net.Wifi;
+using Plugin.Geolocator;
 using SensorenCBS.Droid;
 using Xamarin.Forms;
 using Application = Android.App.Application;
@@ -21,6 +22,8 @@ namespace SensorenCBS.Droid
 		DateTime _now;
 		FetchingGPS _fetchGPS;
 
+		int _size, _level;
+
 		//// inheritance from IWifiConnection
 		public string WifiSSID { get; set; }
 		public string WifiBSSID { get; set; }
@@ -33,14 +36,12 @@ namespace SensorenCBS.Droid
 		public string WifiRssiLevel { get; set; }
 		public List<string> AllWifiBssids { get; set; }
 		public List<string> NearbyWifiList { get; set; }
-		///public List<KeyValuePair<string, string>> wifiList { get; set; }
-
-
 		public IList<ScanResult> Results { get; set; }
 		public string NearbyWifi { get; set; }
 
 		/// private list to add bssids to the public stack: AllWifiBssids
 		List<string> _wifiBssids = new List<string>();
+
 
 
 		/// With this u can check the SSID from the connected WiFi
@@ -104,48 +105,82 @@ namespace SensorenCBS.Droid
 			}
 			Results = _wifiManager.ScanResults;
 
-			var size = Results.Count;
-			size = size - 1;
-			int aantal = 0;
-			var level = 0;
+			_size = Results.Count - 1;
+			_level = 0;
 
-			while (size >= 0)
+			while (_size >= 0)
 			{
-				var _giveLevel = await App.Database.CheckIfBSSIDIsAlreadySavedAndHasLevel(Results[size].Bssid); //GetNearbyBSSID();
+				var _giveLevel = await App.Database.CheckIfBSSIDIsAlreadySavedAndHasLevel(Results[_size].Bssid); //GetNearbyBSSID();
 
-				nearbyBS.BSSID = Results[size].Bssid;
-				nearbyBS.SSID = Results[size].Ssid;
-				nearbyBS.Level = Results[size].Level;
-				nearbyBS.Frequency = Results[size].Frequency;
-				nearbyBS.Cabilities = Results[size].Capabilities;
+				var _idOFTheBSSID = Results[_size].Bssid;
+				nearbyBS.BSSID = _idOFTheBSSID;
+				nearbyBS.SSID = Results[_size].Ssid;
+				nearbyBS.Level = Results[_size].Level;
+				nearbyBS.Frequency = Results[_size].Frequency;
+				nearbyBS.Cabilities = Results[_size].Capabilities;
+
 
 
 				if (_giveLevel.Count > 0) // update
 				{
-					foreach (var item in _giveLevel) { level = item.Level; }
+					foreach (var item in _giveLevel) { _level = item.Level; }
 
-					if (level < Results[size].Level)
+					if (_level < Results[_size].Level)
 					{
 						nearbyBS.TimeUpdated = _now;
-						//_fetchGPS.updateFetchedGPS(nearbyBS.IDbssid);
+						updateWifiWithGPS(_idOFTheBSSID);
 						await App.Database.UpdateNearbyBSSID(nearbyBS);
 					} // else do nothing
 				}
 				else // save
 				{
 					nearbyBS.TimeFirstSaved = _now;
-					//_fetchGPS.saveFetchedGPS(nearbyBS.IDbssid);
+					updateWifiWithGPS(_idOFTheBSSID);
 					await App.Database.SaveNearbyBSSID(nearbyBS);
 				}
-
-				Console.WriteLine(nearbyBS + ", " + nearbyBS.BSSID + ", " + nearbyBS.TimeFirstSaved + ", " + nearbyBS.TimeUpdated);
-
-				size--;
-				aantal++;
+				_size--;
 			}
-			Console.WriteLine("-------------" + aantal + "----------------------");
+		}
+
+		Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+
+		async void updateWifiWithGPS(string idOFTheBSSID)
+		{
+			object BindingContext = new LocationDB();
+			var _GPSFetchUpdate = (LocationDB)BindingContext;
+
+			if (locator.IsGeolocationEnabled)
+			{
+				locator.DesiredAccuracy = 1000;
+				
+				var _position = await locator.GetPositionAsync();
+				_GPSFetchUpdate.Time = DateTime.Now;
+				_GPSFetchUpdate.Longitude = _position.Longitude;
+				_GPSFetchUpdate.Latitude = _position.Latitude;
+				_GPSFetchUpdate.Accuracy = _position.Accuracy;
+				_GPSFetchUpdate.idBSSID = idOFTheBSSID;
+				await App.Database.UpdateGPS(_GPSFetchUpdate);
+			}
+		}
+
+		async void saveWifiWithGPS(string idOFTheBSSID)
+		{
+			object BindingContext = new LocationDB();
+			var _GPSFetchSave = (LocationDB)BindingContext;
+
+			if (locator.IsGeolocationEnabled)
+			{
+				var _position = await locator.GetPositionAsync();
+				_GPSFetchSave.Time = DateTime.Now;
+				_GPSFetchSave.Longitude = _position.Longitude;
+				_GPSFetchSave.Latitude = _position.Latitude;
+				_GPSFetchSave.Accuracy = _position.Accuracy;
+				_GPSFetchSave.idBSSID = idOFTheBSSID;
+				await App.Database.saveGPS(_GPSFetchSave);
+
+			}
+
 		}
 	}
-
 }
 

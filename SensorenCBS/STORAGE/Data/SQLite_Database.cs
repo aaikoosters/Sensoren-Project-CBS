@@ -57,14 +57,6 @@ namespace SensorenCBS
 			return turning;
 		}
 
-
-		public bool getPossibleSSID(string ssid)
-		{
-			var isSsidFilled = database.Table<Network_ssid>().Where(s => s.Ssid == ssid).FirstAsync().ToString();
-			if (isSsidFilled.Equals("")) { return true; }
-			return false;
-		}
-
 		//network
 		public Task<int> SaveSsidAsyncNetwork(Network_ssid item)
 		{
@@ -80,7 +72,7 @@ namespace SensorenCBS
 		public Task<int> GetCountedSSID()
 		{
 			//return databaseAsync.Table<CBS_Tables.PickUpPhone>().CountAsync(); 
-			var turning = database.Table<Network_ssid>().CountAsync();
+			var turning = database.Table<Network_ssid>().Take(1).CountAsync();
 			return turning;
 		}
 
@@ -107,8 +99,9 @@ namespace SensorenCBS
 
 		public Task<List<NearbyBSSID>> WifiWithLocatie()
 		{
-			return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency, L.Latitude, L.Longitude, L.Accuracy FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
-			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID] WHERE [BSSID] like '" + bssid + "';");
+			//return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
+			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID]");// WHERE [BSSID] like '" + bssid + "';");
+			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY Level");
 			
 		}
 
@@ -136,7 +129,7 @@ namespace SensorenCBS
 		{
 
 			return database.QueryAsync<LocationDB>(string.Format(
-				" UPDATE LocationDB SET Latitude = '{0}', Longitude = {1}, Accuracy = {2} WHERE [idBSSID] = '{3}';",
+				" UPDATE LocationDB SET Latitude = '{0}', Longitude = '{1}', Accuracy = '{2}' WHERE [idBSSID] = '{3}';",
 				item.Latitude, item.Longitude, item.Accuracy, item.idBSSID)
 			);
 		}

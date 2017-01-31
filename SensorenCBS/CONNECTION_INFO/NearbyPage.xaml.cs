@@ -14,7 +14,7 @@ namespace SensorenCBS
 		{
 			InitializeComponent();
 			fetchNearbyWifi();
-			//printNearbyBSSID();
+			printNearbyBSSID();
 		}
 
 		void fetchNearbyWifi()
