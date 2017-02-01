@@ -7,8 +7,6 @@ namespace SensorenCBS
 {
 	public class GyroscopeMotionDetect
 	{
-		Label _label;
-		MotionSensorDelay motionDelay;
 		public string xGyro { get; set; }
 		public string yGyro { get; set; }
 		public string zGyro { get; set; }
@@ -16,8 +14,6 @@ namespace SensorenCBS
 
 		public GyroscopeMotionDetect(SensorValueChangedEventArgs svca)
 		{
-			// set delay
-			motionDelay = MotionSensorDelay.Default;
 			// start processing gyroscope
 			GyroscopeDetect(svca);
 

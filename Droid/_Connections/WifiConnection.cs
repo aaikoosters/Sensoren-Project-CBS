@@ -20,7 +20,6 @@ namespace SensorenCBS.Droid
 		WifiManager _wifiManager;
 		WifiInfo _wifiInfo;
 		DateTime _now;
-		FetchingGPS _fetchGPS;
 
 		int _size, _level;
 
