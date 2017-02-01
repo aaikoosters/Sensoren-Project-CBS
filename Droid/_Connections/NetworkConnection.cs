@@ -1,4 +1,5 @@
-﻿using Android.Content;
+﻿using System.Collections.Generic;
+using Android.Content;
 using Android.Net;
 using SensorenCBS.Droid;
 using Xamarin.Forms;

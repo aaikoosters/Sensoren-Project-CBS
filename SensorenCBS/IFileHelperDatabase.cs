@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SensorenCBS
 {
-	public interface IFileHelper
+	public interface IFileHelperDatabase
 	{
 		string GetLocalFilePath(string filename);
 	}

@@ -6,7 +6,7 @@ using SensorenCBS.Droid;
 [assembly: Dependency(typeof(FileHelper))]
 namespace SensorenCBS.Droid
 {
-	public class FileHelper : IFileHelper
+	public class FileHelper : IFileHelperDatabase
 	{
 		public string GetLocalFilePath(string filename)
 		{

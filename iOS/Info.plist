@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>SensorenCBS</string>
+	<string>SensorenCBS.iOS</string>
 	<key>CFBundleName</key>
-	<string>SensorenCBS</string>
+	<string>SensorenCBS.iOS</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.sensorencbs</string>
+	<string>com.companyname.sensorencbs.iOS</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -45,6 +45,8 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
+		<string>bluetooth-central</string>
+		<string>fetch</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Please allow the location services</string>

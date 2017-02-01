@@ -15,11 +15,21 @@ namespace SensorenCBS
 		int WifiNetworkId { get;  }
 		int WifiRssi { get;  }
 		List<string> AllWifiBssids { get; }
+		List<string> NearbyWifiList { get; }
+		//List<KeyValuePair<string, string>> wifiList { get; } // not in use
+
+		string NearbyWifi { get; }
+		//List<string> AllNetworkSSID { get; }
 
 		void CheckWifiSSID();
 		void CheckWifiBBSID();
 		void CheckAllWifiBSSID();
 		void CheckWifiInformation();
+
+		void FetchNearbyWifi(DateTime time);
+		//void GetNearbyWifi();
+
+		//void CheckWifiPoints();
 
 	}
 }

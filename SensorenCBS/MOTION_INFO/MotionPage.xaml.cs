@@ -88,7 +88,7 @@ namespace SensorenCBS
 
 		async void ophalings()
 		{
-			var turing = await App.PickUpDatabase.GetCountedPickUps();
+			var turing = await App.Database.GetCountedPickUps();
 			lblPickedUp.Text = "Times picked up: " + turing.ToString();
 		}
 
@@ -96,7 +96,7 @@ namespace SensorenCBS
 		{
 			var pickUps = (PickedUp)BindingContext;
 			pickUps.TimeDay = DateTime.Now;
-			App.PickUpDatabase.SaveItemAsync(pickUps);
+			App.Database.SaveItemAsync(pickUps);
 		}
 	}
 }

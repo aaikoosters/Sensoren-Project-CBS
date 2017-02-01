@@ -4,6 +4,7 @@ using SystemConfiguration;
 using CoreFoundation;
 using Xamarin.Forms;
 using SensorenCBS.iOS;
+using System.Collections.Generic;
 
 [assembly: Dependency(typeof(NetworkConnection))]
 namespace SensorenCBS.iOS
@@ -17,12 +18,20 @@ namespace SensorenCBS.iOS
 		public string ExtraConnectionInfo { get; set; }
 		public string ConnectionDetailStateInfo { get; set; }
 
+		public List<string> AllNetworkSSID
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
+
 		public void CheckNetworkConnection()
 		{
 			InternetConnectionStatus();
 		}
 
-		// Checking if there is a connection
+		// Checking if there is a connection>>
 		private void UpdateNetworkStatus()
 		{
 
@@ -143,6 +152,11 @@ namespace SensorenCBS.iOS
 		}
 
 		public void CheckConnectionDetailState()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void CheckWifiPoints()
 		{
 			throw new NotImplementedException();
 		}

@@ -20,5 +20,10 @@ namespace SensorenCBS
 		{
 			Navigation.PushAsync(new BluetoothPage());
 		}
+
+		void btnNearby(object s, EventArgs e)
+		{
+			Navigation.PushAsync(new NearbyPage());
+		}
 	}
 }

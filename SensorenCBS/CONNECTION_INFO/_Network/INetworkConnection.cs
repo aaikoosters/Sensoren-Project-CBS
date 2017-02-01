@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace SensorenCBS
 {
 	public interface INetworkConnection
@@ -8,13 +10,15 @@ namespace SensorenCBS
 		string ExtraConnectionInfo { get; }
 		string ConnectionStateInfo { get; }
 		string ConnectionDetailStateInfo { get; }
+		//List<string> AllNetworkSSID { get; }
 
 		void CheckNetworkConnection();
 		void CheckNetworkConnectionType();
 		void CheckExtraConnectionInfo();
 		void CheckConnectionState();
 		void CheckConnectionDetailState();
-
+		//void CheckWifiPoints();
+		
 
 	}
 }

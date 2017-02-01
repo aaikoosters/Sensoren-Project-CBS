@@ -6,7 +6,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(FileHelper))]
 namespace SensorenCBS.iOS
 {
-	public class FileHelper : IFileHelper
+	public class FileHelper : IFileHelperDatabase
 	{
 		public string GetLocalFilePath(string filename)
 		{
