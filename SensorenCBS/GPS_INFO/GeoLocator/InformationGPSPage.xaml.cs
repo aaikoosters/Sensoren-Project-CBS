@@ -29,4 +29,4 @@
 		{ 			var _radials = degrees * (Math.PI / 180);
 			return _radials;
 		} 
-		void searchHeading() 		{ 			// start the compass sensor 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Default); 			CrossDeviceMotion.Current.SensorValueChanged += (s, a) => 			{ 				switch (a.SensorType) 				{ 					//  					case MotionSensorType.Compass: 						var _cmd = new CompasMotionDetect(a); 						lblHeading.Text = _cmd.orCompas; 						break; 				} 			}; 		} 	} }  
+		void searchHeading() 		{ 			// start the compass sensor 			CrossDeviceMotion.Current.Start(MotionSensorType.Compass, MotionSensorDelay.Default); 			CrossDeviceMotion.Current.SensorValueChanged += (s, a) => 			{ 				switch (a.SensorType) 				{ 					//  					case MotionSensorType.Compass: 						var _cmd = new CompasMotionDetect(a); 						lblHeading.Text = "Heading: " + _cmd.orCompas; 						break; 				} 			}; 		} 	} }  
