@@ -27,7 +27,7 @@ namespace SensorenCBS
 		string heading(double? _compasDegrees)
 		{
 			string[] _caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
-			return "Compas\n" + _caridnals[(int)Math.Round(((double)_compasDegrees * 10 % 3600) / 225)] + ", " + string.Format("{0:0}", _compasDegrees);
+			return _caridnals[(int)Math.Round(((double)_compasDegrees * 10 % 3600) / 225)] + ", " + string.Format("{0:0}", _compasDegrees);
 		}
 	}
 }
