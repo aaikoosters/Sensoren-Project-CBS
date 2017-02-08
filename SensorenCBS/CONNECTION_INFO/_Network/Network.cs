@@ -51,5 +51,11 @@ namespace SensorenCBS
 			var detailStateInfo = networkDetailStateInfo;
 			return detailStateInfo;
 		}
+
+		public string getSSID()
+		{
+			return networkConnection.GetSSID();
+
+		}
 	}
 }

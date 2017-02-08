@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Android.Content;
 using Android.Net;
 using SensorenCBS.Droid;
@@ -86,6 +87,11 @@ namespace SensorenCBS.Droid
 			else {
 				ConnectionDetailStateInfo = "";
 			}
+		}
+
+		public string GetSSID()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
