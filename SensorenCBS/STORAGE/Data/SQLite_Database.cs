@@ -101,7 +101,19 @@ namespace SensorenCBS
 		{
 			//return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
 			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID]");// WHERE [BSSID] like '" + bssid + "';");
-			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY Level");
+
+			//return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY Level DESC");
+
+			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [LocationDB] ORDER BY idBSSID DESC");
+			
+			
+		}
+
+		public Task<int> CountWifiWithLocatie()
+		{
+			//return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
+			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID]");// WHERE [BSSID] like '" + bssid + "';");
+			return database.Table<NearbyBSSID>().Take(1).CountAsync();
 			
 		}
 

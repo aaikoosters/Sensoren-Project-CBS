@@ -11,6 +11,7 @@
 	</ContentPage.Padding>
 	
 	<ContentPage.Content>
+		<ScrollView>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
 			<Label Text="Fetching Information" x:Name="lblInfo"/>
@@ -19,9 +20,7 @@
 			<Label Text="Fetching Total Distance" x:Name="lblTotDistance"/>
 			<Label Text="Fetching Average Speed" x:Name="lblAvgSpeed"/>
 			
-			
-			
-			
 		</StackLayout>
+			</ScrollView>
 	</ContentPage.Content>
 </ContentPage>

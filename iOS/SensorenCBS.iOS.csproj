@@ -30,6 +30,7 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
+    <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -86,6 +87,7 @@
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
     <CodesignProvision></CodesignProvision>
+    <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -184,6 +186,7 @@
     <Compile Include="_Connections\NetworkConnection.cs" />
     <Compile Include="_Connections\BluetoothConnection.cs" />
     <Compile Include="FileHelper.cs" />
+    <Compile Include="WifiConncetion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

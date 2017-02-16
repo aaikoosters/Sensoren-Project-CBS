@@ -22,6 +22,8 @@ namespace SensorenCBS
 				networkConnectionType();
 				extraConnectionInfo();
 				connectionState();
+				if(Device.OS == TargetPlatform.iOS)
+					getSSID();
 				return false;
 			});
 
@@ -50,6 +52,12 @@ namespace SensorenCBS
 			type = network.connectionType();
 			lblconnType.Text = type;
 
+		}
+
+		void getSSID()
+		{
+			var ssidback = network.getSSID();
+			lblconnType.Text = ssidback;
 		}
 
 		void extraConnectionInfo()

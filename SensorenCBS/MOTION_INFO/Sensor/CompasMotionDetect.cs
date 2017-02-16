@@ -7,7 +7,6 @@ namespace SensorenCBS
 {
 	public class CompasMotionDetect
 	{
-		Label _label;
 		public string orCompas { get; set; }
 		
 		public CompasMotionDetect(SensorValueChangedEventArgs svca)
