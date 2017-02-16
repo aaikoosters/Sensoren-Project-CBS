@@ -84,15 +84,18 @@ namespace SensorenCBS
 			{
 				// fout bij te veel waardes!!!
 				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
-
+				//Debug.WriteLine(string.Format("{0}, {1}, {2}, {3}", item.BSSID, item.Frequency, item.Level, item.SSID));
 				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
+			Debug.WriteLine("------------------------------");
 		}
 
 		async void ophalen()
 		{
 			var turing = await App.Database.GetCountedSSID();
-			lblTime.Text = "aantal veschillende ssid's: " + turing.ToString();
+			var countNearby = await App.Database.CountWifiWithLocatie();
+			
+			lblTime.Text = "aantal veschillende ssid's: " + countNearby;
 
 			//var giveNearbyNetwork = await App.Database.GetNearbyBSSID(timeNow);
 			//var giveNearby = await App.Database.GetItemsNotDoneAsync(); //GetNearbyBSSID();

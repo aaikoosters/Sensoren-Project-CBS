@@ -16,8 +16,8 @@ namespace SensorenCBS
 
 		public async void FetchGPS()
 		{
-		//	object BindingContext = new LocationDB();
-		//	var _fetchGPS = (LocationDB)BindingContext;
+			//object BindingContext = new LocationDB();
+			//var _fetchGPS = (LocationDB)BindingContext;
 
 			locator.DesiredAccuracy = DefaultAccurancy;
 

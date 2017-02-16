@@ -22,7 +22,8 @@ namespace SensorenCBS
 				networkConnectionType();
 				extraConnectionInfo();
 				connectionState();
-				getSSID();
+				if(Device.OS == TargetPlatform.iOS)
+					getSSID();
 				return false;
 			});
 

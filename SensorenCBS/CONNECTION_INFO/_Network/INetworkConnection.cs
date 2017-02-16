@@ -19,7 +19,5 @@ namespace SensorenCBS
 		void CheckConnectionDetailState();
 		string GetSSID();
 		//void CheckWifiPoints();
-		
-
 	}
 }
