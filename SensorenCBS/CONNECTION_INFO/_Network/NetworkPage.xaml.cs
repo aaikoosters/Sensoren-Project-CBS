@@ -8,7 +8,7 @@ namespace SensorenCBS
 	public partial class NetworkPage : ContentPage
 	{
 		Network network;
-		bool isConnected;
+		//bool isConnected;
 		string type;
 
 		public NetworkPage()
@@ -40,11 +40,6 @@ namespace SensorenCBS
 		{
 			
 			lblStat.Text = network.connected();
-			if (network.connected() == "You are Connected")
-			{
-				isConnected = true;
-			}
-			else { isConnected = false; }
 		}
 
 		void networkConnectionType()

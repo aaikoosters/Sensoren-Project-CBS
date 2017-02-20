@@ -74,6 +74,7 @@ namespace SensorenCBS
 			/// The working function can you find in WifiConnection.droid of .ios
 			wifi.FetchNearbyWifi(timeNow);
 
+
 		}
 
 		async void printNearbyBSSID()
@@ -83,8 +84,11 @@ namespace SensorenCBS
 			foreach (var item in giveNearby)
 			{
 				// fout bij te veel waardes!!!
-				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
-				//Debug.WriteLine(string.Format("{0}, {1}, {2}, {3}", item.BSSID, item.Frequency, item.Level, item.SSID));
+				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
+				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}\n", item.idBSSID, item.Latitude, item.Longitude));
+				
+
+				Debug.WriteLine(string.Format("{0}, {1:0.0000000}, {2:0.0000000}, {3}", item.idBSSID, item.Latitude, item.Longitude, item.IDlocation));
 				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
 			Debug.WriteLine("------------------------------");
@@ -92,10 +96,10 @@ namespace SensorenCBS
 
 		async void ophalen()
 		{
-			var turing = await App.Database.GetCountedSSID();
+			//var turing = await App.Database.GetCountedSSID();
 			var countNearby = await App.Database.CountWifiWithLocatie();
 			
-			lblTime.Text = "aantal veschillende ssid's: " + countNearby;
+			lblTime.Text = "All BSSIDS's: " + countNearby;
 
 			//var giveNearbyNetwork = await App.Database.GetNearbyBSSID(timeNow);
 			//var giveNearby = await App.Database.GetItemsNotDoneAsync(); //GetNearbyBSSID();

@@ -26,7 +26,7 @@ namespace SensorenCBS
 		void CheckAllWifiBSSID();
 		void CheckWifiInformation();
 
-		void FetchNearbyWifi(DateTime time);
+		void saveNearbyBSSID(DateTime time);
 		//void GetNearbyWifi();
 
 		//void CheckWifiPoints();

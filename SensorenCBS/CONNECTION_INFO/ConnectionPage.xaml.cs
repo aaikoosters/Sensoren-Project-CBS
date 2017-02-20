@@ -21,6 +21,8 @@ namespace SensorenCBS
 			Navigation.PushAsync(new BluetoothPage());
 		}
 
+
+		//if (TargetPlatform != OnPlatform
 		void btnNearby(object s, EventArgs e)
 		{
 			Navigation.PushAsync(new NearbyPage());
