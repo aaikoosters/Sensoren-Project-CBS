@@ -7,7 +7,8 @@
 		xmlns:formsAndroid="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Platform.Android;targetPlatform=Android"
 
 		
-		x:Class="SensorenCBS.NearbyPage">
+		x:Class="SensorenCBS.NearbyPage"
+		Title="Nearby information">
 
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
@@ -17,10 +18,10 @@
 	</ContentPage.Padding>
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
-
-			<ios:UILabel Text="Hello world IOS"/> <!--For native IOS Implementation-->
-			<Label Text="Hello world Android"/> <!--For native Android Implementation-->
-			<Label Text="All BSSID: " x:Name="lblAllBSSID" />
+			<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Start" Orientation="Horizontal" Spacing="10">
+				<Label Text="Hello world AndroiHello worldAndroid"/> <!--For native Android Implementation-->
+				<Label Text="AllBSSID:AllBSSID: " x:Name="lblAllBSSID" />
+			</StackLayout>
 			
 		</StackLayout>
 	</ContentPage.Content>

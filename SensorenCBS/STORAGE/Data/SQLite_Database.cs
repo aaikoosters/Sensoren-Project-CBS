@@ -104,22 +104,25 @@ namespace SensorenCBS
 
 			//return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY Level DESC");
 
-			return database.QueryAsync<LocationDB>("SELECT count(*) as aantal FROM [LocationDB] GROUP BY idBSSID");
+			return database.QueryAsync<LocationDB>("SELECT * FROM [LocationDB] ORDER BY idBSSID DESC");
 			
 			
 		}
 
-		public Task<int> CountWifiWithLocatie()
+		public Task<int> CountSavedBSSID()
 		{
-			//return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
-			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID]");// WHERE [BSSID] like '" + bssid + "';");
 			return database.Table<NearbyBSSID>().Take(1).CountAsync();
-			
+			//return database.Table<NearbyBSSID>().Take(1)
 		}
 
 		public Task<List<NearbyBSSID>> GetSavedBSSIDLevel(int level)
 		{
 			return database.QueryAsync<NearbyBSSID>(string.Format("SELECT level FROM [NearbyBSSID] WHERE [BSSID] like '{0}' LIMIT 1", level));
+		}
+
+		public Task<int> CountedAccesWithGPS()
+		{
+			return database.Table<LocationDB>().Take(1).CountAsync();
 		}
 
 		public Task<List<NearbyBSSID>> CheckIfBSSIDIsAlreadySavedAndHasLevel(string bssid)

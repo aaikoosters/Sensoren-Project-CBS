@@ -9,6 +9,10 @@ namespace SensorenCBS
 		public ConnectionPage()
 		{
 			InitializeComponent();
+			if (Device.OS == TargetPlatform.iOS)
+			{
+				btnNearby.IsVisible = false;
+			}
 		}
 
 		void btnWifi(object s, EventArgs e)
@@ -21,9 +25,7 @@ namespace SensorenCBS
 			Navigation.PushAsync(new BluetoothPage());
 		}
 
-
-		//if (TargetPlatform != OnPlatform
-		void btnNearby(object s, EventArgs e)
+		void btnNearbyClicked(object s, EventArgs e)
 		{
 			Navigation.PushAsync(new NearbyPage());
 		}

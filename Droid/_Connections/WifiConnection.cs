@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Android.Content;
 using Android.Net.Wifi;
@@ -20,7 +21,7 @@ namespace SensorenCBS.Droid
 		WifiManager _wifiManager;
 		WifiInfo _wifiInfo;
 		DateTime _now;
-		FetchingGPS fgps = new FetchingGPS();
+		FetchingGPS _fgps = new FetchingGPS();
 
 		int _size, _level;
 
@@ -29,7 +30,7 @@ namespace SensorenCBS.Droid
 		public string WifiBSSID { get; set; }
 		public int WifiFrequency { get; set; }
 		public int WifiLinkSpeed { get; set; }
-		public string WifiIpAddress { get; set; }
+		public int WifiIpAddress { get; set; }
 		public string WifiMacAddress { get; set; }
 		public int WifiNetworkId { get; set; }
 		public int WifiRssi { get; set; }
@@ -41,8 +42,6 @@ namespace SensorenCBS.Droid
 
 		/// private list to add bssids to the public stack: AllWifiBssids
 		List<string> _wifiBssids = new List<string>();
-
-
 
 		/// With this u can check the SSID from the connected WiFi
 		public void CheckWifiSSID()
@@ -67,7 +66,7 @@ namespace SensorenCBS.Droid
 			_wifiInfo = _wifiManager.ConnectionInfo;
 
 			WifiFrequency = _wifiInfo.Frequency;
-			WifiIpAddress = _wifiInfo.IpAddress.ToString();
+			WifiIpAddress = _wifiInfo.IpAddress;
 			WifiLinkSpeed = _wifiInfo.LinkSpeed;
 			WifiMacAddress = _wifiInfo.MacAddress;
 			//// the network ID, or -1 if there is no currently connected network
@@ -110,77 +109,50 @@ namespace SensorenCBS.Droid
 
 			while (_size >= 0)
 			{
-				var _giveLevel = await App.Database.CheckIfBSSIDIsAlreadySavedAndHasLevel(Results[_size].Bssid); //GetNearbyBSSID();
+				var _giveLevel = await App.Database.CheckIfBSSIDIsAlreadySavedAndHasLevel(Results[_size].Bssid);
+				// id is for saving or update DB with bssid to location
 
-				var _idOFTheBSSID = Results[_size].Bssid;
-				nearbyBS.BSSID = _idOFTheBSSID;
-				nearbyBS.SSID = Results[_size].Ssid;
-				nearbyBS.Level = Results[_size].Level;
-				nearbyBS.Frequency = Results[_size].Frequency;
-				nearbyBS.Cabilities = Results[_size].Capabilities;
-
-
-
-				if (_giveLevel.Count > 0) // update
+				/// After a random times the application crashes:
+				/// System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. Parameter name: index
+				try
 				{
-					foreach (var item in _giveLevel) { _level = item.Level; }
+					var _idOFTheBSSID = Results[_size].Bssid;
+					nearbyBS.BSSID = _idOFTheBSSID;
+					nearbyBS.SSID = Results[_size].Ssid;
+					nearbyBS.Level = Results[_size].Level;
+					nearbyBS.Frequency = Results[_size].Frequency;
+					nearbyBS.Cabilities = Results[_size].Capabilities;
 
-					if (_level > Results[_size].Level)
+					if (_giveLevel.Count > 0) // update
 					{
-						nearbyBS.TimeUpdated = _now;
-						fgps.gpsFetching(_idOFTheBSSID);
-						await App.Database.UpdateNearbyBSSID(nearbyBS);
-					} // else do nothing
+						foreach (var item in _giveLevel) { _level = item.Level; } // get the level of the using bssid
+
+						if (_level > Results[_size].Level) // if level is stronger update else nothing
+						{
+							nearbyBS.TimeUpdated = _now;
+							// update the location
+							_fgps.updateGpsFetching(_idOFTheBSSID);
+							// update the bssid to the stronger level
+							await App.Database.UpdateNearbyBSSID(nearbyBS);
+						} // else do nothing
+					}
+					else // save
+					{
+						nearbyBS.TimeFirstSaved = _now;
+						// save location with bssid
+						_fgps.SaveGpsFetching(_idOFTheBSSID);
+						// save bssid
+						await App.Database.SaveNearbyBSSID(nearbyBS);
+					}
+					_size--;
+
 				}
-				else // save
+				catch (ArgumentOutOfRangeException e)
 				{
-					nearbyBS.TimeFirstSaved = _now;
-					updateWifiWithGPS(_idOFTheBSSID);
-					await App.Database.SaveNearbyBSSID(nearbyBS);
+					Debug.WriteLine("error e: " + e);
 				}
-				_size--;
 			}
-		}
-
-		Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
-
-		async void updateWifiWithGPS(string idOFTheBSSID)
-		{
-			object BindingContext = new LocationDB();
-			var _GPSFetchUpdate = (LocationDB)BindingContext;
-
-			if (locator.IsGeolocationEnabled)
-			{
-				locator.DesiredAccuracy = 1000;
-				
-				var _position = await locator.GetPositionAsync();
-				_GPSFetchUpdate.Time = DateTime.Now;
-				_GPSFetchUpdate.Longitude = _position.Longitude;
-				_GPSFetchUpdate.Latitude = _position.Latitude;
-				_GPSFetchUpdate.Accuracy = _position.Accuracy;
-				_GPSFetchUpdate.idBSSID = idOFTheBSSID;
-				await App.Database.UpdateGPS(_GPSFetchUpdate);
-			}
-		}
-
-		async void saveWifiWithGPS(string idOFTheBSSID)
-		{
-			object BindingContext = new LocationDB();
-			var _GPSFetchSave = (LocationDB)BindingContext;
-
-			if (locator.IsGeolocationEnabled)
-			{
-				var _position = await locator.GetPositionAsync();
-				_GPSFetchSave.Time = DateTime.Now;
-				_GPSFetchSave.Longitude = _position.Longitude;
-				_GPSFetchSave.Latitude = _position.Latitude;
-				_GPSFetchSave.Accuracy = _position.Accuracy;
-				_GPSFetchSave.idBSSID = idOFTheBSSID;
-				await App.Database.saveGPS(_GPSFetchSave);
-
-			}
-
-		}
+		} // while
 	}
 }
 

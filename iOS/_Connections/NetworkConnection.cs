@@ -149,29 +149,15 @@ namespace SensorenCBS.iOS
 				var bssid = dict[CaptiveNetwork.NetworkInfoKeyBSSID];
 				var ssid = dict[CaptiveNetwork.NetworkInfoKeySSID];
 				var ssidD = dict[CaptiveNetwork.NetworkInfoKeySSIDData];
-				//var ssiddat = dict [CaptiveNetwork.NetworkInfoKeySSIDData];
 
 				if (withMacAddress)
-					return ssid + ", " + bssid+ ", " + ssidD;
+					return string.Format("SSID: {0}\nBSSID: {1}\nSSIDData: {2}", ssid, bssid, ssidD);
 				return ssid.ToString();
 
-
-				//foreach (string intf in CaptiveNetwork.GetSupportedInterfaces()) {
-				//NSDictionary dict2;
-				//CaptiveNetwork.TryCopyCurrentNetworkInfo (intf, out dict2);
-
-				////if (status == StatusCode.NoKey)
-				////	return "";
-
-				//var bssid2 = dict [CaptiveNetwork.NetworkInfoKeyBSSID];
-				//var ssid2 = dict [CaptiveNetwork.NetworkInfoKeySSID];
-				//var ssiddat2 = dict [CaptiveNetwork.NetworkInfoKeySSIDData];
-				//}
-			
 			}
 			catch
 			{
-				return "";
+				return "No connection available";
 			}
 		}
 

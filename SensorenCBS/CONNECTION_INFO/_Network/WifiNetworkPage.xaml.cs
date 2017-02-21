@@ -7,14 +7,13 @@ namespace SensorenCBS
 {
 	public partial class WifiNetworkPage : ContentPage
 	{
-		Wifi wifi;
-		DateTime timeNow;
+		Wifi _wifi;
+		DateTime _timeNow;
 
 		public WifiNetworkPage()
 		{
 			InitializeComponent();
-			wifi = new Wifi();
-			//BindingContext = new Network_ssid();
+			_wifi = new Wifi();
 
 			checkWifiInformation();
 			Device.StartTimer(new TimeSpan(0, 0, 5), () =>
@@ -22,7 +21,7 @@ namespace SensorenCBS
 				InitializeComponent();
 				checkWifiInformation();
 				fetchNearbyWifi();
-				printNearbyBSSID();
+				CountSavedItems();
 				return true;
 
 			});
@@ -31,87 +30,59 @@ namespace SensorenCBS
 
 		void checkWifiInformation()
 		{
-			BindingContext = new Network_ssid();
 			saveSSID();
-			ophalen();
+			//ophalen();
 
-			//lblTime.Text = DateTime.Now.ToString();
-			lblSSID.Text += wifi.wifiSSID();
-			lblBSSID.Text += wifi.wifiBSSID();
-			lblFreq.Text += wifi.wifiFrequency() + "MHz";
-			lblLSP.Text += wifi.wifiLinkSpeed() + "Mbps";
-			lblIpA.Text += wifi.wifiIpAddress() + "";
-			lblMacA.Text += wifi.wifiMacAddress();
-			lblNetI.Text += wifi.wifiNetworkId() + "";
-			lblRssi.Text += wifi.wifiRssi() + "dBm";
-
-			//lblAllBSSID.Text = "\n"+ wifi.wifiAllBSSID();
-
-			foreach (var bs in wifi.wifiAllBSSID())
-			{
-				//lblAllBSSID.Text += "\n" + bs; 
-			}
-
+			lblTime.Text = DateTime.Now.ToString();
+			lblSSID.Text += _wifi.wifiSSID();
+			lblBSSID.Text += _wifi.wifiBSSID();
+			lblFreq.Text += _wifi.wifiFrequency() + "MHz";
+			lblLSP.Text += _wifi.wifiLinkSpeed() + "Mbps";
+			lblIpA.Text += _wifi.wifiIpAddress() + "";
+			lblMacA.Text += _wifi.wifiMacAddress();
+			lblNetI.Text += _wifi.wifiNetworkId() + "";
+			lblRssi.Text += _wifi.wifiRssi() + "dBm";
 		}
 
 		void saveSSID()
 		{
+			BindingContext = new Network_ssid();
 			var networkSSID = (Network_ssid)BindingContext;
-			networkSSID.Ssid = wifi.wifiSSID();
-			networkSSID.Bssid = wifi.wifiBSSID();
-			networkSSID.Frequency = wifi.wifiFrequency();
-			networkSSID.IP = wifi.wifiIpAddress();
-			networkSSID.MAC = wifi.wifiMacAddress();
-			networkSSID.NetworkID = wifi.wifiNetworkId();
-			networkSSID.Rssi = wifi.wifiRssi();
+			networkSSID.Ssid = _wifi.wifiSSID();
+			networkSSID.Bssid = _wifi.wifiBSSID();
+			networkSSID.Frequency = _wifi.wifiFrequency();
+			networkSSID.IP = _wifi.wifiIpAddress();
+			networkSSID.MAC = _wifi.wifiMacAddress();
+			networkSSID.NetworkID = _wifi.wifiNetworkId();
+			networkSSID.Rssi = _wifi.wifiRssi();
 			App.Database.SaveSsidAsyncNetwork(networkSSID);
 		}
 
 		void fetchNearbyWifi()
 		{
-			timeNow = DateTime.Now;
+			_timeNow = DateTime.Now;
 			/// call wifi class who calls the Interface
 			/// The working function can you find in WifiConnection.droid of .ios
-			wifi.FetchNearbyWifi(timeNow);
+			_wifi.FetchNearbyBSSID(_timeNow);
 
 
 		}
 
-		async void printNearbyBSSID()
+		async void CountSavedItems()
 		{
 			var giveNearby = await App.Database.WifiWithLocatie(); //GetNearbyBSSID();
-			lblAllBSSID.Text = "";
-			foreach (var item in giveNearby)
-			{
-				// fout bij te veel waardes!!!
-				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
-				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}\n", item.idBSSID, item.Latitude, item.Longitude));
-				
+			var _CountedAccesPoints = await App.Database.CountSavedBSSID();
+			var _CountedAccesWithGPS = await App.Database.CountedAccesWithGPS();
 
-				Debug.WriteLine(string.Format("{0}, {1:0.0000000}, {2:0.0000000}, {3}", item.idBSSID, item.Latitude, item.Longitude, item.IDlocation));
-				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
-			}
-			Debug.WriteLine("------------------------------");
-		}
+			lblCountedAccesPoints.Text = string.Format("Saved Acces points: {0}", _CountedAccesPoints);
+			lblCountedAccesWithGPS.Text = string.Format("Saved Acces Point with GPS: {0}", _CountedAccesWithGPS);
 
-		async void ophalen()
-		{
-			//var turing = await App.Database.GetCountedSSID();
-			var countNearby = await App.Database.CountWifiWithLocatie();
-			
-			lblTime.Text = "All BSSIDS's: " + countNearby;
-
-			//var giveNearbyNetwork = await App.Database.GetNearbyBSSID(timeNow);
-			//var giveNearby = await App.Database.GetItemsNotDoneAsync(); //GetNearbyBSSID();
-			//lblAllBSSID.Text = "";
 			//foreach (var item in giveNearby)
 			//{
-			//	// fout bij te veel waardes!!!
-			//	lblAllBSSID.Text += ("\n" + item.BSSID + ", " + item.Level + ", " + item.TimeFirstSaved + ", " + item.TimeUpdated);
-				
+			//	Debug.WriteLine(string.Format("{0}, {1:0.0000000}, {2:0.0000000}, {3}", item.idBSSID, item.Latitude, item.Longitude, item.IDlocation));
 			//	//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			//}
-			//lblPickedUp.Text = "Times picked up: " + turing.ToString();
+			//Debug.WriteLine("------------------------------");
 		}
 	}
 }
