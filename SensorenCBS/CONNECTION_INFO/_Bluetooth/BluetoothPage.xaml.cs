@@ -4,15 +4,20 @@ using System.Diagnostics;
 using System.Collections;
 using Plugin.BLE;
 using Xamarin.Forms;
+using Plugin.BLE.Abstractions.Extensions;
+using Plugin.BLE.Abstractions.Contracts;
 
 namespace SensorenCBS
 {
 	public partial class BluetoothPage : ContentPage
 	{
 		//Bluetooth _bluetooth = new Bluetooth();
-		Plugin.BLE.Abstractions.Contracts.IBluetoothLE _ble;
-		Plugin.BLE.Abstractions.Contracts.IAdapter _adapter;
+		IBluetoothLE _ble;
+		IAdapter _adapter;
+		IDevice devics;
 		List<string> _deviceList;
+		List<IDevice> deviceList = new List<IDevice>();
+		
 
 
 		public BluetoothPage()
@@ -20,8 +25,9 @@ namespace SensorenCBS
 			InitializeComponent();
 			_ble = CrossBluetoothLE.Current;
 			_adapter = CrossBluetoothLE.Current.Adapter;
-			_deviceList = new List<string>();
-					
+
+
+
 		}
 
 
@@ -31,7 +37,7 @@ namespace SensorenCBS
 
 		async void services()
 		{
-			
+
 		}
 
 		void StateOrChanged()
@@ -40,27 +46,19 @@ namespace SensorenCBS
 			_ble.StateChanged += (sender, e) =>
 			{
 				Debug.WriteLine($"The bluetooth state changed to {e.NewState}");
-				lblState.Text = state.ToString();
+				lblState.Text = "Bluetooth is: " + e.NewState.ToString();
 			};
-			lblState.Text = state.ToString();
+			lblState.Text = "Bluetooth is: " + state.ToString();
+			foreach (var i in deviceList){
+				Debug.WriteLine("Deviec in in list: " + i);
+			}
 
 		}
 
 
 		void scanForDevices()
 		{
-			_adapter.StartScanningForDevicesAsync();
-		
-			//await _adapter.StartScanningForDevicesAsync();
-			
-			//_adapter.DeviceDiscovered += (s, a) =>
-			//{
-			//	_deviceList.Add(a.Device.ToString());
-			//	Debug.WriteLine($"The bluetooth discoverd {a.Device}");
-
-
-			//};
-
+			var device = _adapter.DiscoverDeviceAsync(dev => dev.Name.Equals("Aaik"));
 		}
 
 	}
