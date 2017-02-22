@@ -1,47 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Xamarin.Forms;
 
 namespace SensorenCBS
 {
 	public partial class NetworkPage : ContentPage
 	{
-		Network network = new Network();
+		Network _network;
 
 		public NetworkPage()
 		{
 			InitializeComponent();
-			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+			_network = new Network();
+
+
+			if (Device.OS == TargetPlatform.iOS)
 			{
-				isNetworkConnected();
-				networkConnectionType();
-				extraConnectionInfo();
-				connectionState();
-				return false;
-			});
+				Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+				{
+					getSSID();
+					return false;
+				});
+
+				lblConnState.IsVisible = false;
+				lblConnDetailState.IsVisible = false;
+				//lblStat.IsVisible = false;
+				lblconnType.IsVisible = false;
+				lblextConnInfo.IsVisible = false;
+				btnWifi.IsVisible = false;
+
+
+			}
+			else { 
+				Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+				{
+					connectionInformation();
+					return false;
+				});
+			}
+
 		}
 
-		void connectionState()
+		void connectionInformation()
 		{
-			lblConnState.Text = network.connectionStateInfo();
-			lblConnDetailState.Text = network.connectionDetailStateInfo();
+			lblConnState.Text = _network.connectionStateInfo();
+			lblConnDetailState.Text = _network.connectionDetailStateInfo();
+			lblStat.Text = _network.connected();
+			lblconnType.Text = _network.connectionType();
+			lblextConnInfo.Text = _network.connectionExtraInfo();
 		}
 
-		void isNetworkConnected()
+		void getSSID()
 		{
-			lblStat.Text = network.connected();
+			var ssidback = _network.getSSID();
+			lblStat.Text = ssidback;
 		}
 
-		void networkConnectionType()
+		void btnWifiClicked(object s, EventArgs e)
 		{
-			lblconnType.Text = network.connectionType();
+			Navigation.PushAsync(new WifiNetworkPage());
 		}
-
-		void extraConnectionInfo()
-		{
-			lblextConnInfo.Text = network.connectionExtraInfo();
-		}
-
 	}
 }

@@ -7,23 +7,26 @@ namespace SensorenCBS
 {
 	public class CompasMotionDetect
 	{
-		Label _label;
-		public CompasMotionDetect(Label label, SensorValueChangedEventArgs svca)
+		public string orCompas { get; set; }
+		
+		public CompasMotionDetect(SensorValueChangedEventArgs svca)
 		{
-			_label = label;
+			// start processing compass
 			CompasDetect(svca);
 		}
 
 		void CompasDetect(SensorValueChangedEventArgs b)
 		{
-			var or = (b.Value.Value);
-			_label.Text = heading(or);
+			// set variable
+			var _compasDegrees = (b.Value.Value);
+			// set label text with the heading and the grades
+			orCompas = heading(_compasDegrees);
 		}
 
-		string heading(double? or)
+		string heading(double? _compasDegrees)
 		{
-			string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
-			return "Compas\n" + caridnals[(int)Math.Round(((double)or * 10 % 3600) / 225)] + ", " + string.Format("{0:0}", or);
+			string[] _caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
+			return _caridnals[(int)Math.Round(((double)_compasDegrees * 10 % 3600) / 225)] + ", " + string.Format("{0:0}", _compasDegrees);
 		}
 	}
 }

@@ -1,8 +1,4 @@
-﻿using System;
-
-using Xamarin.Forms;
-
-namespace SensorenCBS
+﻿namespace SensorenCBS
 {
 	public interface IBluetoothConnection
 	{

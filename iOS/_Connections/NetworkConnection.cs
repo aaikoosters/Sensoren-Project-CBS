@@ -3,7 +3,10 @@ using System.Net;
 using SystemConfiguration;
 using CoreFoundation;
 using Xamarin.Forms;
+//using SensorenCBS.iOS;
+using System.Collections.Generic;
 using SensorenCBS.iOS;
+using Foundation;
 
 [assembly: Dependency(typeof(NetworkConnection))]
 namespace SensorenCBS.iOS
@@ -11,36 +14,28 @@ namespace SensorenCBS.iOS
 	public class NetworkConnection : INetworkConnection
 	{
 
-		public bool IsConnected { get; set; }
-
 		public string ConnectionType { get; set; }
+		public string ExtraConnectionInfo { get; set; }
 		public string ConnectionStateInfo { get; set; }
+		public string ConnectionDetailStateInfo { get; set; }
 
-		public string ExtraConnectionInfo
+		public bool IsConnected
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
+			get; set;
 		}
 
-		public string ConnectionDetailStateInfo
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-		}
-
+		/*        public NetworkConnection()
+				{
+					InternetConnectionStatus();
+					}*/
+		//public bool IsConnected { get; set; }
 		public void CheckNetworkConnection()
 		{
 			InternetConnectionStatus();
 		}
 
-		// Checking if there is a connection
 		private void UpdateNetworkStatus()
 		{
-
 			if (InternetConnectionStatus())
 			{
 				IsConnected = true;
@@ -69,7 +64,7 @@ namespace SensorenCBS.iOS
 			if (defaultRouteReachability == null)
 			{
 				defaultRouteReachability = new NetworkReachability(new IPAddress(0));
-				//defaultRouteReachability.SetCallback(OnChange);
+				defaultRouteReachability.SetNotification(OnChange);
 				defaultRouteReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
 			}
 			if (!defaultRouteReachability.TryGetFlags(out flags))
@@ -83,7 +78,7 @@ namespace SensorenCBS.iOS
 			if (adHocWiFiNetworkReachability == null)
 			{
 				adHocWiFiNetworkReachability = new NetworkReachability(new IPAddress(new byte[] { 169, 254, 0, 0 }));
-				//adHocWiFiNetworkReachability.SetCallback(OnChange);
+				adHocWiFiNetworkReachability.SetNotification(OnChange);
 				adHocWiFiNetworkReachability.Schedule(CFRunLoop.Current, CFRunLoop.ModeDefault);
 			}
 
@@ -109,7 +104,6 @@ namespace SensorenCBS.iOS
 			return isReachable && noConnectionRequired;
 		}
 
-		// GPS network connection?????
 		private bool InternetConnectionStatus()
 		{
 			NetworkReachabilityFlags flags;
@@ -130,7 +124,6 @@ namespace SensorenCBS.iOS
 			return true;
 		}
 
-		// Checking if there is a WIFI connection
 		private bool LocalWifiConnectionStatus()
 		{
 			NetworkReachabilityFlags flags;
@@ -142,28 +135,51 @@ namespace SensorenCBS.iOS
 			return false;
 		}
 
+		public string GetSSID()
+		{
+			bool withMacAddress = true;
+			try
+			{
+				NSDictionary dict;
+				var status = CaptiveNetwork.TryCopyCurrentNetworkInfo("en0", out dict);
+
+				if (status == StatusCode.NoKey)
+					return "";
+
+				var bssid = dict[CaptiveNetwork.NetworkInfoKeyBSSID];
+				var ssid = dict[CaptiveNetwork.NetworkInfoKeySSID];
+				var ssidD = dict[CaptiveNetwork.NetworkInfoKeySSIDData];
+
+				if (withMacAddress)
+					return string.Format("SSID: {0}\nBSSID: {1}\nSSIDData: {2}", ssid, bssid, ssidD);
+				return ssid.ToString();
+
+			}
+			catch
+			{
+				return "No connection available";
+			}
+		}
+
+
 		public void CheckNetworkConnectionType()
 		{
-			if (IsConnected)
-			{
-
-				// do something like checking the connectionType
-			}
+			//throw new NotImplementedException();
 		}
 
 		public void CheckExtraConnectionInfo()
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		public void CheckConnectionState()
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		public void CheckConnectionDetailState()
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 	}
 }

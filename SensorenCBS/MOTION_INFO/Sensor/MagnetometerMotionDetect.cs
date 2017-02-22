@@ -1,5 +1,4 @@
-﻿using System;
-using DeviceMotion.Plugin;
+﻿using DeviceMotion.Plugin;
 using DeviceMotion.Plugin.Abstractions;
 using Xamarin.Forms;
 
@@ -7,13 +6,17 @@ namespace SensorenCBS
 {
 	public class MagnetometerMotionDetect
 	{
-		Label _label;
 		MotionSensorDelay motionDelay;
+		public string xMagn { get; set; }
+		public string yMagn { get; set; }
+		public string zMagn { get; set; }
 
-		public MagnetometerMotionDetect(Label label, SensorValueChangedEventArgs svca)
+
+		public MagnetometerMotionDetect(SensorValueChangedEventArgs svca)
 		{
-			_label = label;
+			// set delay
 			motionDelay = MotionSensorDelay.Default;
+			// start processing Magnetometer
 			MagnetometerDetect(svca);
 
 		}
@@ -21,12 +24,9 @@ namespace SensorenCBS
 		public void MagnetometerDetect(SensorValueChangedEventArgs b)
 		{
 			CrossDeviceMotion.Current.Start(MotionSensorType.Magnetometer, motionDelay);
-
-			var xG = ((float)((MotionVector)b.Value).X).ToString("N1");
-			var yG = ((float)((MotionVector)b.Value).Y).ToString("N1");
-			var zG = ((float)((MotionVector)b.Value).Z).ToString("N1");
-			_label.Text = string.Format("Magnetometer\nX: {0}\nY: {1}\nZ: {2}", xG, yG, zG);
-
+			xMagn = ((float)((MotionVector)b.Value).X).ToString("N1");
+			yMagn = ((float)((MotionVector)b.Value).Y).ToString("N1");
+			zMagn = ((float)((MotionVector)b.Value).Z).ToString("N1");
 		}
 	}
 }

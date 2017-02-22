@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Xamarin.Forms;
 
@@ -10,6 +9,10 @@ namespace SensorenCBS
 		public ConnectionPage()
 		{
 			InitializeComponent();
+			if (Device.OS == TargetPlatform.iOS)
+			{
+				btnNearby.IsVisible = false;
+			}
 		}
 
 		void btnWifi(object s, EventArgs e)
@@ -20,6 +23,11 @@ namespace SensorenCBS
 		void btnBlue(object s, EventArgs e)
 		{
 			Navigation.PushAsync(new BluetoothPage());
+		}
+
+		void btnNearbyClicked(object s, EventArgs e)
+		{
+			Navigation.PushAsync(new NearbyPage());
 		}
 	}
 }

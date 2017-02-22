@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace SensorenCBS
@@ -6,17 +6,11 @@ namespace SensorenCBS
 	public class Network
 	{
 		INetworkConnection networkConnection = DependencyService.Get<INetworkConnection>();
-		//INetworkConnection ;
-
-		public Network()
-		{
-
-		}
 
 		public string connected()
 		{
 			networkConnection.CheckNetworkConnection();
-			
+
 			var networkConnected = networkConnection.IsConnected;
 			var networkStatus = networkConnected ? "You are Connected" : "You are not Connected";
 			return networkStatus;
@@ -25,7 +19,7 @@ namespace SensorenCBS
 		public string connectionType()
 		{
 			networkConnection.CheckNetworkConnectionType();
-			
+
 			var networkConnType = networkConnection.ConnectionType;
 			var networktype = networkConnType;
 			return networktype;
@@ -34,7 +28,7 @@ namespace SensorenCBS
 		public string connectionExtraInfo()
 		{
 			networkConnection.CheckExtraConnectionInfo();
-			
+
 			var networkExtraInfo = networkConnection.ExtraConnectionInfo;
 			var extraInfo = networkExtraInfo;
 			return extraInfo;
@@ -56,6 +50,12 @@ namespace SensorenCBS
 			var networkDetailStateInfo = networkConnection.ConnectionDetailStateInfo;
 			var detailStateInfo = networkDetailStateInfo;
 			return detailStateInfo;
+		}
+
+		public string getSSID()
+		{
+			return networkConnection.GetSSID();
+
 		}
 	}
 }

@@ -6,13 +6,12 @@ namespace SensorenCBS
 {
 	public partial class BluetoothPage : ContentPage
 	{
-		Bluetooth bluetooth = new Bluetooth();
+		Bluetooth _bluetooth = new Bluetooth();
 
 		public BluetoothPage()
 		{
 			InitializeComponent();
 			startMethods();
-
 		}
 
 		void startMethods()
@@ -26,23 +25,22 @@ namespace SensorenCBS
 
 		void btnConnOn(object s, EventArgs e)
 		{
-			bluetooth.changeState(true);
+			_bluetooth.changeState(true);
 			startMethods();
 		}
 
 		void btnConnOff(object s, EventArgs e)
 		{
-			bluetooth.changeState(false);
+			_bluetooth.changeState(false);
 			startMethods();
-
 		}
 
 		void bluetoothInfo()
 		{
-			lblAbled.Text = bluetooth.isEnabled();
-			lblAddress.Text = bluetooth.bluetoothAddress();
-			lblState.Text = bluetooth.bluetoothState();
-			lblName.Text = bluetooth.bluetoothName();
+			lblAbled.Text = _bluetooth.isEnabled();
+			lblAddress.Text = _bluetooth.bluetoothAddress();
+			lblState.Text = _bluetooth.bluetoothState();
+			lblName.Text = _bluetooth.bluetoothName();
 		}
 	}
 }
