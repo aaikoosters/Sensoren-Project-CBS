@@ -30,7 +30,7 @@ namespace SensorenCBS
 		async void printNearbyBSSID()
 		{
 			//var giveNearby = await App.Database.WifiWithLocatie(); //GetNearbyBSSID();
-			//lblAllBSSID.Text = "";
+			lblAllBSSID.Text = "";
 			//foreach (var item in giveNearby)
 			{
 				// fout bij te veel waardes!!!
