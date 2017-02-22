@@ -30,7 +30,7 @@ namespace SensorenCBS
 
 
 			}
-			else { 
+			else {
 				Device.StartTimer(new TimeSpan(0, 0, 2), () =>
 				{
 					connectionInformation();

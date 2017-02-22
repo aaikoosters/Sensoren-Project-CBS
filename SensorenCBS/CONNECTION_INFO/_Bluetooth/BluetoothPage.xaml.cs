@@ -1,46 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Collections;
+using Plugin.BLE;
 using Xamarin.Forms;
 
 namespace SensorenCBS
 {
 	public partial class BluetoothPage : ContentPage
 	{
-		Bluetooth _bluetooth = new Bluetooth();
+		//Bluetooth _bluetooth = new Bluetooth();
+		Plugin.BLE.Abstractions.Contracts.IBluetoothLE _ble;
+		Plugin.BLE.Abstractions.Contracts.IAdapter _adapter;
+		List<string> _deviceList;
+
 
 		public BluetoothPage()
 		{
 			InitializeComponent();
-			startMethods();
+			_ble = CrossBluetoothLE.Current;
+			_adapter = CrossBluetoothLE.Current.Adapter;
+			_deviceList = new List<string>();
+					
 		}
 
-		void startMethods()
+
+		void btnState(object s, EventArgs e) { StateOrChanged(); }
+		void btnScan(object s, EventArgs e) { scanForDevices(); }
+		void btnServices(object s, EventArgs e) { services(); }
+
+		async void services()
 		{
-			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
+			
+		}
+
+		void StateOrChanged()
+		{
+			var state = _ble.State;
+			_ble.StateChanged += (sender, e) =>
 			{
-				bluetoothInfo();
-				return false;
-			});
+				Debug.WriteLine($"The bluetooth state changed to {e.NewState}");
+				lblState.Text = state.ToString();
+			};
+			lblState.Text = state.ToString();
+
 		}
 
-		void btnConnOn(object s, EventArgs e)
+
+		void scanForDevices()
 		{
-			_bluetooth.changeState(true);
-			startMethods();
+			_adapter.StartScanningForDevicesAsync();
+		
+			//await _adapter.StartScanningForDevicesAsync();
+			
+			//_adapter.DeviceDiscovered += (s, a) =>
+			//{
+			//	_deviceList.Add(a.Device.ToString());
+			//	Debug.WriteLine($"The bluetooth discoverd {a.Device}");
+
+
+			//};
+
 		}
 
-		void btnConnOff(object s, EventArgs e)
-		{
-			_bluetooth.changeState(false);
-			startMethods();
-		}
-
-		void bluetoothInfo()
-		{
-			lblAbled.Text = _bluetooth.isEnabled();
-			lblAddress.Text = _bluetooth.bluetoothAddress();
-			lblState.Text = _bluetooth.bluetoothState();
-			lblName.Text = _bluetooth.bluetoothName();
-		}
 	}
 }

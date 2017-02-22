@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-	<string>SensorenCBS.iOS</string>
-	<key>CFBundleName</key>
-	<string>SensorenCBS.iOS</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.sensorencbs.iOS</string>
 	<key>CFBundleShortVersionString</key>
@@ -50,5 +46,7 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Please allow the location services</string>
+	<key>CFBundleName</key>
+	<string>CBS</string>
 </dict>
 </plist>

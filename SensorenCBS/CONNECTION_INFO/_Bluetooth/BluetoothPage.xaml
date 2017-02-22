@@ -14,8 +14,10 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
 
-			<Button Text="Turn Bluetooth on" Clicked="btnConnOn" />
-			<Button Text="Turn Bluetooth off" Clicked="btnConnOff" />
+			<Button Text="State" Clicked="btnState" />
+<!--			<Button Text="" Clicked="btnScan" />-->
+			<Button Text="Scan for devvices" Clicked="btnScan"/>
+			
 
 			<Label Text="Fetching bluetooth Connection.." x:Name="lblAbled"/>
 			<Label Text="Fetching bluetooth Name" x:Name="lblName"/>
