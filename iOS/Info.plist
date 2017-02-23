@@ -48,5 +48,7 @@
 	<string>Please allow the location services</string>
 	<key>CFBundleName</key>
 	<string>CBS</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Please allow the bluetooth srevices for better usages</string>
 </dict>
 </plist>
