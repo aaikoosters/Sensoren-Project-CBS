@@ -22,7 +22,7 @@ namespace SensorenCBS
 		{
 			//// call the native function
 			//_wifiConnection.FetchNearbyWifi(); 
-			_wifiConnection.saveNearbyBSSID(time);
+			_wifiConnection.FetchNearbyWifi(time);
 			//_wifiConnection.
 			//return _wifiConnection.NearbyWifiList; 
 		}

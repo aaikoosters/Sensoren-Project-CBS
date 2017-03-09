@@ -1,5 +1,6 @@
 ﻿using System; using System.Collections; using System.Collections.Generic;
 using System.Diagnostics;
+<<<<<<< HEAD
 using System.Threading.Tasks; using DeviceMotion.Plugin; using DeviceMotion.Plugin.Abstractions; using Plugin.Geolocator; using Xamarin.Forms;   namespace SensorenCBS { 	public partial class InformationGPSPage : ContentPage 	{ 		FetchingGPS _fgps; 		const int _refreshTime = 20; // 10s 		double? _oldLatitude; 		double? _oldLongitude; 		//double[] totalDistance; 		List<double> _distances = new List<double>(); 		double _totalDistance; 		double _avgSpeed; 		const double EARTH_RADIUS_M = 6371e3;
 
 		public InformationGPSPage() 		{ 			 			InitializeComponent();
@@ -7,11 +8,18 @@ using System.Threading.Tasks; using DeviceMotion.Plugin; using DeviceMotion.
 			// every X seconds the device run this method again
 			Device.StartTimer(new TimeSpan(0, 0, _refreshTime), () =>
 			{ 				// start fetching GPS info 				_fgps.gpsFetching(); 				// do something with the fetched info 				gpsInfo();
+=======
+using System.Threading.Tasks; using DeviceMotion.Plugin; using DeviceMotion.Plugin.Abstractions; using Plugin.Geolocator; using Xamarin.Forms;   namespace SensorenCBS { 	public partial class InformationGPSPage : ContentPage 	{ 		FetchingGPS fgps; 		const int _refreshTime = 20; // 10s 		double? _oldLatitude; 		double? _oldLongitude; 		//double[] totalDistance; 		List<double> _distances = new List<double>(); 		double _totalDistance; 		double _avgSpeed;  		public InformationGPSPage() 		{ 			 			InitializeComponent();
+			fgps = new FetchingGPS(); 			fgps.FetchGPS();
+			// every X seconds the device run this method again
+			Device.StartTimer(new TimeSpan(0, 0, _refreshTime), () =>
+			{ 				// start fetching GPS info 				fgps.FetchGPS(); 				// do something with the fetched info 				gpsInfo();
+>>>>>>> parent of c6bce07... bossed with GPS
 				return true; 
 			}); 		}            void gpsInfo()         { 			// searching for the direction moving or device is pointing 			searchHeading(); 			var _outputString = string.Format("Time : {0}\nLat: {1}\nLong: {2}\nAccuracy: {3:0.0000}", 			                                  _fgps.time, _fgps.Latitude, _fgps.Longitude, _fgps.Accuracy); 			var _distance = GetDistanceM(_fgps.Latitude, _fgps.Longitude); 			_distances.Add(_distance); 			lblInfo.Text = _outputString;  			foreach (double _dist in _distances)
 			{ 				_totalDistance += _dist; 			} 			//_avgSpeed = (_totalDistance / (_distances.Count - 1)) / 20; 			//lblAvgSpeed.Text = "AVG Speed: " + _avgSpeed;
 			lblSpeed.Text = string.Format("Total m of movement: {0:0.00}", _totalDistance);   		}
- 		// http://damien.dennehy.me/blog/2011/01/15/haversine-algorithm-in-csharp/ 		// https://en.wikipedia.org/wiki/Haversine_formula  		public double GetDistanceM(double newLatitude, double newLongitude)
+ 		const double EARTH_RADIUS_M = 6371e3; 		// http://damien.dennehy.me/blog/2011/01/15/haversine-algorithm-in-csharp/ 		// https://en.wikipedia.org/wiki/Haversine_formula  		public double GetDistanceM(double newLatitude, double newLongitude)
 		{ 			if (_oldLatitude.HasValue && _oldLongitude.HasValue) 			{
 				double dLat = ToRad((double)(newLatitude - _oldLatitude));
 				double dLon = ToRad((double)(newLongitude - _oldLongitude)); // 2 - 1

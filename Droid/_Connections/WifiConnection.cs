@@ -20,7 +20,6 @@ namespace SensorenCBS.Droid
 		WifiManager _wifiManager;
 		WifiInfo _wifiInfo;
 		DateTime _now;
-		FetchingGPS fgps = new FetchingGPS();
 
 		int _size, _level;
 
@@ -90,7 +89,7 @@ namespace SensorenCBS.Droid
 		}
 
 		//// Fetching the native nearby Wifi Connection and save it to the database
-		public async void saveNearbyBSSID(DateTime timeSaved)
+		public async void FetchNearbyWifi(DateTime timeSaved)
 		{
 			_now = timeSaved;
 
@@ -125,10 +124,10 @@ namespace SensorenCBS.Droid
 				{
 					foreach (var item in _giveLevel) { _level = item.Level; }
 
-					if (_level > Results[_size].Level)
+					if (_level < Results[_size].Level)
 					{
 						nearbyBS.TimeUpdated = _now;
-						fgps.gpsFetching(_idOFTheBSSID);
+						updateWifiWithGPS(_idOFTheBSSID);
 						await App.Database.UpdateNearbyBSSID(nearbyBS);
 					} // else do nothing
 				}

@@ -38,7 +38,7 @@ namespace SensorenCBS
 //>>>>>>> origin/master
 			{
 				// fout bij te veel waardes!!!
-				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}", item.BSSID, item.Level, item.Frequency));
+				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}", item.BSSID, item.Level, item.Frequency));
 
 				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
