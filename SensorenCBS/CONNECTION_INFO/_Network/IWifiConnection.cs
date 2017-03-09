@@ -10,7 +10,7 @@ namespace SensorenCBS
 		string WifiBSSID { get;  }
 		int WifiFrequency { get;  }
 		int WifiLinkSpeed { get;  }
-		int WifiIpAddress { get;  }
+		string WifiIpAddress { get;  }
 		string WifiMacAddress { get;  }
 		int WifiNetworkId { get;  }
 		int WifiRssi { get;  }

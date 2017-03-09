@@ -20,6 +20,7 @@ namespace SensorenCBS
 			//var _fetchGPS = (LocationDB)BindingContext;
 
 			locator.DesiredAccuracy = DefaultAccurancy;
+
 			if (locator.IsGeolocationEnabled)
 			{
 				var _position = await locator.GetPositionAsync();
@@ -30,12 +31,13 @@ namespace SensorenCBS
 			}
 		}
 
-		public async void SaveGpsFetching(string idBSSID)
+		public async void gpsFetching(string idBSSID)
 		{
 			object BindingContext = new LocationDB();
 			var _fetchGPS = (LocationDB)BindingContext;
 
 			locator.DesiredAccuracy = DefaultAccurancy;
+
 			if (locator.IsGeolocationEnabled)
 			{
 				var _position = await locator.GetPositionAsync();
@@ -45,28 +47,9 @@ namespace SensorenCBS
 				_fetchGPS.Accuracy = _position.Accuracy;
 				_fetchGPS.idBSSID = idBSSID;
 				await App.Database.saveGPS(_fetchGPS);
+				//Longitude = 
 			}
 		}
-
-		public async void updateGpsFetching(string idBSSID)
-		{
-			object BindingContext = new LocationDB();
-			var _fetchGPS = (LocationDB)BindingContext;
-
-			locator.DesiredAccuracy = DefaultAccurancy;
-			if (locator.IsGeolocationEnabled)
-			{
-				var _position = await locator.GetPositionAsync();
-				_fetchGPS.Time = DateTime.Now;
-				_fetchGPS.Longitude = _position.Longitude;
-				_fetchGPS.Latitude = _position.Latitude;
-				_fetchGPS.Accuracy = _position.Accuracy;
-				_fetchGPS.idBSSID = idBSSID;
-				await App.Database.saveGPS(_fetchGPS);
-			}
-		}
-
-
 
 	}
 }

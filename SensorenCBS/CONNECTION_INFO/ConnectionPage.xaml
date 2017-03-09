@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:local="clr-namespace:SensorenCBS" 
-		x:Class="SensorenCBS.ConnectionPage"
-		Title="Connections">
+		x:Class="SensorenCBS.ConnectionPage">
 
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
@@ -16,7 +15,8 @@
 
 			<Button Text="WiFi Information" Clicked="btnWifi"/>
 			<Button Text="Bluetooth Information" Clicked="btnBlue"/>
-			<Button Text="Nearby Information" Clicked="btnNearbyClicked" x:Name="btnNearby" />
+			<Button Text="Nearby Information" Clicked="btnNearby" />
+			<Label Text="All BSSID: " x:Name="lblAllBSSID" />
 
 		</StackLayout>
 	</ContentPage.Content>

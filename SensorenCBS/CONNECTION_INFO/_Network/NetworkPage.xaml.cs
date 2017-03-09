@@ -1,61 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using Xamarin.Forms;
 
 namespace SensorenCBS
 {
 	public partial class NetworkPage : ContentPage
 	{
-		Network _network;
+		Network network;
+		//bool isConnected;
+		string type;
 
 		public NetworkPage()
 		{
 			InitializeComponent();
-			_network = new Network();
+			network = new Network();
 
-
-			if (Device.OS == TargetPlatform.iOS)
+			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
 			{
-				Device.StartTimer(new TimeSpan(0, 0, 2), () =>
-				{
+				isNetworkConnected();
+				networkConnectionType();
+				extraConnectionInfo();
+				connectionState();
+				if(Device.OS == TargetPlatform.iOS)
 					getSSID();
-					return false;
-				});
+				return false;
+			});
 
-				lblConnState.IsVisible = false;
-				lblConnDetailState.IsVisible = false;
-				//lblStat.IsVisible = false;
-				lblconnType.IsVisible = false;
-				lblextConnInfo.IsVisible = false;
-				btnWifi.IsVisible = false;
-
-
-			}
-			else { 
-				Device.StartTimer(new TimeSpan(0, 0, 2), () =>
-				{
-					connectionInformation();
-					return false;
-				});
-			}
 
 		}
 
-		void connectionInformation()
+		void connectionState()
 		{
-			lblConnState.Text = _network.connectionStateInfo();
-			lblConnDetailState.Text = _network.connectionDetailStateInfo();
-			lblStat.Text = _network.connected();
-			lblconnType.Text = _network.connectionType();
-			lblextConnInfo.Text = _network.connectionExtraInfo();
+			lblConnState.Text = network.connectionStateInfo();
+			lblConnDetailState.Text = network.connectionDetailStateInfo();
+		}
+
+		void isNetworkConnected()
+		{
+			
+			lblStat.Text = network.connected();
+		}
+
+		void networkConnectionType()
+		{
+			type = network.connectionType();
+			lblconnType.Text = type;
+
 		}
 
 		void getSSID()
 		{
-			var ssidback = _network.getSSID();
-			lblStat.Text = ssidback;
+			var ssidback = network.getSSID();
+			lblconnType.Text = ssidback;
 		}
 
-		void btnWifiClicked(object s, EventArgs e)
+		void extraConnectionInfo()
+		{
+			lblextConnInfo.Text = network.connectionExtraInfo();
+		}
+
+		void btnWifi(object s, EventArgs e)
 		{
 			Navigation.PushAsync(new WifiNetworkPage());
 		}

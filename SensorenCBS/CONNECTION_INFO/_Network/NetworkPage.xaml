@@ -2,8 +2,7 @@
 <ContentPage 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="SensorenCBS.NetworkPage"
-		Title="Connection Info">
+		x:Class="SensorenCBS.NetworkPage">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 10, 20, 20"
@@ -20,7 +19,20 @@
 			<Label Text="Fetching Connection State.." x:Name="lblConnState"/>
 			<Label Text="Fetching Connection Detail State.." x:Name="lblConnDetailState"/>
 
-			<Button Text="Wifi information" Clicked="btnWifiClicked" x:Name="btnWifi"/>
+			<Button Text="Wifi information" x:Name="btnWifiInformation" Clicked="btnWifi" />
+			<ListView x:Name="listAvailable">
+			    <ListView.ItemTemplate>
+     				<DataTemplate>
+       					<TextCell Text="{Binding DisplayName}" />
+      				</DataTemplate>
+    			</ListView.ItemTemplate>
+  			</ListView>
+
+			
+			
+			
+			
+			
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

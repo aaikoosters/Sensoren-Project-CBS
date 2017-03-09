@@ -2,9 +2,7 @@
 <ContentPage 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="SensorenCBS.WifiNetworkPage"
-		Title="WiFi Info">
-	
+		x:Class="SensorenCBS.WifiNetworkPage">
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 10, 20, 20"
@@ -15,7 +13,7 @@
 	<ContentPage.Content>
 		<ScrollView >
 		<StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="10">
-
+<!--			<StackLayout>-->
 			<Label Text="Time: " x:Name="lblTime" />
 			<Label Text="SSID: " x:Name="lblSSID" />
 			<Label Text="BSSID: " x:Name="lblBSSID" />
@@ -25,9 +23,9 @@
 			<Label Text="MAC Address: " x:Name="lblMacA" />
 			<Label Text="Network ID: " x:Name="lblNetI" />
 			<Label Text="Rssi: " x:Name="lblRssi" />
-			<Label x:Name="lblCountedAccesPoints" />
-			<Label x:Name="lblCountedAccesWithGPS" />
-				
+			<Label Text="All BSSID: " x:Name="lblAllBSSID" />
+			
+
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

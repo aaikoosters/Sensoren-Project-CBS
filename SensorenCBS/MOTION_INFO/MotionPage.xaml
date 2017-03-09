@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		xmlns:local="clr-namespace:SensorenCBS" 
-		x:Class="SensorenCBS.MotionPage"
-		Title="Motion services">
+		x:Class="SensorenCBS.MotionPage">
 
 	<ContentPage.Padding>
 		<OnPlatform x:TypeArguments="Thickness"
