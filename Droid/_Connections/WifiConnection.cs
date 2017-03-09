@@ -135,52 +135,52 @@ namespace SensorenCBS.Droid
 				else // save
 				{
 					nearbyBS.TimeFirstSaved = _now;
-					updateWifiWithGPS(_idOFTheBSSID);
+					//updateWifiWithGPS(_idOFTheBSSID);
 					await App.Database.SaveNearbyBSSID(nearbyBS);
 				}
 				_size--;
 			}
 		}
 
-		Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
+		//Plugin.Geolocator.Abstractions.IGeolocator locator = CrossGeolocator.Current;
 
-		async void updateWifiWithGPS(string idOFTheBSSID)
-		{
-			object BindingContext = new LocationDB();
-			var _GPSFetchUpdate = (LocationDB)BindingContext;
+		//async void updateWifiWithGPS(string idOFTheBSSID)
+		//{
+		//	object BindingContext = new LocationDB();
+		//	var _GPSFetchUpdate = (LocationDB)BindingContext;
 
-			if (locator.IsGeolocationEnabled)
-			{
-				locator.DesiredAccuracy = 1000;
+		//	if (locator.IsGeolocationEnabled)
+		//	{
+		//		locator.DesiredAccuracy = 1000;
 				
-				var _position = await locator.GetPositionAsync();
-				_GPSFetchUpdate.Time = DateTime.Now;
-				_GPSFetchUpdate.Longitude = _position.Longitude;
-				_GPSFetchUpdate.Latitude = _position.Latitude;
-				_GPSFetchUpdate.Accuracy = _position.Accuracy;
-				_GPSFetchUpdate.idBSSID = idOFTheBSSID;
-				await App.Database.UpdateGPS(_GPSFetchUpdate);
-			}
-		}
+		//		var _position = await locator.GetPositionAsync();
+		//		_GPSFetchUpdate.Time = DateTime.Now;
+		//		_GPSFetchUpdate.Longitude = _position.Longitude;
+		//		_GPSFetchUpdate.Latitude = _position.Latitude;
+		//		_GPSFetchUpdate.Accuracy = _position.Accuracy;
+		//		_GPSFetchUpdate.idBSSID = idOFTheBSSID;
+		//		await App.Database.UpdateGPS(_GPSFetchUpdate);
+		//	}
+		//}
 
-		async void saveWifiWithGPS(string idOFTheBSSID)
-		{
-			object BindingContext = new LocationDB();
-			var _GPSFetchSave = (LocationDB)BindingContext;
+		//async void saveWifiWithGPS(string idOFTheBSSID)
+		//{
+		//	object BindingContext = new LocationDB();
+		//	var _GPSFetchSave = (LocationDB)BindingContext;
 
-			if (locator.IsGeolocationEnabled)
-			{
-				var _position = await locator.GetPositionAsync();
-				_GPSFetchSave.Time = DateTime.Now;
-				_GPSFetchSave.Longitude = _position.Longitude;
-				_GPSFetchSave.Latitude = _position.Latitude;
-				_GPSFetchSave.Accuracy = _position.Accuracy;
-				_GPSFetchSave.idBSSID = idOFTheBSSID;
-				await App.Database.saveGPS(_GPSFetchSave);
+		//	if (locator.IsGeolocationEnabled)
+		//	{
+		//		var _position = await locator.GetPositionAsync();
+		//		_GPSFetchSave.Time = DateTime.Now;
+		//		_GPSFetchSave.Longitude = _position.Longitude;
+		//		_GPSFetchSave.Latitude = _position.Latitude;
+		//		_GPSFetchSave.Accuracy = _position.Accuracy;
+		//		_GPSFetchSave.idBSSID = idOFTheBSSID;
+		//		await App.Database.saveGPS(_GPSFetchSave);
 
-			}
+		//	}
 
-		}
+		//}
 	}
 }
 

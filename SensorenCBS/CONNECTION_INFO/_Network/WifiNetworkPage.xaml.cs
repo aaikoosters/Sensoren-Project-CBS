@@ -84,11 +84,11 @@ namespace SensorenCBS
 			foreach (var item in giveNearby)
 			{
 				// fout bij te veel waardes!!!
-				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
+				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
 				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}\n", item.idBSSID, item.Latitude, item.Longitude));
 				
 
-				Debug.WriteLine(string.Format("{0}, {1:0.0000000}, {2:0.0000000}, {3}", item.idBSSID, item.Latitude, item.Longitude, item.IDlocation));
+				//Debug.WriteLine(string.Format("{0}, {1:0.0000000}, {2:0.0000000}, {3}", item.idBSSID, item.Latitude, item.Longitude, item.IDlocation));
 				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
 			Debug.WriteLine("------------------------------");
