@@ -127,7 +127,7 @@ namespace SensorenCBS.Droid
 					if (_level < Results[_size].Level)
 					{
 						nearbyBS.TimeUpdated = _now;
-						updateWifiWithGPS(_idOFTheBSSID);
+						//updateWifiWithGPS(_idOFTheBSSID);
 						await App.Database.UpdateNearbyBSSID(nearbyBS);
 					} // else do nothing
 				}

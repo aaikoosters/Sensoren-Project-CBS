@@ -102,14 +102,7 @@ namespace SensorenCBS
 			//return database.QueryAsync<NearbyBSSID>("SELECT W.BSSID, W.Level, W.Frequency FROM NearbyBSSID W INNER JOIN LocationDB L ON W.IDbssid = L.idBSSID ORDER BY W.Level;");
 			//return database.QueryAsync<NearbyBSSID>("SELECT Level FROM [NearbyBSSID]");// WHERE [BSSID] like '" + bssid + "';");
 
-			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY Level DESC");
-
-<<<<<<< HEAD
-			//return database.QueryAsync<LocationDB>("SELECT count(*) as aantal FROM [LocationDB] GROUP BY idBSSID");
-=======
-			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [LocationDB] ORDER BY idBSSID DESC");
->>>>>>> parent of c6bce07... bossed with GPS
-			
+			return database.QueryAsync<NearbyBSSID>("SELECT * FROM [NearbyBSSID] ORDER BY Level DESC");			
 			
 		}
 
