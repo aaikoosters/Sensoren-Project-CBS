@@ -10,7 +10,6 @@ namespace SensorenCBS
 		string ExtraConnectionInfo { get; }
 		string ConnectionStateInfo { get; }
 		string ConnectionDetailStateInfo { get; }
-		//List<string> AllNetworkSSID { get; }
 
 		void CheckNetworkConnection();
 		void CheckNetworkConnectionType();
@@ -18,6 +17,5 @@ namespace SensorenCBS
 		void CheckConnectionState();
 		void CheckConnectionDetailState();
 		string GetSSID();
-		//void CheckWifiPoints();
 	}
 }

@@ -96,7 +96,6 @@
     <Compile Include="CONNECTION_INFO\NearbyPage.xaml.cs">
       <DependentUpon>NearbyPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CONNECTION_INFO\_Network\INearbyConnection.cs" />
     <Compile Include="STORAGE\Models\Nearby.cs" />
     <Compile Include="GPS_INFO\GeoLocator\FetchingGPS.cs" />
   </ItemGroup>

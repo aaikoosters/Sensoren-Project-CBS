@@ -24,26 +24,26 @@ namespace SensorenCBS
 			return bluetoothEnabled ? "Bluetooth is Enabled" : "Bluetooth is Disabled";
 		}
 		
-		// Set bluetooth on or off
+		// SET bluetooth on or off
 		public void changeState(bool change)
 		{
 			bluetoothConnection.ChangeBluetoothState(change);
 		}
 
-		// get the bluetoothAdress
+		// GET the bluetoothAdress
 		public string bluetoothAddress()
 		{
 			bluetoothConnection.DiscoverBluetoothInformation();
 			return bluetoothConnection.bluetoothAddress;
 		}
 
-		// get the state, same as the furst function
+		// GET the state, same as the furst function
 		public string bluetoothState()
 		{
 			return bluetoothConnection.bluetoothState;
 		}
 		
-		// get the bluetooth name
+		// GET the bluetooth name
 		public string bluetoothName()
 		{
 			bluetoothConnection.DiscoverBluetoothInformation();

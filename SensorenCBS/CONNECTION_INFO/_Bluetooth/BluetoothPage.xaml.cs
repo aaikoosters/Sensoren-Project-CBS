@@ -6,6 +6,7 @@ namespace SensorenCBS
 {
 	public partial class BluetoothPage : ContentPage
 	{
+		// the connection to the bluetooth methodes.
 		Bluetooth bluetooth = new Bluetooth();
 
 		public BluetoothPage()
@@ -39,7 +40,8 @@ namespace SensorenCBS
 			startMethods();
 
 		}
-
+		
+		// set the labels with the right information
 		void bluetoothInfo()
 		{
 			lblAbled.Text = bluetooth.isEnabled();

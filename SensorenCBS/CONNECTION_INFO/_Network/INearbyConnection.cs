@@ -4,6 +4,6 @@ using Xamarin.Forms;
 
 namespace SensorenCBS
 {
-	public interface INearbyConnection { }
+	//public interface INearbyConnection { }
 }
 
