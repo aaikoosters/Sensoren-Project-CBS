@@ -15,6 +15,7 @@ namespace SensorenCBS
 
 		}
 
+		// a wait function so there is time to get the information, otherwise the device is to fast and can not fetch the right information 
 		void startMethods()
 		{
 			Device.StartTimer(new TimeSpan(0, 0, 2), () =>
@@ -24,12 +25,14 @@ namespace SensorenCBS
 			});
 		}
 
+		// button function to put bluetooth on
 		void btnConnOn(object s, EventArgs e)
 		{
 			bluetooth.changeState(true);
 			startMethods();
 		}
 
+		// button function to put bluetooth off
 		void btnConnOff(object s, EventArgs e)
 		{
 			bluetooth.changeState(false);

@@ -21,11 +21,7 @@ namespace SensorenCBS
 			Navigation.PushAsync(new BluetoothPage());
 		}
 
-<<<<<<< HEAD
-
 		////if (TargetPlatform != OnPlatform
-=======
->>>>>>> parent of c6bce07... bossed with GPS
 		void btnNearby(object s, EventArgs e)
 		{
 			Navigation.PushAsync(new NearbyPage());

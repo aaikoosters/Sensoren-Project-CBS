@@ -84,14 +84,12 @@ namespace SensorenCBS
 			{
 				// fout bij te veel waardes!!!
 				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}, {3}\n", item.BSSID, item.Frequency, item.Level, item.SSID));
-<<<<<<< HEAD
 				//lblAllBSSID.Text += (string.Format("{0}, {1}, {2}\n", item.idBSSID, item.Latitude, item.Longitude));
 				
 
 				//Debug.WriteLine(string.Format("{0}, {1:0.0000000}, {2:0.0000000}, {3}", item.idBSSID, item.Latitude, item.Longitude, item.IDlocation));
-=======
 				//Debug.WriteLine(string.Format("{0}, {1}, {2}, {3}", item.BSSID, item.Frequency, item.Level, item.SSID));
->>>>>>> parent of c6bce07... bossed with GPS
+
 				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
 			Debug.WriteLine("------------------------------");

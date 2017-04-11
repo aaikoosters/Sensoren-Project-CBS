@@ -31,16 +31,10 @@ namespace SensorenCBS
 			var giveNearby = await App.Database.WifiWithLocatie(); //GetNearbyBSSID();
 			lblAllBSSID.Text = "";
 			foreach (var item in giveNearby)
-//=======
-			//var giveNearby = await App.Database.WifiWithLocatie(); //GetNearbyBSSID();
-			lblAllBSSID.Text = "";
-			//foreach (var item in giveNearby)
-//>>>>>>> origin/master
 			{
 				// fout bij te veel waardes!!!
 				lblAllBSSID.Text += (string.Format("{0}, {1}, {2}", item.BSSID, item.Level, item.Frequency));
 
-				//lblAllBSSID.Text += "\n" + item.BSSID + ", " + item.Level;
 			}
 		}
 
